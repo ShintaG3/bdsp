@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="card" style="width: 18rem;">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h1 class="card-title">Service</h1>
+      <p class="card-text">Search BDSPs by Type of Service</p>
+      <a href="{% url 'service' %}" class="btn btn-primary">Search</a>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h1 class="card-title">Organization</h1>
+      <p class="card-text">Search BDSPs by Organization</p>
+      <a href="{% url 'organization' %}" class="btn btn-primary">Search</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
