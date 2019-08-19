@@ -1,0 +1,29 @@
+html {
+  font-family: sans-serif;
+}
+
+form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+fieldset {
+  background: cyan;
+  border: 5px solid blue;
+  margin-bottom: 20px;
+  max-width: 100vw;
+}
+
+legend {
+  padding: 10px;
+  background: blue;
+  color: cyan;
+  width:100px;
+}
+.search_category{
+
+}

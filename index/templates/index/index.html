@@ -1,24 +1,42 @@
 {% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'search.css' %}" type="text/css" />
+{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="card" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h1 class="card-title">Service</h1>
-      <p class="card-text">Search BDSPs by Type of Service</p>
-      <a href="{% url 'service' %}" class="btn btn-primary">Search</a>
-    </div>
+<form class="" action="" method="post">
+  <fieldset>
+  <legend>Region</legend>
+  <div class="search_category">
+  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
+  <label for="Adis Ababa">Adis Ababa</label>
+  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
+  <label for="Melbourne">Melbourne</label>
   </div>
+  </fieldset>
 
-  <div class="card" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h1 class="card-title">Organization</h1>
-      <p class="card-text">Search BDSPs by Organization</p>
-      <a href="{% url 'organization' %}" class="btn btn-primary">Search</a>
-    </div>
+  <fieldset>
+  <legend>industry</legend>
+  <div class="search_category">
+  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
+  <label for="Adis Ababa">Adis Ababa</label>
+  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
+  <label for="Melbourne">Melbourne</label>
   </div>
-</div>
+  </fieldset>
+
+  <fieldset>
+  <legend>Service</legend>
+  <div class="search_category">
+  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
+  <label for="Adis Ababa">Adis Ababa</label>
+  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
+  <label for="Melbourne">Melbourne</label>
+  </div>
+  </fieldset>
+  <input type="submit" name="" value="Submit">
+</form>
+
 
 {% endblock %}
