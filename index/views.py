@@ -3,38 +3,41 @@ from django.http import HttpResponse
 from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo
 
 def index (request):
+
     if request.method == 'POST':
         regions = request.POST.getlist('region')
+        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
-        service_name = []
-        industry_name = []
-        region_name = []
-
-        if services:
-            for service in services:
-                service_name.append(ServiceCategory.objects.get(Name=service).Name)
-        if industries:
-            for industry in industries:
-                industry_name.append(Industry.objects.get(Name=industry).Name)
-                print(industry_name)
-        if regions:
-            for region in regions:
-                for Region in Region_data:
-                    if region == Region[1]:
-                        region_name.append(Region[0])
-        if "allregion" in regions:
+        # Send all the data if any all is selected
+        if "allregion" in regions or "allindustries" in industries or "allservices" in services:
             query_result = OrgBaseInfo.objects.all()
             print(query_result)
-            return render(request, 'index/index.html')
-        print(region_name,)
-        query_result = OrgBaseInfo.objects.filter(Region__in=region_name, Industry__Name__in=industry_name, ServiceCategory__Name__in=service_name)
+            return HttpResponse(query_result)
+        if len(regions)==0 and len(industries)==0 and len(services)==0:
+            return HttpResponse('No result')
+        #chaining the  input data for querying
+        if len(regions) == 0:
+            for region in Region_data:
+                regions.append(region[0])
+            print('no region',regions)
+        if len(industries) == 0:
+            allindustries = Industry.objects.all()
+            for industry in allindustries:
+                industries.append(industry.Name)
+            print('no industry',industries)
+        if len(services) == 0 :
+            allservices = ServiceCategory.objects.all()
+            for service in allservices:
+                services.append(service.Name)
+            print('no service')
+        query_result = OrgBaseInfo.objects.filter(Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
         print(query_result)
-        return render(request, 'index/index.html')
+        return HttpResponse(query_result)
     regiondata = Region_data
     regions = []
     for region in regiondata:
-        regions.append(region[1])
+        regions.append({'name':region[0], 'value':region[1]})
     context = {
         'industries': Industry.objects.all(),
         'services': ServiceCategory.objects.all(),

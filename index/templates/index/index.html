@@ -11,16 +11,13 @@
   <legend>Region</legend>
   <div class="search_category">
   {% for region in regions %}
-  <input type="checkbox" id="{{ region }}" name="region" value="{{ region }}">
-  <label for="{{ region }}">{{ region }}</label>
+  <input type="checkbox" id="{{ region.name }}" name="region" value="{{ region.name }}">
+  <label for="{{ region.name }}">{{ region.value }}</label>
   {% endfor %}<br>
   <input type="checkbox" id="allregion" name="region" value="allregion">
   <label for="allregion">all</label>
   </div>
-
   </fieldset>
-
-
 
   <fieldset>
   <legend>Industry</legend>
