@@ -4,7 +4,7 @@ html {
 
 form {
   width: 600px;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 
 div {
@@ -19,10 +19,10 @@ fieldset {
 }
 
 legend {
-  padding: 10px;
   background: blue;
   color: cyan;
-  width:100px;
+  width: auto;
+  padding: 5px;
 }
 .search_category{
 

@@ -6,36 +6,46 @@
 
 {% block content %}
 <form class="" action="" method="post">
+  {% csrf_token %}
   <fieldset>
   <legend>Region</legend>
   <div class="search_category">
-  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
-  <label for="Adis Ababa">Adis Ababa</label>
-  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
-  <label for="Melbourne">Melbourne</label>
+  {% for region in regions %}
+  <input type="checkbox" id="{{ region }}" name="region" value="{{ region }}">
+  <label for="{{ region }}">{{ region }}</label>
+  {% endfor %}<br>
+  <input type="checkbox" id="allregion" name="region" value="allregion">
+  <label for="allregion">all</label>
   </div>
+
   </fieldset>
 
+
+
   <fieldset>
-  <legend>industry</legend>
+  <legend>Industry</legend>
   <div class="search_category">
-  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
-  <label for="Adis Ababa">Adis Ababa</label>
-  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
-  <label for="Melbourne">Melbourne</label>
+    {% for industry in industries %}
+    <input type="checkbox" id="{{ industry }}" name="industry" value="{{ industry }}">
+    <label for="{{ industry }}">{{ industry }}</label>
+    {% endfor %}<br>
+    <input type="checkbox" id="allindustries" name="industry" value="allindustries">
+    <label for="allindustries">all</label>
   </div>
   </fieldset>
 
   <fieldset>
   <legend>Service</legend>
   <div class="search_category">
-  <input type="checkbox" id="Adis Ababa" name="region" value="Adis Ababa">
-  <label for="Adis Ababa">Adis Ababa</label>
-  <input type="checkbox" id="Melbourne" name="region" value="Melbourne">
-  <label for="Melbourne">Melbourne</label>
+    {% for service in services %}
+    <input type="checkbox" id="{{ service }}" name="service" value="{{ service }}">
+    <label for="{{ service }}">{{ service }}</label>
+    {% endfor %}<br>
+    <input type="checkbox" id="allservices" name="service" value="allservices">
+    <label for="allservices">all</label>
   </div>
   </fieldset>
-  <input type="submit" name="" value="Submit">
+    <input type="submit" name="" value="Submit">
 </form>
 
 
