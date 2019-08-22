@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'list.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<header>
+  <span>*ada-Addid Adaba, </span><span>*jhn-Johanesberg, </span><span>*smd- Something</span>
+</header>
+<table>
+  <tr>
+    <th>Region</th><th>Industry</th><th>ServiceCategory</th><th>Name</th>
+  </tr>
+{% for query in query_result %}
+<tr>
+  <td>{{ query.Region }}*</td><td>{{ query.Industry }}</td>
+  <td>
+  {% for service in query.ServiceCategory.all %}
+  <p>{{ service.Name }}</p>
+  {% endfor %}
+  </td>
+
+  <td><a href="{% url 'details' query.Name %}">
+    {{ query.Name }}</a></td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+table{
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 15px;
+  border: 1px solid;
+  margin-top: 15px;
+}
+
+tr{
+  border-bottom: 1px solid;
+}
+
+th{
+  font-size: 25px;
+  background-color: lightgrey;
+}
+
+th, td{
+  padding: 10px;
+}
+
+td p{
+  display: inline;
+  padding:5px;
+  background-color: blue;
+  color:#fff;
+  border-radius: 5px;
+  width: inherit;
+}
+
+span{
+  margin-right: 10px;
+}

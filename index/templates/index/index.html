@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form class="" action="" method="post">
+<form class="" action="{% url 'list' %}" method="post">
   {% csrf_token %}
   <fieldset>
   <legend>Region</legend>
@@ -42,7 +42,7 @@
     <label for="allservices">all</label>
   </div>
   </fieldset>
-    <input type="submit" name="" value="Submit">
+    <input type="submit" name="" value="Search" class="btn" style="background-color:lightblue;">
 </form>
 
 

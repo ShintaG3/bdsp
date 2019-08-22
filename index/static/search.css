@@ -12,8 +12,7 @@ div {
 }
 
 fieldset {
-  background: cyan;
-  border: 5px solid blue;
+  border: 3px solid blue;
   margin-bottom: 20px;
   max-width: 100vw;
 }
@@ -24,6 +23,7 @@ legend {
   width: auto;
   padding: 5px;
 }
+
 .search_category{
 
 }

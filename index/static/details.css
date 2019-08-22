@@ -1,0 +1,37 @@
+h1{
+  text-decoration: underline;
+}
+
+.container{
+  margin: 0px;
+  padding: 0px;
+}
+
+.jumbotron{
+  color: #fff;
+  width: 100vw;
+  padding:40px;
+  background-color: #bb5367;
+}
+h2{
+  text-decoration: underline;
+}
+main{
+  margin-left: 40px;
+}
+table{
+  font-size: Large;
+}
+td{
+  padding-right: 50px;
+}
+tr{
+
+}
+.tableright{
+  background-color: lightgrey;
+  border: 2px solid #fff;
+  min-width:50vw;
+  padding: 8px;
+  border-radius: 5px;
+}

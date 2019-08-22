@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+{% endblock %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>{{ org.Name }}</h1>
+    <p class="lead">Industory Tag: <a class="btn btn-primary" href="#" role="button">{{ org.Industry }}</a></p>
+    <p class="lead">Service Tag:
+      {% for service in org.ServiceCategory.all %}
+      <span class="btn btn-success"">{{ service.Name }}</span>
+      {% endfor %}
+    </p>
+    <p class="lead">Address:{{ org.Region }}, {{ org.Address }}</p>
+  </div>
+</div>
+<main>
+
+<h2>Overview</h2>
+
+<table>
+  <tr>
+    <td>PR</td><td class="tableright">{{ org.PR }}</td>
+  </tr>
+  <tr>
+    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate }}</td>
+  </tr>
+  <tr>
+    <td>Affiliation</td><td class="tableright">{{ org.Affiliation }}</td>
+  </tr>
+  <tr>
+    <td>URL</td><td class="tableright">{{ org.Url }}</td>
+  </tr>
+  <tr>
+    <td>ContactPerson</td><td class="tableright">{{ org.ContactPerson }}</td>
+  </tr>
+  <tr>
+    <td>Email</td><td class="tableright">{{ org.Email }}</td>
+  </tr>
+  <tr>
+    <td>Telephone</td><td class="tableright">{{ org.Telephone }}</td>
+  </tr>
+</table>
+</main>
+<h2>Services</h2>
+{% for service in services %}
+<p>Service: {{ service.OrgName }} Category: {{ service.ServiceCategory }} Service: {{ service.Service }} Contents: {{ service.Contents }}</p>
+{% endfor %}
+{% endblock %}
