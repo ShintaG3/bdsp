@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
+<h1>Edit Profile</h1>>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1>{{ org.Name }}</h1>
@@ -18,14 +19,11 @@
 <table>
   <tr>
   <td class="lead">Industory Tag:</td><td class="tableright">{{ org.Industry }}</td>
-  </tr>
-  <tr>
   <td>Service Tag:</td>
-    <td class="tableright">{% for service in org.ServiceCategory.all %}
-    <span class="servicespan">{{ service.Name }}</span>
+    <td>{% for service in org.ServiceCategory.all %}
+    {{ service.Name }}
     {% endfor %}
     </td>
-  </tr>
   <tr>
     <td>PR</td><td class="tableright">{{ org.PR }}</td>
   </tr>

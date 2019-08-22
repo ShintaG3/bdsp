@@ -21,18 +21,24 @@ main{
 }
 table{
   font-size: Large;
+  width: 80vw;
 }
 td{
   padding-right: 50px;
 }
 th{
   padding:8px;
-  background-color: lightgrey;
+  background-color: #f1eded;
 }
 .tableright{
-  background-color: lightgrey;
+  background-color: #f1eded;
   border: 2px solid #fff;
   min-width:50vw;
   padding: 8px;
   border-radius: 5px;
+}
+.servicespan{
+  padding: 4px;
+  background-color: lightblue;
+  color:#fff;
 }

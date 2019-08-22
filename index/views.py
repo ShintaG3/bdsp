@@ -26,6 +26,7 @@ def list (request):
             context = {
                 'query_result': query_result
             }
+            return render(request, 'index/list.html', context=context)
     # Send empty if nothin selected
         if len(regions)==0 and len(industries)==0 and len(services)==0:
             context = {
@@ -46,8 +47,8 @@ def list (request):
             for service in allservices:
                 services.append(service.Name)
             print('no service')
-            query_result = OrgBaseInfo.objects.filter(
-                Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
+        query_result = OrgBaseInfo.objects.filter(
+            Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
         context = {
             'query_result': query_result
         }
