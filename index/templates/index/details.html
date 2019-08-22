@@ -16,8 +16,9 @@
     <p class="lead">Address:{{ org.Region }}, {{ org.Address }}</p>
   </div>
 </div>
-<main>
 
+<main>
+<section>
 <h2>Overview</h2>
 
 <table>
@@ -43,9 +44,22 @@
     <td>Telephone</td><td class="tableright">{{ org.Telephone }}</td>
   </tr>
 </table>
-</main>
+</section>
+<section style="margin-top:20px;">
 <h2>Services</h2>
+<table>
+<tr>
+  <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
+</tr>
 {% for service in services %}
-<p>Service: {{ service.OrgName }} Category: {{ service.ServiceCategory }} Service: {{ service.Service }} Contents: {{ service.Contents }}</p>
+<tr>
+  <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
+  <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
+</tr>
 {% endfor %}
+</table>
+</section>
+</main>
+
+
 {% endblock %}

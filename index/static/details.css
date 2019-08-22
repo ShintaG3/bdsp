@@ -25,8 +25,9 @@ table{
 td{
   padding-right: 50px;
 }
-tr{
-
+th{
+  padding:8px;
+  background-color: lightgrey;
 }
 .tableright{
   background-color: lightgrey;
