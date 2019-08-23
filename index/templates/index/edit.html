@@ -4,62 +4,86 @@
 <link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
-<h1>Edit Profile</h1>>
+
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1>{{ org.Name }}</h1>
     <p class="lead">Address:{{ org.Region }}, {{ org.Address }}</p>
   </div>
 </div>
-<button type="button" name="button" class="btn" style="background-color:lightgrey;">Edit</button>
+<h1>Edit Profile</h1>
+
 <main>
 <section>
-<h2>Overview</h2>
 
+<form class="" action="" method="post">
+{% csrf_token %}
 <table>
   <tr>
-  <td class="lead">Industory Tag:</td><td class="tableright">{{ org.Industry }}</td>
-  <td>Service Tag:</td>
-    <td>{% for service in org.ServiceCategory.all %}
-    {{ service.Name }}
-    {% endfor %}
+  <td>Industory Tag</td>
+  <td>
+      <select name = "changeindustry" class="tableright">
+        <option>{{ currentindustry }}</option>
+        {% for industry in otherindustries %}
+        <option>{{ industry }}</option>
+        {% endfor %}
+      </select>
+  </td>
+  </tr>
+
+  <tr>
+    <td>Services</td>
+    <td class="tableright">
+      {% for service in checked %}
+      <input type="checkbox" id="{{ service }}" name="Services" value="{{ service }}" checked>
+      <label for="{{ service }}">{{ service }}</label>
+      {% endfor %}
+      {% for service in unchecked %}
+      <input type="checkbox" id="{{ service }}" name="Services" value="{{ service }}">
+      <label for="{{ service }}">{{ service }}</label>
+      {% endfor %}
     </td>
-  <tr>
-    <td>PR</td><td class="tableright">{{ org.PR }}</td>
   </tr>
+
   <tr>
-    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate }}</td>
+    <td><label for="PR">PR</label></td>
+    <td><input type="text" id="PR" name="PR" value="{{ org.PR }}" class="tableright"></td>
   </tr>
+
   <tr>
-    <td>Affiliation</td><td class="tableright">{{ org.Affiliation }}</td>
+    <td><label for="Affiliation">Affiliation</label></td>
+    <td><input type="text" id="Affiliation" name="Affiliation" value="{{ org.Affiliation }}" class="tableright"></td>
   </tr>
+
   <tr>
-    <td>URL</td><td class="tableright">{{ org.Url }}</td>
+    <td><label for="RegistrationDate">Registration Date</label></td>
+    <td><input type="dat" id="RegistrationDate" name="RegistrationDate" value="{{ org.RegistrationDate }}" class="tableright"></td>
   </tr>
+
   <tr>
-    <td>ContactPerson</td><td class="tableright">{{ org.ContactPerson }}</td>
+    <td><label for="URL">URL</label></td>
+    <td><input type="text" id="URL" name="URL" value="{{ org.Url }}" class="tableright"></td>
   </tr>
+
   <tr>
-    <td>Email</td><td class="tableright">{{ org.Email }}</td>
+    <td><label for="ContactPerson">ContactPerson</label></td>
+    <td><input type="tel" id="ContactPerson" name="ContactPerson" value="{{ org.ContactPerson }}" class="tableright"></td>
   </tr>
+
   <tr>
-    <td>Telephone</td><td class="tableright">{{ org.Telephone }}</td>
+    <td><label for="Email">Email</label></td>
+    <td><input type="email" id="Email" name="Email" value="{{ org.Email }}" class="tableright"></td>
+  </tr>
+
+  <tr>
+    <td><label for="Telephone">Telephone</label></td>
+    <td><input type="tel" id="Telephone" name="Telephone" value="{{ org.Telephone }}" class="tableright"></td>
   </tr>
 </table>
-</section>
-<section style="margin-top:20px;">
-<h2>Services</h2>
-<table>
-<tr>
-  <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
-</tr>
-{% for service in services %}
-<tr>
-  <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
-  <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
-</tr>
-{% endfor %}
-</table>
+
+  <input type="submit" value="Submit">
+</form>
+
 </section>
 </main>
 

@@ -7,10 +7,13 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1>{{ org.Name }}</h1>
-    <p class="lead">Address:{{ org.Region }}, {{ org.Address }}</p>
+    <h3>{{ org.Region }}, {{ org.Address }}</h3>
   </div>
 </div>
-<button type="button" name="button" class="btn" style="background-color:lightgrey;">Edit</button>
+<a href="{% url 'editPage' org.Name %}">
+  <button type="button" name="button" class="btn" style="background-color:lightgrey; padding='10px'; float:right;">
+   Edit Page</button>
+</a>
 <main>
 <section>
 <h2>Overview</h2>

@@ -13,30 +13,39 @@ h1{
   padding:40px;
   background-color: #bb5367;
 }
+
 h2{
   text-decoration: underline;
 }
+
 main{
   margin-left: 40px;
 }
+
 table{
-  font-size: Large;
   width: 80vw;
 }
-td{
-  padding-right: 50px;
+
+tr{
+  margin-bottom: 10px;
 }
+
+
 th{
   padding:8px;
   background-color: #f1eded;
 }
+
 .tableright{
+  font-size: Large;
   background-color: #f1eded;
   border: 2px solid #fff;
-  min-width:50vw;
+  width:65vw;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 10px;
+  padding-right: 0px;
 }
+
 .servicespan{
   padding: 4px;
   background-color: lightblue;
