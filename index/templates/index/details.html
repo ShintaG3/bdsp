@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+{% endblock %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>{{ org.Name }}</h1>
+    <h3>{{ org.Region }}, {{ org.Address }}</h3>
+  </div>
+</div>
+<a href="{% url 'editPage' org.Name %}">
+  <button type="button" name="button" class="btn" style="background-color:lightgrey; padding='10px'; float:right;">
+   Edit Page</button>
+</a>
+<main>
+<section>
+<h2>Overview</h2>
+
+<table>
+  <tr>
+  <td class="lead">Industory Tag:</td><td class="tableright">{{ org.Industry }}</td>
+  </tr>
+  <tr>
+  <td>Service Tag:</td>
+    <td class="tableright">{% for service in org.ServiceCategory.all %}
+    <span class="servicespan">{{ service.Name }}</span>
+    {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>PR</td><td class="tableright">{{ org.PR }}</td>
+  </tr>
+  <tr>
+    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate }}</td>
+  </tr>
+  <tr>
+    <td>Affiliation</td><td class="tableright">{{ org.Affiliation }}</td>
+  </tr>
+  <tr>
+    <td>URL</td><td class="tableright">{{ org.Url }}</td>
+  </tr>
+  <tr>
+    <td>ContactPerson</td><td class="tableright">{{ org.ContactPerson }}</td>
+  </tr>
+  <tr>
+    <td>Email</td><td class="tableright">{{ org.Email }}</td>
+  </tr>
+  <tr>
+    <td>Telephone</td><td class="tableright">{{ org.Telephone }}</td>
+  </tr>
+</table>
+</section>
+<section style="margin-top:20px;">
+<h2>Services</h2>
+<table>
+<tr>
+  <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
+</tr>
+{% for service in services %}
+<tr>
+  <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
+  <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
+</tr>
+{% endfor %}
+</table>
+</section>
+</main>
+
+
+{% endblock %}

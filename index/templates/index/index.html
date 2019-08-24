@@ -1,24 +1,49 @@
 {% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'search.css' %}" type="text/css" />
+{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="card" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h1 class="card-title">Service</h1>
-      <p class="card-text">Search BDSPs by Type of Service</p>
-      <a href="{% url 'service' %}" class="btn btn-primary">Search</a>
-    </div>
+<form class="" action="{% url 'list' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+  <legend>Region</legend>
+  <div class="search_category">
+  {% for region in regions %}
+  <input type="checkbox" id="{{ region.name }}" name="region" value="{{ region.name }}">
+  <label for="{{ region.name }}">{{ region.value }}</label>
+  {% endfor %}<br>
+  <input type="checkbox" id="allregion" name="region" value="allregion">
+  <label for="allregion">all</label>
   </div>
+  </fieldset>
 
-  <div class="card" style="width: 18rem;">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h1 class="card-title">Organization</h1>
-      <p class="card-text">Search BDSPs by Organization</p>
-      <a href="{% url 'organization' %}" class="btn btn-primary">Search</a>
-    </div>
+  <fieldset>
+  <legend>Industry</legend>
+  <div class="search_category">
+    {% for industry in industries %}
+    <input type="checkbox" id="{{ industry }}" name="industry" value="{{ industry }}">
+    <label for="{{ industry }}">{{ industry }}</label>
+    {% endfor %}<br>
+    <input type="checkbox" id="allindustries" name="industry" value="allindustries">
+    <label for="allindustries">all</label>
   </div>
-</div>
+  </fieldset>
+
+  <fieldset>
+  <legend>Service</legend>
+  <div class="search_category">
+    {% for service in services %}
+    <input type="checkbox" id="{{ service }}" name="service" value="{{ service }}">
+    <label for="{{ service }}">{{ service }}</label>
+    {% endfor %}<br>
+    <input type="checkbox" id="allservices" name="service" value="allservices">
+    <label for="allservices">all</label>
+  </div>
+  </fieldset>
+    <input type="submit" name="" value="Search" class="btn" style="background-color:lightblue;">
+</form>
+
 
 {% endblock %}
