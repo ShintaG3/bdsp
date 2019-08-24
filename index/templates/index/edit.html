@@ -84,8 +84,8 @@
   </tr>
 
   <tr>
-    <td><label for="RegistrationDate">Registration Date</label></td>
-    <td><input type="dat" id="RegistrationDate" name="RegistrationDate" value="{{ org.RegistrationDate }}" class="tableright"></td>
+    <td><label for="RegistrationDate">Registration Date<br>(YYYY-MM-DD)</label></td>
+    <td><input type="dat" id="RegistrationDate" name="RegistrationDate" value="{{ org.RegistrationDate|date:"Y-m-d" }}" class="tableright"></td>
   </tr>
 
   <tr>
@@ -109,7 +109,7 @@
   </tr>
 </table>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" class="btn">
 </form>
 
 </section>

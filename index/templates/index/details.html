@@ -10,7 +10,7 @@
     <h3>{{ org.Region }}, {{ org.Address }}</h3>
   </div>
 </div>
-<a href="{% url 'editPage' org.Name %}">
+<a href="{% url 'editPage' org.id %}">
   <button type="button" name="button" class="btn" style="background-color:lightgrey; padding='10px'; float:right;">
    Edit Page</button>
 </a>
@@ -33,7 +33,7 @@
     <td>PR</td><td class="tableright">{{ org.PR }}</td>
   </tr>
   <tr>
-    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate }}</td>
+    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate|date:"Y-m-d" }} &nbsp;(YYYY-MM-DD)</td>
   </tr>
   <tr>
     <td>Affiliation</td><td class="tableright">{{ org.Affiliation }}</td>
