@@ -12,15 +12,14 @@ div {
 }
 
 fieldset {
-  border: 3px solid blue;
+  border: 3px solid #5f5f63;
   margin-bottom: 20px;
   max-width: 100vw;
-  background-color: cyan;
 }
 
 legend {
-  background: blue;
-  color: cyan;
+  background: #bce2e2;
+  color: #0e1313;
   width: auto;
   padding: 5px;
 }

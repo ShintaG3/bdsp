@@ -10,10 +10,13 @@
     <h3>{{ org.Region }}, {{ org.Address }}</h3>
   </div>
 </div>
-<a href="{% url 'editPage' org.Name %}">
-  <button type="button" name="button" class="btn" style="background-color:lightgrey; padding='10px'; float:right;">
-   Edit Page</button>
-</a>
+{% if user.is_authenticated %}
+  <a href="{% url 'editPage' org.id %}">
+  <button type="button" name="button" class="btn" style="background-color:lightblue">
+    Edit Page
+  </button>
+  </a>
+{% endif %}
 <main>
 <section>
 <h2>Overview</h2>
@@ -33,7 +36,7 @@
     <td>PR</td><td class="tableright">{{ org.PR }}</td>
   </tr>
   <tr>
-    <td>Registration Date</td><td class="tableright">{{ org.RegistrationDate }}</td>
+    <td>Registration Date<br>(YYYY-MM-DD)</td><td class="tableright">{{ org.RegistrationDate|date:"Y-m-d" }}</td>
   </tr>
   <tr>
     <td>Affiliation</td><td class="tableright">{{ org.Affiliation }}</td>
@@ -52,19 +55,50 @@
   </tr>
 </table>
 </section>
+
 <section style="margin-top:20px;">
-<h2>Services</h2>
-<table>
-<tr>
-  <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
-</tr>
-{% for service in services %}
-<tr>
-  <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
-  <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
-</tr>
-{% endfor %}
-</table>
+  <h2>Services</h2>
+  <table>
+  <tr>
+    <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
+  </tr>
+  {% for service in services %}
+  <tr>
+    <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
+    <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+</section>
+
+<section style="margin-top:20px;">
+  <h2>Experience</h2>
+  <table>
+  <tr>
+    <th>Large</th><th>Medium</th><th>SmallandMicro</th>
+  </tr>
+  {% for experience in experiences %}
+  <tr>
+    <td>{{ experience.Large }}</td>
+    <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+</section>
+
+<section style="margin-top:20px;">
+  <h2>Experience</h2>
+  <table>
+  <tr>
+    <th>Large</th><th>Medium</th><th>SmallandMicro</th>
+  </tr>
+  {% for experience in experiences %}
+  <tr>
+    <td>{{ experience.Large }}</td>
+    <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
+  </tr>
+  {% endfor %}
+  </table>
 </section>
 </main>
 

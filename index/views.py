@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service, Case, Experience
+from django.urls import reverse
 
 def index (request):
     regiondata = Region_data
@@ -17,7 +18,6 @@ def index (request):
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
-        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
     # Send all the data if any all is selected
@@ -36,17 +36,17 @@ def list (request):
         if len(regions) == 0:
             for region in Region_data:
                 regions.append(region[0])
-            print('no region',regions)
+
         if len(industries) == 0:
             allindustries = Industry.objects.all()
             for industry in allindustries:
                 industries.append(industry.Name)
-            print('no industry',industries)
+
         if len(services) == 0 :
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
-            print('no service')
+
         query_result = OrgBaseInfo.objects.filter(
             Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
         context = {
@@ -59,35 +59,59 @@ def list (request):
         }
     return render(request, 'index/list.html', context=context)
 
-def details(request, name):
-    org = OrgBaseInfo.objects.get(Name=name)
+def details (request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
     region = org.Region
     for r in Region_data:
         if r[0] == region:
             region = r[1]
         org.Region = region
     services = Service.objects.filter(OrgName=org)
+    cases = Case.objects.filter(OrgName=org)
+    experiences = Experience.objects.filter(OrgName=org)
     print(services)
     context={
     'org': org,
-    'services': services
+    'services': services,
+    'cases': cases,
+    'experiences': experiences
     }
     return render(request, 'index/details.html', context=context)
 
-def editPage(request, name):
+def editPage(request, id):
     if request.method == 'POST':
-        ind = request.POST["changeindustry"]
-        context = {
-        'industry': request.POST["changeindustry"],
-        'services': request.POST.getlist('Services'),
-        'PR': request.POST.get('PR'),
-        'RegistrationDate': request.POST.get('RegistrationDate'),
-        'URL': request.POST.get('URL'),
-        'ContactPerson': request.POST.get('ContactPerson'),
-        'Email': request.POST.get('Email')
-        }
-        return HttpResponse(context['industry'])
-    org = OrgBaseInfo.objects.get(Name=name)
+        orgid = int(request.session.get('orgid'))
+        org = OrgBaseInfo.objects.get(pk=orgid)
+        name = request.POST.get("Name")
+        address = request.POST.get("Address")
+        regiondata = request.POST.get("changeregion")
+        print(regiondata)
+        industrydata = request.POST.get("changeindustry")
+        industry = Industry.objects.get(Name=industrydata)
+        newservicesdata = request.POST.getlist('Services')
+        PR = request.POST.get('PR')
+        #registrationDate = request.POST.get('RegistrationDate')
+        registrationDate = request.POST.get("RegistrationDate")
+        print(registrationDate)
+        Affiliation = request.POST.get('Affiliation')
+        URL = request.POST.get('URL')
+        ContactPerson = request.POST.get('ContactPerson')
+        Email = request.POST.get('Email')
+        # Update the Organisation information
+        OrgBaseInfo.objects.filter(pk=orgid).update(
+        Name=name, Address=address, Region=regiondata,
+        RegistrationDate=registrationDate, Industry=industry, PR=PR, Email=Email, Affiliation=Affiliation,
+        Url=URL, ContactPerson=ContactPerson)
+        #Delete the existing services
+        oldServices = org.ServiceCategory.all()
+        for service in oldServices:
+            org.ServiceCategory.remove(service)
+        # Adding the services
+        for service in newservicesdata:
+            addservice = ServiceCategory.objects.get(Name=service)
+            org.ServiceCategory.add(addservice)
+        return redirect('details', id=int(orgid))
+    org = OrgBaseInfo.objects.get(pk=id)
     # Get the services for this Org
     checked = []
     checkedServices = org.ServiceCategory.all()
@@ -100,6 +124,13 @@ def editPage(request, name):
     for service in allServices:
         if service not in checked:
             unchecked.append(service)
+            print(unchecked)
+    # Get the regions
+    currentregion = org.Region
+    otherregions = []
+    for region in Region_data:
+        if region[0] != currentregion:
+            otherregions.append(region[0])
     allservices = Service.objects.all()
     currentindustry = org.Industry.Name
     allindustries = Industry.objects.all()
@@ -108,10 +139,18 @@ def editPage(request, name):
         if industry.Name != currentindustry:
             otherindustries.append(industry.Name)
     context={
-    'org': org,
-    'checked': checked,
-    'unchecked': unchecked,
-    'currentindustry': currentindustry,
-    'otherindustries': otherindustries
+        'currentregion': currentregion,
+        'otherregions': otherregions,
+        'org': org,
+        'checked': checked,
+        'unchecked': unchecked,
+        'currentindustry': currentindustry,
+        'otherindustries': otherindustries
     }
+    request.session['orgid'] = org.id
     return render(request, 'index/edit.html', context=context)
+
+def search(request):
+    orgInfo = request.POST["orgInfo"]
+    orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    return render(request,'index/list.html',context={'query_result':orgs})
