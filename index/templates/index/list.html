@@ -5,27 +5,37 @@
 {% endblock %}
 
 {% block content %}
-<header>
+<!-- <header>
   <span>*ada-Addid Adaba, </span><span>*jhn-Johanesberg, </span><span>*smd- Something</span>
-</header>
-<table>
-  <tr>
-    <th>Region</th><th>Industry</th><th>ServiceCategory</th><th>Name</th>
-  </tr>
-{% for query in query_result %}
-<tr>
-  <td>{{ query.Region }}*</td><td>{{ query.Industry }}</td>
-  <td>
-  {% for service in query.ServiceCategory.all %}
-  <p>{{ service.Name }}</p>
-  {% endfor %}
-  </td>
-
-  <td><a href="{% url 'details' query.id %}">
-    {{ query.Name }}</a></td>
-</tr>
-{% endfor %}
-
+</header> -->
+<table class="table table-hover mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Region</th>
+      <th scope="col">Industry</th>
+      <th scope="col">ServiceCategory</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for query in query_result %}
+      <tr>
+        <td>{{ query.Region }}</td>
+        <td>{{ query.Industry }}</td>
+        <td>
+          {% for service in query.ServiceCategory.all %}
+            <span class="text-muted">{{ service.Name }}, </span>
+            <!-- <p class="text-muted"></p> -->
+          {% endfor %}
+        </td>
+        <td>
+          <a href="{% url 'details' query.id %}">
+            {{ query.Name }}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% endblock %}
