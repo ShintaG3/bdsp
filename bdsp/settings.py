@@ -108,6 +108,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = '/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -117,6 +118,7 @@ STATICFILES_DIRS = [
 urlpatterns = [
     # ... the rest of your URLconf goes here ...
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 try:
     from .local_settings import *

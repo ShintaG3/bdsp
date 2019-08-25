@@ -153,4 +153,8 @@ def editPage(request, id):
 def search(request):
     orgInfo = request.POST["orgInfo"]
     orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    context = {
+    'query_result': orgs
+    }
     return render(request,'index/list.html',context={'query_result':orgs})
+    
