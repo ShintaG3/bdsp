@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service
+from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service, Case, Experience
 from django.urls import reverse
 
 def index (request):
@@ -67,10 +67,14 @@ def details (request, id):
             region = r[1]
         org.Region = region
     services = Service.objects.filter(OrgName=org)
+    cases = Case.objects.filter(OrgName=org)
+    experiences = Experience.objects.filter(OrgName=org)
     print(services)
     context={
     'org': org,
-    'services': services
+    'services': services,
+    'cases': cases,
+    'experiences': experiences
     }
     return render(request, 'index/details.html', context=context)
 
@@ -102,12 +106,10 @@ def editPage(request, id):
         oldServices = org.ServiceCategory.all()
         for service in oldServices:
             org.ServiceCategory.remove(service)
-            print(org.ServiceCategory.all())
         # Adding the services
         for service in newservicesdata:
             addservice = ServiceCategory.objects.get(Name=service)
             org.ServiceCategory.add(addservice)
-            print(org.ServiceCategory.all())
         return redirect('details', id=int(orgid))
     org = OrgBaseInfo.objects.get(pk=id)
     # Get the services for this Org
@@ -147,3 +149,8 @@ def editPage(request, id):
     }
     request.session['orgid'] = org.id
     return render(request, 'index/edit.html', context=context)
+
+def search(request):
+    orgInfo = request.POST["orgInfo"]
+    orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    return render(request,'index/list.html',context={'query_result':orgs})

@@ -51,3 +51,8 @@ th{
   background-color: lightblue;
   color:#fff;
 }
+
+button{
+   padding:10px;
+   float:right;
+}
