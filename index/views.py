@@ -84,15 +84,13 @@ def editPage(request, id):
         org = OrgBaseInfo.objects.get(pk=orgid)
         name = request.POST.get("Name")
         address = request.POST.get("Address")
+        telephone = request.POST.get("Telephone")
         regiondata = request.POST.get("changeregion")
-        print(regiondata)
         industrydata = request.POST.get("changeindustry")
         industry = Industry.objects.get(Name=industrydata)
         newservicesdata = request.POST.getlist('Services')
         PR = request.POST.get('PR')
-        #registrationDate = request.POST.get('RegistrationDate')
         registrationDate = request.POST.get("RegistrationDate")
-        print(registrationDate)
         Affiliation = request.POST.get('Affiliation')
         URL = request.POST.get('URL')
         ContactPerson = request.POST.get('ContactPerson')
@@ -101,7 +99,7 @@ def editPage(request, id):
         OrgBaseInfo.objects.filter(pk=orgid).update(
         Name=name, Address=address, Region=regiondata,
         RegistrationDate=registrationDate, Industry=industry, PR=PR, Email=Email, Affiliation=Affiliation,
-        Url=URL, ContactPerson=ContactPerson)
+        Url=URL, ContactPerson=ContactPerson, Telephone=telephone)
         #Delete the existing services
         oldServices = org.ServiceCategory.all()
         for service in oldServices:
@@ -153,8 +151,4 @@ def editPage(request, id):
 def search(request):
     orgInfo = request.POST["orgInfo"]
     orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
-    context = {
-    'query_result': orgs
-    }
     return render(request,'index/list.html',context={'query_result':orgs})
-    
