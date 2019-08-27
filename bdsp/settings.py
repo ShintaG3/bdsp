@@ -109,6 +109,8 @@ from django.conf.urls.static import static
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
@@ -120,11 +122,11 @@ urlpatterns = [
     # ... the rest of your URLconf goes here ...
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
 
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+# if not DEBUG:
+#     import django_heroku
+#     django_heroku.settings(locals())
