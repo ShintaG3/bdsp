@@ -114,6 +114,8 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+LOGIN_REDIRECT_URL = '/'
+
 urlpatterns = [
     # ... the rest of your URLconf goes here ...
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

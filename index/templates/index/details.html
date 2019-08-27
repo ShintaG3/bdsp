@@ -99,15 +99,17 @@
   </section>
 
   <section style="margin-top:20px;">
-    <h2>Experience</h2>
+    <h2>Cases</h2>
     <table>
     <tr>
-      <th>Large</th><th>Medium</th><th>SmallandMicro</th>
+      <th>ServiceCategory</th><th>Contents</th><th>Result</th>
     </tr>
-    {% for experience in experiences %}
+    {% for case in cases %}
     <tr>
-      <td>{{ experience.Large }}</td>
-      <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
+      <td>
+      {{ case.ServiceCategory.Name }}
+      </td>
+      <td>{{ case.Contents }}</td><td>{{ case.Result }}</td>
     </tr>
     {% endfor %}
     </table>
