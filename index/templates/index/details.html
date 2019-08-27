@@ -68,50 +68,89 @@
     </table>
   </section>
 
-  <section style="margin-top:20px;">
-    <h2>Services</h2>
-    <table>
-    <tr>
-      <th>Service</th><th>Category</th><th>Service</th><th>Contents</th>
-    </tr>
-    {% for service in services %}
-    <tr>
-      <td>{{ service.OrgName }}</td><td>{{ service.ServiceCategory }}</td>
-      <td>{{ service.Service }}</td><td>{{ service.Contents }}</td>
-    </tr>
-    {% endfor %}
+  <h2 class="display-4">Services</h2>
+  <section  class="shadow p-3 mb-5 bg-white rounded">
+    {% if user.is_authenticated %}
+      <div class="row">
+        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editPage' org.id %}" >
+          Edit Page
+        </a>
+      </div>
+    {% endif %}
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <th class="lead" scope="col">Category</th>
+          <th class="lead" scope="col">Title</th>
+          <th class="lead" scope="col">Contents</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in services %}
+        <tr>
+          <td>{{ service.ServiceCategory }}</td>
+          <td>{{ service.Service }}</td>
+          <td>{{ service.Contents }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </section>
 
-  <section style="margin-top:20px;">
-    <h2>Experience</h2>
-    <table>
-    <tr>
-      <th>Large</th><th>Medium</th><th>SmallandMicro</th>
-    </tr>
-    {% for experience in experiences %}
-    <tr>
-      <td>{{ experience.Large }}</td>
-      <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
-    </tr>
-    {% endfor %}
+  <h2 class="display-4">Experience</h2>
+  <section  class="shadow p-3 mb-5 bg-white rounded">
+    {% if user.is_authenticated %}
+      <div class="row">
+        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editPage' org.id %}" >
+          Edit Page
+        </a>
+      </div>
+    {% endif %}
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <th class="lead" scope="col">Large</th>
+          <th class="lead" scope="col">Medium</th>
+          <th class="lead" scope="col">SmallandMicro</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for experience in experiences %}
+        <tr>
+          <td>{{ experience.Large }}</td>
+          <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </section>
-
-  <section style="margin-top:20px;">
-    <h2>Cases</h2>
-    <table>
-    <tr>
-      <th>ServiceCategory</th><th>Contents</th><th>Result</th>
-    </tr>
-    {% for case in cases %}
-    <tr>
-      <td>
-      {{ case.ServiceCategory.Name }}
-      </td>
-      <td>{{ case.Contents }}</td><td>{{ case.Result }}</td>
-    </tr>
-    {% endfor %}
+  
+  <h2 class="display-4">Cases</h2>
+  <section  class="shadow p-3 mb-5 bg-white rounded">
+    {% if user.is_authenticated %}
+      <div class="row">
+        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editPage' org.id %}" >
+          Edit Page
+        </a>
+      </div>
+    {% endif %}
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <th class="lead" scope="col">ServiceCategory</th>
+          <th class="lead" scope="col">Contents</th>
+          <th class="lead" scope="col">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for case in cases %}
+        <tr>
+          <td>{{ case.ServiceCategory.Name }}</td>
+          <td>{{ case.Contents }}</td>
+          <td>{{ case.Result }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </section>
 </main>
