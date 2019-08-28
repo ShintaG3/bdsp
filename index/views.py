@@ -111,16 +111,16 @@ def editPage(request, id):
         return redirect('details', id=int(orgid))
     org = OrgBaseInfo.objects.get(pk=id)
     # Get the services for this Org
-    checked = []
+    checked_services = []
     checkedServices = org.ServiceCategory.all()
     for service in checkedServices:
-        checked.append(service.Name)
+        checked_services.append(service.Name)
     allServices = []
     for service in ServiceCategory.objects.all():
         allServices.append(service.Name)
     unchecked = []
     for service in allServices:
-        if service not in checked:
+        if service not in checked_services:
             unchecked.append(service)
             print(unchecked)
     # Get the regions
@@ -140,10 +140,13 @@ def editPage(request, id):
         'currentregion': currentregion,
         'otherregions': otherregions,
         'org': org,
-        'checked': checked,
+        'checked_services': checked_services,
         'unchecked': unchecked,
         'currentindustry': currentindustry,
-        'otherindustries': otherindustries
+        'otherindustries': otherindustries,
+        'regions': Region_data,
+        'industries': Industry.objects.all(),
+        'services': ServiceCategory.objects.all(),
     }
     request.session['orgid'] = org.id
     return render(request, 'index/edit.html', context=context)
