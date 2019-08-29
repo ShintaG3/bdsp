@@ -135,7 +135,6 @@ def editPage(request, id):
     for region in Region_data:
         if region[0] != currentregion:
             otherregions.append(region[1])
-    print(otherregions)
     for region in Region_data:
         if currentregion == region[0]:
             currentregion = region[1]
@@ -185,6 +184,7 @@ def editcases(request, id):
     cases = Case.objects.filter(OrgName=org)
     if request.method == 'POST':
         service = request.POST.get("ServiceCategory")
+        print(service)
         ServiceCat = ServiceCategory.objects.get(Name=service)
         contents = request.POST.get("Contents")
         result = request.POST.get("Result")
@@ -197,7 +197,8 @@ def editcases(request, id):
         case.save()
         return redirect('details', id=id)
     context = {
-        'cases': cases
+        'cases': cases,
+        'services': ServiceCategory.objects.all()
         }
     return render(request, 'index/edit_cases.html', context=context)
 

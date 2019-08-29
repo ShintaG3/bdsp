@@ -13,9 +13,9 @@
           </tr>
         </thead>
         <tbody>
-          <td><input type="text" name="ServiceCategory" value={{ service.ServiceCategory.Name }}></td>
-          <td><input type="text" name="Service" value={{ service.Service }}></td>
-          <td><input type="text" name="Contents" value={{ service.Contents }}></td>
+          <td><input type="text" name="ServiceCategory" value="{{ service.ServiceCategory.Name }}"></td>
+          <td><input type="text" name="Service" value="{{ service.Service }}"></td>
+          <td><input type="text" name="Contents" value="{{ service.Contents }}""></td>
         </tbody>
     </table>
     Edit<input type="submit" name="case" value="{{ service.id }}">
