@@ -160,6 +160,7 @@ def editPage(request, id):
 def search(request):
     orgInfo = request.POST["orgInfo"]
     orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    getregion(orgs)
     return render(request,'index/list.html',context={'query_result':orgs})
 
 def editexperiences(request, id):
@@ -189,13 +190,9 @@ def editcases(request, id):
         contents = request.POST.get("Contents")
         result = request.POST.get("Result")
         caseid = request.POST.get("case")
-        case = Case.objects.get(pk=int(caseid))
-        case.OrgName=org
-        case.ServiceCategory=ServiceCat
-        case.Contents=contents
-        case.Result=result
-        case.save()
-        return redirect('details', id=id)
+        Case.objects.filter(pk=int(caseid)).update(ServiceCategory=ServiceCat,
+        Contents=contents, Result=result)
+        return redirect('editcases', id=id)
     context = {
         'cases': cases,
         'services': ServiceCategory.objects.all()
@@ -205,7 +202,16 @@ def editcases(request, id):
 def editservices(request, id):
     org = OrgBaseInfo.objects.get(pk=id)
     services = Service.objects.filter(OrgName=org)
+    if request.method == 'POST':
+        serviceid = request.POST.get('serviceid')
+        serviceCategory = request.POST.get('ServiceCategory')
+        ServiceCat = ServiceCategory.objects.get(Name=serviceCategory)
+        service = request.POST.get('service')
+        content = request.POST.get('content')
+        Service.objects.filter(pk=int(serviceid)).update(ServiceCategory=ServiceCat, Contents=content, Service=service)
+        return redirect('editservices', id=id)
     context = {
-        'services': services
+        'services': services,
+        'ServiceCategory': ServiceCategory.objects.all()
         }
     return render(request, 'index/edit_services.html', context=context)
