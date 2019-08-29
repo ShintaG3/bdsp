@@ -15,45 +15,50 @@ def index (request):
     }
     return render(request, 'index/index.html', context=context)
 
+def getregion(query_result):
+    for query in query_result:
+        for region in Region_data:
+            if region[0] == query.Region:
+                query.Region = region[1]
+
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
+        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
-    # Send all the data if any all is selected
-        if "allregion" in regions or "allindustries" in industries or "allservices" in services:
-            query_result = OrgBaseInfo.objects.all()
-            context = {
-                'query_result': query_result
-            }
-            return render(request, 'index/list.html', context=context)
+
     # Send empty if nothing selected
         if len(regions)==0 and len(industries)==0 and len(services)==0:
             context = {
             }
             return render(request, 'index/list.html', context=context)
+
     #chaining the  input data for querying
-        if len(regions) == 0:
+        if len(regions) == 0 or "allregion" in regions:
+            print("working")
             for region in Region_data:
                 regions.append(region[0])
 
-        if len(industries) == 0:
+        if len(industries) == 0 or "allindustries" in industries:
             allindustries = Industry.objects.all()
             for industry in allindustries:
                 industries.append(industry.Name)
 
-        if len(services) == 0 :
+        if len(services) == 0 or "allservices" in services:
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
 
         query_result = OrgBaseInfo.objects.filter(
             Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
+        getregion(query_result)
         context = {
             'query_result': query_result
         }
         return render(request, 'index/list.html', context=context)
     query_result = OrgBaseInfo.objects.all()
+    getregion(query_result)
     context = {
         'query_result': query_result
         }
@@ -69,7 +74,6 @@ def details (request, id):
     services = Service.objects.filter(OrgName=org)
     cases = Case.objects.filter(OrgName=org)
     experiences = Experience.objects.filter(OrgName=org)
-    print(services)
     context={
     'org': org,
     'services': services,
@@ -95,6 +99,9 @@ def editPage(request, id):
         URL = request.POST.get('URL')
         ContactPerson = request.POST.get('ContactPerson')
         Email = request.POST.get('Email')
+        for region in Region_data:
+            if regiondata == Region_data[1]:
+                regiondata = Region_data[0]
         # Update the Organisation information
         OrgBaseInfo.objects.filter(pk=orgid).update(
         Name=name, Address=address, Region=regiondata,
@@ -122,13 +129,15 @@ def editPage(request, id):
     for service in allServices:
         if service not in checked_services:
             unchecked.append(service)
-            print(unchecked)
     # Get the regions
     currentregion = org.Region
     otherregions = []
     for region in Region_data:
         if region[0] != currentregion:
-            otherregions.append(region[0])
+            otherregions.append(region[1])
+    for region in Region_data:
+        if currentregion == region[0]:
+            currentregion = region[1]
     allservices = Service.objects.all()
     currentindustry = org.Industry.Name
     allindustries = Industry.objects.all()
@@ -154,4 +163,58 @@ def editPage(request, id):
 def search(request):
     orgInfo = request.POST["orgInfo"]
     orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    getregion(orgs)
     return render(request,'index/list.html',context={'query_result':orgs})
+
+def editexperiences(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    experiences = Experience.objects.filter(OrgName=org).first()
+    if request.method == 'POST':
+        large = request.POST.get('Large')
+        medium = request.POST.get('Medium')
+        smallandmicro = request.POST.get('SmallandMicro')
+        experiences.Large = int(large)
+        experiences.Medium = int(medium)
+        experiences.SmallandMicro = int(smallandmicro)
+        experiences.save()
+        return redirect('details', id=int(id))
+    context = {
+        'experiences': experiences
+        }
+    return render(request, 'index/edit_experiences.html', context=context)
+
+def editcases(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    cases = Case.objects.filter(OrgName=org)
+    if request.method == 'POST':
+        service = request.POST.get("ServiceCategory")
+        print(service)
+        ServiceCat = ServiceCategory.objects.get(Name=service)
+        contents = request.POST.get("Contents")
+        result = request.POST.get("Result")
+        caseid = request.POST.get("case")
+        Case.objects.filter(pk=int(caseid)).update(ServiceCategory=ServiceCat,
+        Contents=contents, Result=result)
+        return redirect('editcases', id=id)
+    context = {
+        'cases': cases,
+        'services': ServiceCategory.objects.all()
+        }
+    return render(request, 'index/edit_cases.html', context=context)
+
+def editservices(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    services = Service.objects.filter(OrgName=org)
+    if request.method == 'POST':
+        serviceid = request.POST.get('serviceid')
+        serviceCategory = request.POST.get('ServiceCategory')
+        ServiceCat = ServiceCategory.objects.get(Name=serviceCategory)
+        service = request.POST.get('service')
+        content = request.POST.get('content')
+        Service.objects.filter(pk=int(serviceid)).update(ServiceCategory=ServiceCat, Contents=content, Service=service)
+        return redirect('editservices', id=id)
+    context = {
+        'services': services,
+        'ServiceCategory': ServiceCategory.objects.all()
+        }
+    return render(request, 'index/edit_services.html', context=context)

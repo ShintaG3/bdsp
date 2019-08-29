@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+{% if cases %}
+
+<table>
+      <thead>
+        <tr>
+          <th>ServiceId</th>
+          <th>ServiceCategory</th>
+          <th>Contents</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for case in cases %}
+        <tr>
+          <td>{{ case.id }}</td>
+          <td>{{ case.ServiceCategory.Name }}</td>
+          <td>{{ case.Contents }}</td>
+          <td>{{ case.Result }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+</table>
+
+{% endif %}
+<hr>
+
+
+<form class="" action="" method="post">
+  {% csrf_token %}
+ <p>Choose the case
+   <select name = "case" class="tableright" style="padding:10px;">
+     {% for case in cases %}
+     <option>{{ case.id }}</option>
+     {% endfor %}
+   </select>
+ </p>
+
+  <table>
+        <tr>
+          <td><label for="Service">ServicesCategory</label></td>
+          <td>
+            <select name="ServiceCategory" id="Service">
+              {% for service in services %}
+              <option>{{ service.Name }}</option>
+              {% endfor %}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="content">Contents</label></td>
+          <td><textarea id="content" name="Contents" rows="5" cols="15"></textarea></td>
+        </tr>
+        <tr>
+          <td><label for="result">Results</label></td>
+          <td><textarea id="result" name="Result" rows="5" cols="15"></textarea></td>
+        </tr>
+  </table>
+
+  <input type="submit" name="caseEdit" value="Edit" class="btn btn-outline-primary my-2 my-sm-0">
+</form>
+
+{% endblock %}

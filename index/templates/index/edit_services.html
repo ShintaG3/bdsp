@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+{% if services %}
+
+<table>
+      <thead>
+        <tr>
+          <th>ServiceId</th>
+          <th>ServiceCategory</th>
+          <th>Service</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for service in services %}
+        <tr>
+          <td>{{ service.id }}</td>
+          <td>{{ service.ServiceCategory.Name }}</td>
+          <td>{{ service.Service }}</td>
+          <td>{{ service.Contents }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+</table>
+
+{% endif %}
+<hr>
+
+
+<form class="" action="" method="post">
+  {% csrf_token %}
+ <p>Choose the Service
+   <select name = "serviceid" class="tableright" style="padding:10px;">
+     {% for service in services %}
+     <option>{{ service.id }}</option>
+     {% endfor %}
+   </select>
+ </p>
+
+  <table>
+        <tr>
+          <td><label for="Service">ServicesCategory</label></td>
+          <td>
+            <select name="ServiceCategory" id="Service">
+              {% for service in ServiceCategory %}
+              <option>{{ service.Name }}</option>
+              {% endfor %}
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td><label for="service">Service</label></td>
+          <td><textarea id="service" name="service" rows="5" cols="15"></textarea></td>
+        </tr>
+
+        <tr>
+          <td><label for="content">Content</label></td>
+          <td><textarea id="content" name="content" rows="5" cols="15"></textarea></td>
+        </tr>
+  </table>
+
+  <input type="submit" value="Edit" class="btn btn-outline-primary my-2 my-sm-0">
+</form>
+
+{% endblock %}
