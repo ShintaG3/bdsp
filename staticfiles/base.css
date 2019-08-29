@@ -8,7 +8,7 @@
   background: linear-gradient(180deg, rgba(98,133,255,1) 0%, rgba(12,123,255,1) 100%);
 }
 
-.bg-gr-b5 {
+.bg-gr-b-5 {
   background: rgb(31,47,152);
   background: linear-gradient(147deg, rgba(31,47,152,1) 0%, rgba(123,213,245,1) 100%);
 }
@@ -48,3 +48,8 @@
   background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);   
 }
 
+.btn-outline-primary:hover {
+  transition: 0.4s;
+  background: rgb(28,167,236);
+  background: linear-gradient(147deg, rgba(28,167,236,1) 0%, rgba(31,47,152,1) 100%);
+}
