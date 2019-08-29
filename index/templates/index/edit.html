@@ -48,12 +48,12 @@
         {% for industry in industries %}
           {% if industry.Name in currentindustry %}
             <div class="custom-control custom-checkbox custom-control-inline" >
-              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}" checked>
+              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="changeindustry" value="{{ industry }}" checked>
               <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
             </div>
           {% else %}
             <div class="custom-control custom-checkbox custom-control-inline" >
-              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}">
+              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="changeindustry" value="{{ industry }}">
               <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
             </div>
           {% endif %}
@@ -89,7 +89,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="PR">PR</label>
     <div class="col-sm-10">
-      <textarea class="form-control" id="PR" rows="5">{{ org.PR }}</textarea>
+      <textarea class="form-control" name="PR" id="PR" rows="5">{{ org.PR }}</textarea>
     </div>
   </div>
 
