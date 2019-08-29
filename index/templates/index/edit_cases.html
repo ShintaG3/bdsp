@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for case in cases %}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <table>
+        <thead>
+          <tr>
+            <th>ServiceCategory</th>
+            <th>Contents</th>
+            <th>Results</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><input type="text" name="ServiceCategory" value={{ case.ServiceCategory.Name }}></td>
+          <td><input type="text" name="Contents" value={{ case.Contents }}></td>
+          <td><input type="text" name="Result" value={{ case.Result }}></td>
+        </tbody>
+    </table>
+    Edit<input type="submit" name="case" value="{{ case.id }}">
+  </form>
+{% endfor %}
+{% endblock %}

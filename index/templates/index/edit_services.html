@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for service in services %}
+  <form class="" action="" method="post">
+    {% csrf_token %}
+    <table>
+        <thead>
+          <tr>
+            <th>ServiceCategory</th>
+            <th>Service</th>
+            <th>Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><input type="text" name="ServiceCategory" value={{ service.ServiceCategory.Name }}></td>
+          <td><input type="text" name="Service" value={{ service.Service }}></td>
+          <td><input type="text" name="Contents" value={{ service.Contents }}></td>
+        </tbody>
+    </table>
+    Edit<input type="submit" name="case" value="{{ service.id }}">
+  </form>
+{% endfor %}
+{% endblock %}

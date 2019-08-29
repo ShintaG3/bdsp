@@ -5,45 +5,73 @@
 {% endblock %}
 
 {% block content %}
-<form class="" action="{% url 'list' %}" method="post">
-  {% csrf_token %}
-  <fieldset>
-  <legend>Region</legend>
-  <div class="search_category">
-  {% for region in regions %}
-  <input type="checkbox" id="{{ region.name }}" name="region" value="{{ region.name }}">
-  <label for="{{ region.name }}">{{ region.value }}</label>
-  {% endfor %}<br>
-  <input type="checkbox" id="allregion" name="region" value="allregion">
-  <label for="allregion">all</label>
-  </div>
-  </fieldset>
+<form class="" action="{% url 'list' %}" method="post">{% csrf_token %}
 
-  <fieldset>
-  <legend>Industry</legend>
-  <div class="search_category">
-    {% for industry in industries %}
-    <input type="checkbox" id="{{ industry }}" name="industry" value="{{ industry }}">
-    <label for="{{ industry }}">{{ industry }}</label>
-    {% endfor %}<br>
-    <input type="checkbox" id="allindustries" name="industry" value="allindustries">
-    <label for="allindustries">all</label>
+  <div class="form-group row mt-5">
+    <div class="col-sm-2">
+      <p class="h3">Region</p>
+    </div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        {% for region in regions %}
+        <div class="custom-control custom-checkbox custom-control-inline" >
+            <input type="checkbox" class="custom-control-input" id="{{ region.name }}" name="region" value="{{ region.name }}">
+            <label class="custom-control-label" for="{{ region.name }}">{{ region.value }} &nbsp;</label>
+        </div>
+        {% endfor %}
+        <div class="custom-control custom-checkbox">
+          <input  type="checkbox" class="form-control-lg custom-control-input" id="allregion" name="region" value="allregion">
+          <label  class="custom-control-label" for="allregion">All</label>
+        </div>
+      </div>
+    </div>
   </div>
-  </fieldset>
 
-  <fieldset>
-  <legend>Service</legend>
-  <div class="search_category">
-    {% for service in services %}
-    <input type="checkbox" id="{{ service }}" name="service" value="{{ service }}">
-    <label for="{{ service }}">{{ service }}</label>
-    {% endfor %}<br>
-    <input type="checkbox" id="allservices" name="service" value="allservices">
-    <label for="allservices">all</label>
+  <div class="form-group row mt-5">
+    <div class="col-sm-2">
+      <p class="h3">Industry</p>
+    </div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        {% for industry in industries %}
+        <div class="custom-control custom-checkbox custom-control-inline" >
+            <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}">
+            <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
+        </div>
+        {% endfor %}
+        <div class="custom-control custom-checkbox">
+          <input  type="checkbox" class="form-control-lg custom-control-input" id="allindustries" name="industry" value="allindustries">
+          <label  class="custom-control-label" for="allindustries">All</label>
+        </div>
+      </div>
+    </div>
   </div>
-  </fieldset>
-    <input type="submit" name="" value="Search" class="btn btn-outline-success" style="background-color:lightblue;">
+
+  <div class="form-group row mt-5">
+    <div class="col-sm-2">
+      <p class="h3">Service</p>
+    </div>
+    <div class="col-sm-10">
+      <div class="form-check">
+          {% for service in services %}
+        <div class="custom-control custom-checkbox custom-control-inline" >
+            <input type="checkbox" class="custom-control-input" id="{{ service }}" name="service" value="{{ service }}">
+            <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
+        </div>
+        {% endfor %}
+        <div class="custom-control custom-checkbox">
+          <input  type="checkbox" class="form-control-lg custom-control-input" id="allservices" name="service" value="allservices">
+          <label  class="custom-control-label" for="allservices">All</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- button -->
+  <div class="text-center mt-5">
+    <input type="submit" name="" value="Search" class="mx-auto btn btn-lg btn-outline-primary">
+  </div>
+
 </form>
-
 
 {% endblock %}

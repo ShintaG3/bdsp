@@ -122,7 +122,6 @@ def editPage(request, id):
     for service in allServices:
         if service not in checked:
             unchecked.append(service)
-            print(unchecked)
     # Get the regions
     currentregion = org.Region
     otherregions = []
@@ -152,3 +151,50 @@ def search(request):
     orgInfo = request.POST["orgInfo"]
     orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
     return render(request,'index/list.html',context={'query_result':orgs})
+
+def editexperiences(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    experiences = Experience.objects.filter(OrgName=org).first()
+    if request.method == 'POST':
+        large = request.POST.get('Large')
+        medium = request.POST.get('Medium')
+        smallandmicro = request.POST.get('SmallandMicro')
+        experiences.Large = int(large)
+        experiences.Medium = int(medium)
+        experiences.SmallandMicro = int(smallandmicro)
+        experiences.save()
+        return redirect('details', id=int(id))
+
+    context = {
+        'experiences': experiences
+        }
+    return render(request, 'index/edit_experiences.html', context=context)
+
+def editcases(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    cases = Case.objects.filter(OrgName=org)
+    if request.method == 'POST':
+        service = request.POST.get("ServiceCategory")
+        ServiceCat = ServiceCategory.objects.get(Name=service)
+        contents = request.POST.get("Contents")
+        result = request.POST.get("Result")
+        caseid = request.POST.get("case")
+        case = Case.objects.get(pk=int(caseid))
+        case.OrgName=org
+        case.ServiceCategory=ServiceCat
+        case.Contents=contents
+        case.Result=result
+        case.save()
+        return redirect('details', id=id)
+    context = {
+        'cases': cases
+        }
+    return render(request, 'index/edit_cases.html', context=context)
+
+def editservices(request, id):
+    org = OrgBaseInfo.objects.get(pk=id)
+    services = Service.objects.filter(OrgName=org)
+    context = {
+        'services': services
+        }
+    return render(request, 'index/edit_services.html', context=context)

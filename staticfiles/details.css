@@ -1,0 +1,58 @@
+h1{
+  text-decoration: underline;
+}
+
+.container{
+  margin: 0px;
+  padding: 0px;
+}
+
+.jumbotron{
+  color: #fff;
+  width: 100vw;
+  padding:40px;
+  background-color: #bb5367;
+}
+
+h2{
+  text-decoration: underline;
+}
+
+main{
+  margin-left: 40px;
+}
+
+table{
+  width: 80vw;
+}
+
+tr{
+  margin-bottom: 10px;
+}
+
+
+th{
+  padding:8px;
+  background-color: #f1eded;
+}
+
+.tableright{
+  font-size: Large;
+  background-color: #f1eded;
+  border: 2px solid #fff;
+  width:65vw;
+  padding: 8px;
+  border-radius: 10px;
+  padding-right: 0px;
+}
+
+.servicespan{
+  padding: 4px;
+  background-color: lightblue;
+  color:#fff;
+}
+
+button{
+   padding:10px;
+   float:right;
+}
