@@ -90,8 +90,7 @@ def editPage(request, id):
         address = request.POST.get("Address")
         telephone = request.POST.get("Telephone")
         regiondata = request.POST.get("changeregion")
-        industrydata = request.POST.get("changeindustry")
-        industry = Industry.objects.get(Name=industrydata)
+        newindustrydata = request.POST.getlist("changeindustry")
         newservicesdata = request.POST.getlist('Services')
         PR = request.POST.get('PR')
         registrationDate = request.POST.get("RegistrationDate")
@@ -100,12 +99,13 @@ def editPage(request, id):
         ContactPerson = request.POST.get('ContactPerson')
         Email = request.POST.get('Email')
         for region in Region_data:
-            if regiondata == Region_data[1]:
-                regiondata = Region_data[0]
+            if regiondata == region[1]:
+                regiondata = region[0]
+                print(regiondata)
         # Update the Organisation information
         OrgBaseInfo.objects.filter(pk=orgid).update(
         Name=name, Address=address, Region=regiondata,
-        RegistrationDate=registrationDate, Industry=industry, PR=PR, Email=Email, Affiliation=Affiliation,
+        RegistrationDate=registrationDate, PR=PR, Email=Email, Affiliation=Affiliation,
         Url=URL, ContactPerson=ContactPerson, Telephone=telephone)
         #Delete the existing services
         oldServices = org.ServiceCategory.all()
@@ -115,6 +115,14 @@ def editPage(request, id):
         for service in newservicesdata:
             addservice = ServiceCategory.objects.get(Name=service)
             org.ServiceCategory.add(addservice)
+        #Delete the existing industries
+        oldIndustries = org.Industry.all()
+        for industry in oldIndustries:
+            org.Industry.remove(industry)
+        # Adding the new industries
+        for industry in newindustrydata:
+            addindustry = Industry.objects.get(Name=industry)
+            org.Industry.add(addindustry)
         return redirect('details', id=int(orgid))
     org = OrgBaseInfo.objects.get(pk=id)
     # Get the services for this Org
@@ -139,19 +147,25 @@ def editPage(request, id):
         if currentregion == region[0]:
             currentregion = region[1]
     allservices = Service.objects.all()
-    currentindustry = org.Industry.Name
     allindustries = Industry.objects.all()
+    # Get the current Industries
+    currentindustries = []
+    currentindustry = org.Industry.all()
+    for industry in currentindustry:
+        currentindustries.append(industry.Name)
+    # Get the other industries
     otherindustries = []
     for industry in allindustries:
-        if industry.Name != currentindustry:
+        if industry.Name not in currentindustries:
             otherindustries.append(industry.Name)
+    print(currentindustries,otherindustries)
     context={
         'currentregion': currentregion,
         'otherregions': otherregions,
         'org': org,
         'checked_services': checked_services,
         'unchecked': unchecked,
-        'currentindustry': currentindustry,
+        'currentindustries': currentindustries,
         'otherindustries': otherindustries,
         'regions': Region_data,
         'industries': Industry.objects.all(),
@@ -168,15 +182,13 @@ def search(request):
 
 def editexperiences(request, id):
     org = OrgBaseInfo.objects.get(pk=id)
-    experiences = Experience.objects.filter(OrgName=org).first()
+    orgid = org.id
+    experiences = Experience.objects.filter(OrgName=org).first
     if request.method == 'POST':
         large = request.POST.get('Large')
         medium = request.POST.get('Medium')
         smallandmicro = request.POST.get('SmallandMicro')
-        experiences.Large = int(large)
-        experiences.Medium = int(medium)
-        experiences.SmallandMicro = int(smallandmicro)
-        experiences.save()
+        Experience.objects.filter(OrgName=org).update(Large=large, Medium=medium, SmallandMicro=smallandmicro)
         return redirect('details', id=int(id))
     context = {
         'experiences': experiences
@@ -188,7 +200,6 @@ def editcases(request, id):
     cases = Case.objects.filter(OrgName=org)
     if request.method == 'POST':
         service = request.POST.get("ServiceCategory")
-        print(service)
         ServiceCat = ServiceCategory.objects.get(Name=service)
         contents = request.POST.get("Contents")
         result = request.POST.get("Result")

@@ -21,17 +21,17 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label" for="Address">Address</label>     
+    <label class="col-sm-2 col-form-label" for="Address">Address</label>
     <div class="col-sm-10">
       <input type="text" id="Address" name="Address" value="{{ org.Address }}" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <legend class="col-form-label col-sm-2 pt-0">Ragion</legend>
+    <legend class="col-form-label col-sm-2 pt-0">Region</legend>
     <div class="col-sm-10">
       <select name = "changeregion" class="custom-select">
-        <option selected>{{ currentregion }}</option>            
+        <option selected>{{ currentregion }}</option>
         {% for region in otherregions %}
         <option value="{{ region }}">{{ region }}</option>
         {% endfor %}
@@ -44,9 +44,9 @@
     <legend class="col-form-label col-sm-2 pt-0">Industries</legend>
     <div class="col-sm-10">
       <div class="form-check">
-  
+
         {% for industry in industries %}
-          {% if industry.Name in currentindustry %}
+          {% if industry.Name in currentindustries %}
             <div class="custom-control custom-checkbox custom-control-inline" >
               <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="changeindustry" value="{{ industry }}" checked>
               <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
@@ -57,8 +57,8 @@
               <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
             </div>
           {% endif %}
-        {% endfor %}      
-          
+        {% endfor %}
+
       </div>
     </div>
   </div>
@@ -67,25 +67,24 @@
     <legend class="col-form-label col-sm-2 pt-0">Services</legend>
     <div class="col-sm-10">
       <div class="form-check">
-
         {% for service in services %}
           {% if service.Name in checked_services %}
             <div class="custom-control custom-checkbox custom-control-inline" >
-              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Service" value="{{ service }}" checked>
+              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Services" value="{{ service }}" checked>
               <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
             </div>
           {% else %}
             <div class="custom-control custom-checkbox custom-control-inline" >
-              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Service" value="{{ service }}">
+              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Services" value="{{ service }}">
               <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
             </div>
           {% endif %}
-        {% endfor %}      
+        {% endfor %}
 
       </div>
     </div>
   </div>
-  
+
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="PR">PR</label>
     <div class="col-sm-10">
@@ -134,7 +133,7 @@
       <input type="tel" id="Telephone" name="Telephone" value="{{ org.Telephone }}" class="form-control">
     </div>
   </div>
-  
+
   <!-- button -->
   <div class="text-center mt-5">
       <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-lg btn-outline-primary">

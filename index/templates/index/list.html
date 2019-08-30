@@ -4,9 +4,7 @@
 {% endblock %}
 
 {% block content %}
-<!-- <header>
-  <span>*ada-Addid Adaba, </span><span>*jhn-Johanesberg, </span><span>*smd- Something</span>
-</header> -->
+
 <table class="table table-hover mt-5">
   <thead>
     <tr>
@@ -20,10 +18,14 @@
     {% for query in query_result %}
       <tr>
         <td>{{ query.Region }}</td>
-        <td>{{ query.Industry }}</td>
+        <td>
+          {% for industry in query.Industry.all %}
+          {{ industry.Name }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
         <td>
           {% for service in query.ServiceCategory.all %}
-            <span class="text-muted">{{ service.Name }}, </span>
+            <span class="text-muted">{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
             <!-- <p class="text-muted"></p> -->
           {% endfor %}
         </td>
