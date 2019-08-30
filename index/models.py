@@ -28,7 +28,7 @@ class OrgBaseInfo(models.Model):
     Name = models.CharField(max_length=100, help_text="Enter the name of Organisation(eg. Metal Industries)")
     Address = models.CharField(max_length=200, help_text="Enter the adress of the Organisation")
     RegistrationDate = models.DateField()
-    Industry = models.ForeignKey('Industry', on_delete=models.SET_NULL, null=True)
+    Industry = models.ManyToManyField('Industry')
     ServiceCategory = models.ManyToManyField('ServiceCategory')
     PR = models.CharField(max_length=300)
     Url = models.URLField(max_length=50)
@@ -36,7 +36,6 @@ class OrgBaseInfo(models.Model):
     ContactPerson = models.CharField(max_length=50)
     Email = models.EmailField()
     Telephone = models.CharField(max_length=12, help_text="Enter the telephone number for the organisation")
-
 
     Region = models.CharField(
         max_length=3,

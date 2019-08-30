@@ -100,8 +100,9 @@ def editPage(request, id):
         ContactPerson = request.POST.get('ContactPerson')
         Email = request.POST.get('Email')
         for region in Region_data:
-            if regiondata == Region_data[1]:
-                regiondata = Region_data[0]
+            if regiondata == region[1]:
+                regiondata = region[0]
+                print(regiondata)
         # Update the Organisation information
         OrgBaseInfo.objects.filter(pk=orgid).update(
         Name=name, Address=address, Region=regiondata,
@@ -165,15 +166,13 @@ def search(request):
 
 def editexperiences(request, id):
     org = OrgBaseInfo.objects.get(pk=id)
-    experiences = Experience.objects.filter(OrgName=org).first()
+    orgid = org.id
+    experiences = Experience.objects.filter(OrgName=org).first
     if request.method == 'POST':
         large = request.POST.get('Large')
         medium = request.POST.get('Medium')
         smallandmicro = request.POST.get('SmallandMicro')
-        experiences.Large = int(large)
-        experiences.Medium = int(medium)
-        experiences.SmallandMicro = int(smallandmicro)
-        experiences.save()
+        Experience.objects.filter(OrgName=org).update(Large=large, Medium=medium, SmallandMicro=smallandmicro)
         return redirect('details', id=int(id))
     context = {
         'experiences': experiences
@@ -185,7 +184,6 @@ def editcases(request, id):
     cases = Case.objects.filter(OrgName=org)
     if request.method == 'POST':
         service = request.POST.get("ServiceCategory")
-        print(service)
         ServiceCat = ServiceCategory.objects.get(Name=service)
         contents = request.POST.get("Contents")
         result = request.POST.get("Result")
