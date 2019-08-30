@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% if experiences %}
   <form class="" action="" method="post">
     {% csrf_token %}
     <table>
@@ -22,5 +22,5 @@
     </table>
     <input type="submit" name="" value="Submit">
   </form>
-
+{% endif %}
 {% endblock %}
