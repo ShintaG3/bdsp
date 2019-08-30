@@ -2,7 +2,6 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css" />
-<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
 
@@ -19,149 +18,152 @@
     {% if user.is_authenticated %}
       <div class="row">
         <a class="btn btn-primary ml-auto mr-2" href="{% url 'editPage' org.id %}" >
-          Edit Page
+          Edit
         </a>
       </div>
     {% endif %}
 
-    <table class="table table-borderless">
-      <tbody>
-        <tr>
-          <th class="lead" scope="row">Industory</th>
-          <td class="tableright">{{ org.Industry }}</td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">Service</th>
-          <td class="tableright">
-            {% for service in org.ServiceCategory.all %}
-              <span class="servicespan">{{ service.Name }}, </span>
-            {% endfor %}
-          </td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">PR</th>
-          <td class="tableright">{{ org.PR }}</td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">Registration Date</th>
-          <td class="tableright">{{ org.RegistrationDate|date:"Y-m-d" }}</td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">Affiliation</th>
-          <td class="tableright">{{ org.Affiliation }}</td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">URL</th>
-          <td class="tableright">
-            <a href="{{ org.Url }}">{{ org.Url }}</a>
-          </td>
-        </tr>
-        <tr>
-          <th class="lead" scope="row">Contact</th>
-          <td class="tableright">
-            <span>{{ org.ContactPerson }}&nbsp;&nbsp;</span>
-            <span>Email:{{ org.Email }}&nbsp;&nbsp;</span>
-            <span>Tel:{{ org.Telephone }}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th class="lead" scope="row">Industory</th>
+            <td >{% for industry in org.Industry.all %}
+            {{ industry.Name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}</td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">Service</th>
+            <td >
+              {% for service in org.ServiceCategory.all %}
+                <span >{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
+              {% endfor %}
+            </td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">PR</th>
+            <td >{{ org.PR }}</td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">Registration Date</th>
+            <td >{{ org.RegistrationDate|date:"Y-m-d" }}</td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">Affiliation</th>
+            <td >{{ org.Affiliation }}</td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">URL</th>
+            <td >
+              <a href="{{ org.Url }}">{{ org.Url }}</a>
+            </td>
+          </tr>
+          <tr>
+            <th class="lead" scope="row">Contact</th>
+            <td >
+              <span>{{ org.ContactPerson }}&nbsp;&nbsp;</span>
+              <span>Email:{{ org.Email }}&nbsp;&nbsp;</span>
+              <span>Tel:{{ org.Telephone }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <h2 class="display-4">Services</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-
         <a class="btn btn-primary ml-auto mr-2" href="{% url 'editservices' org.id %}" >
-          Edit Services
-
+          Edit
         </a>
       </div>
     {% endif %}
-    <table class="table table-hover mt-5">
-      <thead>
-        <tr>
 
-          <th class="lead" scope="col">Service Category</th>
-          <th class="lead" scope="col">Service</th>
-
-          <th class="lead" scope="col">Contents</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for service in services %}
-        <tr>
-          <td>{{ service.ServiceCategory }}</td>
-          <td>{{ service.Service }}</td>
-          <td>{{ service.Contents }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover mt-5">
+        <thead>
+          <tr>
+            <th class="lead" scope="col">Service Category</th>
+            <th class="lead" scope="col">Service</th>
+            <th class="lead" scope="col">Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for service in services %}
+          <tr>
+            <td>{{ service.ServiceCategory }}</td>
+            <td>{{ service.Service }}</td>
+            <td>{{ service.Contents }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <h2 class="display-4">Experience</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-
         <a class="btn btn-primary ml-auto mr-2" href="{% url 'editexperiences' org.id %}" >
-          Edit Experiences
-
+          Edit
         </a>
       </div>
     {% endif %}
-    <table class="table table-hover mt-5">
-      <thead>
-        <tr>
-          <th class="lead" scope="col">Large</th>
-          <th class="lead" scope="col">Medium</th>
-          <th class="lead" scope="col">SmallandMicro</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for experience in experiences %}
-        <tr>
-          <td>{{ experience.Large }}</td>
-          <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+
+    <div class="table-responsive">
+      <table class="table table-hover mt-5">
+        <thead>
+          <tr>
+            <th class="lead" scope="col">Large</th>
+            <th class="lead" scope="col">Medium</th>
+            <th class="lead" scope="col">SmallandMicro</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for experience in experiences %}
+          <tr>
+            <td>{{ experience.Large }}</td>
+            <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
-
-
 
   <h2 class="display-4">Cases</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-
         <a class="btn btn-primary ml-auto mr-2" href="{% url 'editcases' org.id %}" >
-          Edit Cases
-
+          Edit
         </a>
       </div>
     {% endif %}
-    <table class="table table-hover mt-5">
-      <thead>
-        <tr>
-          <th class="lead" scope="col">ServiceCategory</th>
-          <th class="lead" scope="col">Contents</th>
-          <th class="lead" scope="col">Result</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for case in cases %}
-        <tr>
-          <td>{{ case.ServiceCategory.Name }}</td>
-          <td>{{ case.Contents }}</td>
-          <td>{{ case.Result }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover mt-5">
+        <thead>
+          <tr>
+            <th class="lead" scope="col">ServiceCategory</th>
+            <th class="lead" scope="col">Contents</th>
+            <th class="lead" scope="col">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for case in cases %}
+          <tr>
+            <td>{{ case.ServiceCategory.Name }}</td>
+            <td>{{ case.Contents }}</td>
+            <td>{{ case.Result }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
 </main>
 

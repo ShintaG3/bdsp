@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -29,7 +28,6 @@
       </tbody>
 </table>
 
-{% endif %}
 <hr>
 
 
@@ -68,5 +66,5 @@
 
   <input type="submit" value="Edit" class="btn btn-outline-primary my-2 my-sm-0">
 </form>
-
+{% endif %}
 {% endblock %}
