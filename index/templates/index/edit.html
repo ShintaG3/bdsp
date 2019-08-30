@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 {% endblock %}
 {% block content %}
 
@@ -12,6 +11,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <h1>Edit Profile</h1>
 <main>
 <section>
@@ -54,66 +54,137 @@
         <option>{{ currentindustry }}</option>
         {% for industry in otherindustries %}
         <option>{{ industry }}</option>
+=======
+
+<form class="" action="" method="post">{% csrf_token %}
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Name">Name</label>
+    <div class="col-sm-10">
+      <input type="text" id="Name" name="Name" value="{{ org.Name }}" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Address">Address</label>     
+    <div class="col-sm-10">
+      <input type="text" id="Address" name="Address" value="{{ org.Address }}" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <legend class="col-form-label col-sm-2 pt-0">Ragion</legend>
+    <div class="col-sm-10">
+      <select name = "changeregion" class="custom-select">
+        <option selected>{{ currentregion }}</option>            
+        {% for region in otherregions %}
+        <option value="{{ region }}">{{ region }}</option>
+>>>>>>> 9e9cd6ee1d92a9495408cda20073bcef63c4ab39
         {% endfor %}
       </select>
-  </td>
-  </tr>
+    </div>
+  </div>
 
-  <tr>
-    <td>Services</td>
-    <td class="tableright">
-      {% for service in checked %}
-      <input type="checkbox" id="{{ service }}" name="Services" value="{{ service }}" checked>
-      <label for="{{ service }}">{{ service }}</label>
-      {% endfor %}
-      {% for service in unchecked %}
-      <input type="checkbox" id="{{ service }}" name="Services" value="{{ service }}">
-      <label for="{{ service }}">{{ service }}</label>
-      {% endfor %}
-    </td>
-  </tr>
 
-  <tr>
-    <td><label for="PR">PR</label></td>
-    <td><input type="text" id="PR" name="PR" value="{{ org.PR }}" class="tableright" required></td>
-  </tr>
+  <div class="form-group row">
+    <legend class="col-form-label col-sm-2 pt-0">Industries</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+  
+        {% for industry in industries %}
+          {% if industry.Name in currentindustry %}
+            <div class="custom-control custom-checkbox custom-control-inline" >
+              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}" checked>
+              <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
+            </div>
+          {% else %}
+            <div class="custom-control custom-checkbox custom-control-inline" >
+              <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}">
+              <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
+            </div>
+          {% endif %}
+        {% endfor %}      
+          
+      </div>
+    </div>
+  </div>
 
-  <tr>
-    <td><label for="Affiliation">Affiliation</label></td>
-    <td><input type="text" id="Affiliation" name="Affiliation" value="{{ org.Affiliation }}" class="tableright" required></td>
-  </tr>
+  <div class="form-group row">
+    <legend class="col-form-label col-sm-2 pt-0">Services</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
 
-  <tr>
-    <td><label for="RegistrationDate">Registration Date<br>(YYYY-MM-DD)</label></td>
-    <td><input type="dat" id="RegistrationDate" name="RegistrationDate" value="{{ org.RegistrationDate|date:"Y-m-d" }}" class="tableright" required></td>
-  </tr>
+        {% for service in services %}
+          {% if service.Name in checked_services %}
+            <div class="custom-control custom-checkbox custom-control-inline" >
+              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Service" value="{{ service }}" checked>
+              <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
+            </div>
+          {% else %}
+            <div class="custom-control custom-checkbox custom-control-inline" >
+              <input type="checkbox" class="custom-control-input" id="{{ service }}" name="Service" value="{{ service }}">
+              <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
+            </div>
+          {% endif %}
+        {% endfor %}      
 
-  <tr>
-    <td><label for="URL">URL</label></td>
-    <td><input type="text" id="URL" name="URL" value="{{ org.Url }}" class="tableright" required></td>
-  </tr>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="PR">PR</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="PR" rows="5">{{ org.PR }}</textarea>
+    </div>
+  </div>
 
-  <tr>
-    <td><label for="ContactPerson">ContactPerson</label></td>
-    <td><input type="tel" id="ContactPerson" name="ContactPerson" value="{{ org.ContactPerson }}" class="tableright" required></td>
-  </tr>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Affiliation">Affiliation</label>
+    <div class="col-sm-10">
+      <input type="text" id="Affiliation" name="Affiliation" value="{{ org.Affiliation }}" class="form-control">
+    </div>
+  </div>
 
-  <tr>
-    <td><label for="Email">Email</label></td>
-    <td><input type="email" id="Email" name="Email" value="{{ org.Email }}" class="tableright" required></td>
-  </tr>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="RegistrationDate">Registration Date</label>
+    <div class="col-sm-10">
+      <input type="date" id="RegistrationDate" name="RegistrationDate" value="{{ org.RegistrationDate|date:'Y-m-d' }}" class="form-control">
+    </div>
+  </div>
 
-  <tr>
-    <td><label for="Telephone">Telephone</label></td>
-    <td><input type="tel" id="Telephone" name="Telephone" value="{{ org.Telephone }}" class="tableright" required></td>
-  </tr>
-</table>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="URL">URL</label>
+    <div class="col-sm-10">
+      <input type="text" id="URL" name="URL" value="{{ org.Url }}" class="form-control">
+    </div>
+  </div>
 
-  <input type="submit" value="Submit" class="btn" style="background-color:lightblue;">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="ContactPerson">ContactPerson</label>
+    <div class="col-sm-10">
+      <input type="text" id="ContactPerson" name="ContactPerson" value="{{ org.ContactPerson }}" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Email">Email</label>
+    <div class="col-sm-10">
+      <input type="email" id="Email" name="Email" value="{{ org.Email }}" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Telephone">Telephone</label>
+    <div class="col-sm-10">
+      <input type="tel" id="Telephone" name="Telephone" value="{{ org.Telephone }}" class="form-control">
+    </div>
+  </div>
+  
+  <!-- button -->
+  <div class="text-center mt-5">
+      <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-lg btn-outline-primary">
+  </div>
+
 </form>
-
-</section>
-</main>
-
 
 {% endblock %}
