@@ -23,21 +23,26 @@
       </div>
     {% endif %}
 
+
     <div class="table-responsive">
 
       <table class="table table-borderless">
         <tbody>
           <tr>
             <th class="lead" scope="row">Industory</th>
+
             <td >{% for industry in org.Industry.all %}
             {{ industry.Name }}{% if not forloop.last %}, {% endif %}
             {% endfor %}</td>
+
           </tr>
           <tr>
             <th class="lead" scope="row">Service</th>
             <td >
               {% for service in org.ServiceCategory.all %}
+
                 <span >{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
+
               {% endfor %}
             </td>
           </tr>
