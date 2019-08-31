@@ -24,7 +24,6 @@ def getregion(query_result):
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
-        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
 
@@ -36,22 +35,35 @@ def list (request):
 
     #chaining the  input data for querying
         if len(regions) == 0 or "allregion" in regions:
-            print("working")
+            regions = []
             for region in Region_data:
                 regions.append(region[0])
 
         if len(industries) == 0 or "allindustries" in industries:
+            industries = []
             allindustries = Industry.objects.all()
             for industry in allindustries:
                 industries.append(industry.Name)
 
         if len(services) == 0 or "allservices" in services:
+            services = []
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
-
+        # Get the industries & services not selected
+        excludeindustries = []
+        excludeservices = []
+        for industry in Industry.objects.all():
+            if industry.Name not in industries:
+                excludeindustries.append(industry.Name)
+        for service in ServiceCategory.objects.all():
+            if service.Name not in services:
+                excludeservices.append(service.Name)
+        # This is the main query code
         query_result = OrgBaseInfo.objects.filter(
-            Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
+            Region__in=regions).exclude(
+            ServiceCategory__Name__in=excludeservices).exclude(
+            Industry__Name__in=excludeindustries).distinct()
         getregion(query_result)
         context = {
             'query_result': query_result
