@@ -3,7 +3,7 @@ from django.db import models
 
 # Regions tuple added here
 Region_data = (
-    ('ada', 'Addis Adabba'),
+    ('ada', 'Addis Ababa'),
     ('jhn', 'Johannesburg'),
     ('smt', 'Something')
 )
