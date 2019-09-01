@@ -22,9 +22,18 @@ def getregion(query_result):
             if region[0] == query.Region:
                 query.Region = region[1]
 
+def searchAll(request):
+    query_result =  OrgBaseInfo.objects.all().order_by('Region')
+    getregion(query_result)
+    context = {
+        'query_result' : query_result
+    }
+    return render(request, 'index/list.html', context=context)
+
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
+        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
 
@@ -35,36 +44,23 @@ def list (request):
             return render(request, 'index/list.html', context=context)
 
     #chaining the  input data for querying
-        if len(regions) == 0 or "allregion" in regions:
-            regions = []
+        if len(regions) == 0:
             for region in Region_data:
                 regions.append(region[0])
 
-        if len(industries) == 0 or "allindustries" in industries:
-            industries = []
+        if len(industries) == 0:
             allindustries = Industry.objects.all()
             for industry in allindustries:
                 industries.append(industry.Name)
 
-        if len(services) == 0 or "allservices" in services:
-            services = []
+        if len(services) == 0:
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
-        # Get the industries & services not selected
-        excludeindustries = []
-        excludeservices = []
-        for industry in Industry.objects.all():
-            if industry.Name not in industries:
-                excludeindustries.append(industry.Name)
-        for service in ServiceCategory.objects.all():
-            if service.Name not in services:
-                excludeservices.append(service.Name)
-        # This is the main query code
+
         query_result = OrgBaseInfo.objects.filter(
-            Region__in=regions).exclude(
-            ServiceCategory__Name__in=excludeservices).exclude(
-            Industry__Name__in=excludeindustries).distinct()
+            Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct().order_by('Region')
+
         getregion(query_result)
         context = {
             'query_result': query_result
@@ -79,7 +75,6 @@ def list (request):
 
 def details (request, id):
     org = get_object_or_404(OrgBaseInfo, pk=id)
-    #org = OrgBaseInfo.objects.get(pk=id)
     region = org.Region
     for r in Region_data:
         if r[0] == region:
@@ -115,7 +110,6 @@ def editPage(request, id):
         for region in Region_data:
             if regiondata == region[1]:
                 regiondata = region[0]
-                print(regiondata)
         # Update the Organisation information
         OrgBaseInfo.objects.filter(pk=orgid).update(
         Name=name, Address=address, Region=regiondata,
@@ -190,7 +184,7 @@ def editPage(request, id):
 
 def search(request):
     orgInfo = request.POST["orgInfo"]
-    orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo)
+    orgs = OrgBaseInfo.objects.filter(Name__icontains=orgInfo).order_by('Region')
     getregion(orgs)
     return render(request,'index/list.html',context={'query_result':orgs})
 
@@ -202,7 +196,8 @@ def editexperiences(request, id):
         large = request.POST.get('Large')
         medium = request.POST.get('Medium')
         smallandmicro = request.POST.get('SmallandMicro')
-        Experience.objects.filter(OrgName=org).update(Large=large, Medium=medium, SmallandMicro=smallandmicro)
+        Experience.objects.filter(OrgName=org).update(
+        Large=large, Medium=medium, SmallandMicro=smallandmicro)
         return redirect('details', id=int(id))
     context = {
         'experiences': experiences
@@ -236,7 +231,8 @@ def editservices(request, id):
         ServiceCat = ServiceCategory.objects.get(Name=serviceCategory)
         service = request.POST.get('service')
         content = request.POST.get('content')
-        Service.objects.filter(pk=int(serviceid)).update(ServiceCategory=ServiceCat, Contents=content, Service=service)
+        Service.objects.filter(pk=int(serviceid)).update(
+        ServiceCategory=ServiceCat, Contents=content, Service=service)
         return redirect('editservices', id=id)
     context = {
         'services': services,
