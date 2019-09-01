@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service, Case, Experience
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 def index (request):
     regiondata = Region_data
@@ -24,7 +25,6 @@ def getregion(query_result):
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
-        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
 
@@ -36,22 +36,35 @@ def list (request):
 
     #chaining the  input data for querying
         if len(regions) == 0 or "allregion" in regions:
-            print("working")
+            regions = []
             for region in Region_data:
                 regions.append(region[0])
 
         if len(industries) == 0 or "allindustries" in industries:
+            industries = []
             allindustries = Industry.objects.all()
             for industry in allindustries:
                 industries.append(industry.Name)
 
         if len(services) == 0 or "allservices" in services:
+            services = []
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
-
+        # Get the industries & services not selected
+        excludeindustries = []
+        excludeservices = []
+        for industry in Industry.objects.all():
+            if industry.Name not in industries:
+                excludeindustries.append(industry.Name)
+        for service in ServiceCategory.objects.all():
+            if service.Name not in services:
+                excludeservices.append(service.Name)
+        # This is the main query code
         query_result = OrgBaseInfo.objects.filter(
-            Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct()
+            Region__in=regions).exclude(
+            ServiceCategory__Name__in=excludeservices).exclude(
+            Industry__Name__in=excludeindustries).distinct()
         getregion(query_result)
         context = {
             'query_result': query_result
@@ -65,7 +78,8 @@ def list (request):
     return render(request, 'index/list.html', context=context)
 
 def details (request, id):
-    org = OrgBaseInfo.objects.get(pk=id)
+    org = get_object_or_404(OrgBaseInfo, pk=id)
+    #org = OrgBaseInfo.objects.get(pk=id)
     region = org.Region
     for r in Region_data:
         if r[0] == region:
@@ -85,7 +99,7 @@ def details (request, id):
 def editPage(request, id):
     if request.method == 'POST':
         orgid = int(request.session.get('orgid'))
-        org = OrgBaseInfo.objects.get(pk=orgid)
+        org = get_object_or_404(OrgBaseInfo, pk=orgid)
         name = request.POST.get("Name")
         address = request.POST.get("Address")
         telephone = request.POST.get("Telephone")
@@ -181,7 +195,7 @@ def search(request):
     return render(request,'index/list.html',context={'query_result':orgs})
 
 def editexperiences(request, id):
-    org = OrgBaseInfo.objects.get(pk=id)
+    org = get_object_or_404(OrgBaseInfo, pk=id)
     orgid = org.id
     experiences = Experience.objects.filter(OrgName=org).first
     if request.method == 'POST':
@@ -196,7 +210,7 @@ def editexperiences(request, id):
     return render(request, 'index/edit_experiences.html', context=context)
 
 def editcases(request, id):
-    org = OrgBaseInfo.objects.get(pk=id)
+    org = get_object_or_404(OrgBaseInfo, pk=id)
     cases = Case.objects.filter(OrgName=org)
     if request.method == 'POST':
         service = request.POST.get("ServiceCategory")
@@ -214,7 +228,7 @@ def editcases(request, id):
     return render(request, 'index/edit_cases.html', context=context)
 
 def editservices(request, id):
-    org = OrgBaseInfo.objects.get(pk=id)
+    org = get_object_or_404(OrgBaseInfo, pk=id)
     services = Service.objects.filter(OrgName=org)
     if request.method == 'POST':
         serviceid = request.POST.get('serviceid')
