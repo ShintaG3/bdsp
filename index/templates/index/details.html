@@ -2,6 +2,7 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 {% endblock %}
 {% block content %}
 
@@ -17,8 +18,10 @@
   <section class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editPage' org.id %}" >
-          Edit
+        <a class="ml-auto mr-2" href="{% url 'editPage' org.id %}" >
+          <i class="material-icons">
+            edit
+          </i>
         </a>
       </div>
     {% endif %}
@@ -81,8 +84,10 @@
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editservices' org.id %}" >
-          Edit
+        <a class="ml-auto mr-2" href="" >
+          <i class="material-icons">
+            add
+          </i>
         </a>
       </div>
     {% endif %}
@@ -94,6 +99,7 @@
             <th class="lead" scope="col">Service Category</th>
             <th class="lead" scope="col">Service</th>
             <th class="lead" scope="col">Contents</th>
+            <th class="lead" scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -102,6 +108,17 @@
             <td>{{ service.ServiceCategory }}</td>
             <td>{{ service.Service }}</td>
             <td>{{ service.Contents }}</td>
+            <td>
+              {% if user.is_authenticated %}
+              <div class="row">
+                <a class="ml-auto mr-2" href="{% url 'editservices' service.id org.id %}">
+                  <i class="material-icons">
+                    edit
+                  </i>
+                </a>
+              </div>
+              {% endif %}
+            </td>
           </tr>
           {% endfor %}
         </tbody>
@@ -113,8 +130,10 @@
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editexperiences' org.id %}" >
-          Edit
+        <a class="ml-auto mr-2" href="{% url 'editexperiences' org.id %}" >
+          <i class="material-icons">
+            edit
+          </i>
         </a>
       </div>
     {% endif %}
@@ -144,8 +163,10 @@
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-        <a class="btn btn-primary ml-auto mr-2" href="{% url 'editcases' org.id %}" >
-          Edit
+        <a class="ml-auto mr-2" href="{% url 'editcases' org.id %}" >
+          <i class="material-icons">
+            edit
+          </i>
         </a>
       </div>
     {% endif %}

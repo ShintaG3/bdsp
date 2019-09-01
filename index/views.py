@@ -222,20 +222,23 @@ def editcases(request, id):
         }
     return render(request, 'index/edit_cases.html', context=context)
 
-def editservices(request, id):
-    org = get_object_or_404(OrgBaseInfo, pk=id)
+def editservices(request, service_id, org_id):
+    service = get_object_or_404(Service, pk=service_id)
+    org = get_object_or_404(OrgBaseInfo, pk=org_id)
     services = Service.objects.filter(OrgName=org)
     if request.method == 'POST':
-        serviceid = request.POST.get('serviceid')
-        serviceCategory = request.POST.get('ServiceCategory')
-        ServiceCat = ServiceCategory.objects.get(Name=serviceCategory)
-        service = request.POST.get('service')
+        service = get_object_or_404(Service, pk=service_id)
+        Category = request.POST.get('ServiceCategory')
+        servicecategory = ServiceCategory.objects.get(Name=Category)
+        title = request.POST.get('title')
         content = request.POST.get('content')
-        Service.objects.filter(pk=int(serviceid)).update(
-        ServiceCategory=ServiceCat, Contents=content, Service=service)
-        return redirect('editservices', id=id)
+        service.ServiceCategory = servicecategory
+        service.Contents = content
+        service.Service = title      
+        service.save()
+        return redirect('details', id=org_id)
     context = {
-        'services': services,
-        'ServiceCategory': ServiceCategory.objects.all()
+        'service': service,
+        'org':org,
         }
     return render(request, 'index/edit_services.html', context=context)

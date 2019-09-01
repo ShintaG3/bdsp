@@ -4,67 +4,41 @@
 {% endblock %}
 
 {% block content %}
-{% if services %}
+{% if service %}
 
-<table class="table table-hover mt-5">
-      <thead>
-        <tr>
-          <th>ServiceId</th>
-          <th>ServiceCategory</th>
-          <th>Service</th>
-          <th>Content</th>
-        </tr>
-      </thead>
+<form class="mt-5" action="" method="post">{% csrf_token %}
+  
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="Service">Service Category</label>
+    <div class="col-sm-10">
+      <select class="custom-select" name="ServiceCategory" id="ServiceCategory">       
+        <option value="{{ service.ServiceCategory }}" selected>{{ service.ServiceCategory }}</option>
+        {% for category in org.ServiceCategory.all %}
+          <option value="{{ category.Name }}">{{ category.Name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+ 
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="title">Title</label>
+    <div class="col-sm-10">
+      <input type="text" id="title" name="title" value="{{ service.Service }}" class="form-control">
+    </div>
+  </div>
 
-      <tbody>
-      {% for service in services %}
-        <tr>
-          <td>{{ service.id }}</td>
-          <td>{{ service.ServiceCategory.Name }}</td>
-          <td>{{ service.Service }}</td>
-          <td>{{ service.Contents }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-</table>
-
-<hr>
-
-
-<form class="" action="" method="post">
-  {% csrf_token %}
- <p>Choose the Service
-   <select name = "serviceid" class="tableright" style="padding:10px;">
-     {% for service in services %}
-     <option>{{ service.id }}</option>
-     {% endfor %}
-   </select>
- </p>
-
-  <table>
-        <tr>
-          <td><label for="Service">ServicesCategory</label></td>
-          <td>
-            <select name="ServiceCategory" id="Service">
-              {% for service in ServiceCategory %}
-              <option>{{ service.Name }}</option>
-              {% endfor %}
-            </select>
-          </td>
-        </tr>
-
-        <tr>
-          <td><label for="service">Service</label></td>
-          <td><textarea id="service" name="service" rows="5" cols="15"></textarea></td>
-        </tr>
-
-        <tr>
-          <td><label for="content">Content</label></td>
-          <td><textarea id="content" name="content" rows="5" cols="15"></textarea></td>
-        </tr>
-  </table>
-
-  <input type="submit" value="Edit" class="btn btn-outline-primary my-2 my-sm-0">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="content">Content</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" name="content" id="content" rows="5">{{ service.Contents }}</textarea>
+    </div>
+  </div>
+  
+  <!-- button -->
+  <div class="text-center mt-5">
+    <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
+  </div>
+  
 </form>
 {% endif %}
 {% endblock %}
