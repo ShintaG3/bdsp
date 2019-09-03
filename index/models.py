@@ -59,7 +59,7 @@ class Service(models.Model):
         return str(self.OrgName)
 
 class Experience(models.Model):
-    OrgName = models.ForeignKey('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    OrgName = models.OneToOneField('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     Large = models.IntegerField()
     Medium = models.IntegerField()
     SmallandMicro = models.IntegerField()
