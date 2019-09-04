@@ -258,3 +258,49 @@ def addservice (request, id):
     'services': ServiceCategory.objects.all()
     }
     return render(request, 'index/new_service.html', context=context)
+
+def register (request):
+    regiondata = Region_data
+    regions = []
+    for region in regiondata:
+        regions.append({'name':region[0], 'value':region[1]})
+    context = {
+        'industries': Industry.objects.all(),
+        'services': ServiceCategory.objects.all(),
+        'regions': regions
+    }
+    if request.method == 'POST':
+        name = request.POST.get("Name")
+        address = request.POST.get("Address")
+        telephone = request.POST.get("Telephone")
+        regiondata = request.POST.get("changeregion")
+        newindustrydata = request.POST.getlist("changeindustry")
+        newservicesdata = request.POST.getlist('Services')
+        PR = request.POST.get('PR')
+        registrationDate = request.POST.get("RegistrationDate")
+        Affiliation = request.POST.get('Affiliation')
+        URL = request.POST.get('URL')
+        ContactPerson = request.POST.get('ContactPerson')
+        Email = request.POST.get('Email')
+        for region in Region_data:
+            if regiondata == region[1]:
+                regiondata = region[0]
+
+        org = OrgBaseInfo.objects.create(
+        Name=name, Address=address, Region=regiondata,
+        RegistrationDate=registrationDate, PR=PR, Email=Email, Affiliation=Affiliation,
+        Url=URL, ContactPerson=ContactPerson, Telephone=telephone)
+        
+        # Adding the services
+        for service in newservicesdata:
+            addservice = ServiceCategory.objects.get(Name=service)
+            org.ServiceCategory.add(addservice)
+       
+        # Adding industries
+        for industry in newindustrydata:
+            addindustry = Industry.objects.get(Name=industry)
+            org.Industry.add(addindustry)
+        return redirect('details', id=org.id)
+    return render(request, 'index/edit_add.html', context=context)
+    
+        
