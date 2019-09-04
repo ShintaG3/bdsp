@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service, Case, Experience
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 def index (request):
     regiondata = Region_data
@@ -57,10 +58,10 @@ def list (request):
             allservices = ServiceCategory.objects.all()
             for service in allservices:
                 services.append(service.Name)
-
+    # Query Codes here
         query_result = OrgBaseInfo.objects.filter(
-            Region__in=regions, Industry__Name__in=industries, ServiceCategory__Name__in=services).distinct().order_by('Region')
-
+        Q(Region__in=regions) & Q(Industry__Name__in=industries) & Q(ServiceCategory__Name__in=services)
+        ).distinct().order_by('Region')
         getregion(query_result)
         context = {
             'query_result': query_result
@@ -205,40 +206,55 @@ def editexperiences(request, id):
     return render(request, 'index/edit_experiences.html', context=context)
 
 def editcases(request, id):
-    org = get_object_or_404(OrgBaseInfo, pk=id)
-    cases = Case.objects.filter(OrgName=org)
+    #org = get_object_or_404(OrgBaseInfo, pk=id)
+    case = get_object_or_404(Case, pk=id)
+    org = get_object_or_404(OrgBaseInfo, Name=case.OrgName)
     if request.method == 'POST':
         service = request.POST.get("ServiceCategory")
         ServiceCat = ServiceCategory.objects.get(Name=service)
-        contents = request.POST.get("Contents")
-        result = request.POST.get("Result")
-        caseid = request.POST.get("case")
-        Case.objects.filter(pk=int(caseid)).update(ServiceCategory=ServiceCat,
+        contents = request.POST.get("contents")
+        result = request.POST.get("result")
+        Case.objects.filter(pk=int(id)).update(ServiceCategory=ServiceCat,
         Contents=contents, Result=result)
-        return redirect('editcases', id=id)
+        return redirect('details', id=int(org.id))
     context = {
-        'cases': cases,
+        'case': case,
         'services': ServiceCategory.objects.all()
         }
     return render(request, 'index/edit_cases.html', context=context)
 
-def editservices(request, service_id, org_id):
-    service = get_object_or_404(Service, pk=service_id)
-    org = get_object_or_404(OrgBaseInfo, pk=org_id)
+def editservices(request, service_id):
+    service = get_object_or_404(Service, pk=int(service_id))
+    org = get_object_or_404(OrgBaseInfo, Name=service.OrgName)
     services = Service.objects.filter(OrgName=org)
     if request.method == 'POST':
-        service = get_object_or_404(Service, pk=service_id)
+        #service = get_object_or_404(Service, pk=service_id)
         Category = request.POST.get('ServiceCategory')
-        servicecategory = ServiceCategory.objects.get(Name=Category)
-        title = request.POST.get('title')
+        servicecategory = get_object_or_404(ServiceCategory, Name=Category)
+        title = request.POST.get('service')
         content = request.POST.get('content')
-        service.ServiceCategory = servicecategory
-        service.Contents = content
-        service.Service = title      
-        service.save()
-        return redirect('details', id=org_id)
+        Service.objects.filter(pk=service_id).update(ServiceCategory=servicecategory, Service=title,
+        Contents=content)
+        return redirect('details', id=org.id)
     context = {
         'service': service,
+        'services': ServiceCategory.objects.all(),
         'org':org,
         }
     return render(request, 'index/edit_services.html', context=context)
+
+def addservice (request, id):
+    org = get_object_or_404(OrgBaseInfo, pk=id)
+    if request.method == 'POST':
+        service = request.POST.get('ServiceCategory')
+        serviceCategory = get_object_or_404(ServiceCategory, Name=service)
+        service = request.POST.get('service')
+        content = request.POST.get('content')
+        newService = Service(OrgName=org, ServiceCategory=serviceCategory, Service=service, Contents=content)
+        newService.save()
+        return redirect('details', id=org.id)
+    context = {
+    'org': org,
+    'services': ServiceCategory.objects.all()
+    }
+    return render(request, 'index/new_service.html', context=context)

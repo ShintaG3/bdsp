@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block content %}
-{% if service %}
 
 <form class="mt-5" action="" method="post">{% csrf_token %}
 
@@ -12,9 +11,8 @@
     <label class="col-sm-2 col-form-label" for="Service">Service Category</label>
     <div class="col-sm-10">
       <select class="custom-select" name="ServiceCategory" id="ServiceCategory">
-        <option value="{{ service.ServiceCategory }}" selected>{{ service.ServiceCategory }}</option>
         {% for service in services %}
-          <option value="{{ service.Name }}">{{ service.Name }}</option>
+        <option>{{ service.Name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -23,14 +21,14 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="service">Service</label>
     <div class="col-sm-10">
-      <input type="text" id="service" name="service" value="{{ service.Service }}" class="form-control" required>
+      <input type="text" id="service" name="service" class="form-control" required>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="content">Content</label>
     <div class="col-sm-10">
-      <textarea class="form-control" name="content" id="content" rows="5" required>{{ service.Contents }}</textarea>
+      <textarea class="form-control" name="content" id="content" rows="5" required></textarea>
     </div>
   </div>
 
@@ -40,5 +38,4 @@
   </div>
 
 </form>
-{% endif %}
 {% endblock %}
