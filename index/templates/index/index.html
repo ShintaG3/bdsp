@@ -53,14 +53,17 @@
       </div>
     </div>
   </div>
-
-  <!-- button -->
+  <div class="custom-control custom-checkbox custom-control-inline">
+    <input type="checkbox" class="custom-control-input" id="searchAll" name="searchAll" value="searchAll">
+    <label class="custom-control-label" for="searchAll">Search All</label>
+  </div>
+  <!-- button  + Search all -->
   <div class="text-center mt-5">
     <input type="submit" name="" value="Search" class="mx-auto btn btn-lg btn-outline-primary">
   </div>
 
 </form>
 
-<a href="{% url 'searchAll' %}"><button type="button" name="button" class="mx-auto btn btn-lg btn-outline-primary">Search All</button></a>
+
 
 {% endblock %}
