@@ -23,13 +23,6 @@ def getregion(query_result):
             if region[0] == query.Region:
                 query.Region = region[1]
 
-def searchAll(request):
-    query_result =  OrgBaseInfo.objects.all().order_by('Region')
-    getregion(query_result)
-    context = {
-        'query_result' : query_result
-    }
-    return render(request, 'index/list.html', context=context)
 
 def list (request):
     if request.method == 'POST':
@@ -37,7 +30,15 @@ def list (request):
         print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
-
+        searchAll = request.POST.get('searchAll')
+    # Send all if Search all is selected
+        if searchAll:
+            query_result =  OrgBaseInfo.objects.all().order_by('Region')
+            getregion(query_result)
+            context = {
+                'query_result': query_result
+            }
+            return render(request, 'index/list.html', context=context)
     # Send empty if nothing selected
         if len(regions)==0 and len(industries)==0 and len(services)==0:
             context = {
@@ -290,17 +291,15 @@ def register (request):
         Name=name, Address=address, Region=regiondata,
         RegistrationDate=registrationDate, PR=PR, Email=Email, Affiliation=Affiliation,
         Url=URL, ContactPerson=ContactPerson, Telephone=telephone)
-        
+
         # Adding the services
         for service in newservicesdata:
             addservice = ServiceCategory.objects.get(Name=service)
             org.ServiceCategory.add(addservice)
-       
+
         # Adding industries
         for industry in newindustrydata:
             addindustry = Industry.objects.get(Name=industry)
             org.Industry.add(addindustry)
         return redirect('details', id=org.id)
     return render(request, 'index/edit_add.html', context=context)
-    
-        

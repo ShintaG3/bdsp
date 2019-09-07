@@ -3,18 +3,26 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style media="screen">
+  @media screen and (max-width:600px){
+    .container{
+    min-width: 100vw;
+    padding-left:0px;
+    }
+  }
+</style>
 {% endblock %}
 {% block content %}
-
+<main>
 <div class="jumbotron jumbotron-fluid bg-gr-blue shadow p-3 mb-5 bg-white">
   <div class="container text-white">
     <h1 class="display-3">{{ org.Name }}</h1>
     <h3 class="lead">{{ org.Region }}, {{ org.Address }}</h3>
   </div>
 </div>
+</main>
 
-
-<main>
+<article>
   <section class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
@@ -80,7 +88,7 @@
     </div>
   </section>
 
-  <h4 class="display-4">Services</h4>
+  <h2 class="display-4">Services</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
@@ -126,7 +134,7 @@
     </div>
   </section>
 
-  <h4 class="display-4">Experience</h4>
+  <h2 class="display-4">Experience</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
@@ -159,7 +167,7 @@
     </div>
   </section>
 
-  <h4 class="display-4">Cases</h4>
+  <h2 class="display-4">Cases</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     <div class="table-responsive">
       <table class="table table-hover mt-5">
@@ -193,7 +201,7 @@
       </table>
     </div>
   </section>
-</main>
+</article>
 
 
 {% endblock %}
