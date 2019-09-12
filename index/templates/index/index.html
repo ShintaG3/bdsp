@@ -54,8 +54,12 @@
     </div>
   </div>
   <div class="custom-control custom-checkbox custom-control-inline">
-    <input type="checkbox" class="custom-control-input" id="searchAll" name="searchAll" value="searchAll">
-    <label class="custom-control-label" for="searchAll">Search All</label>
+    <input type="radio" class="custom-control-input" id="checkAll" name="checkAll" value="checkAll">
+    <label class="custom-control-label" for="checkAll"><h5>Check All</h5></label>
+  </div>
+  <div class="custom-control custom-checkbox custom-control-inline">
+    <input type="radio" class="custom-control-input" id="unCheckAll" name="unCheckAll" value="unCheckAll">
+    <label class="custom-control-label" for="unCheckAll"><h5>Uncheck All</h5></label>
   </div>
   <!-- button  + Search all -->
   <div class="text-center mt-5">
@@ -64,6 +68,47 @@
 
 </form>
 
+<script>
+  let checkAllInputs = document.querySelector('input[id="checkAll"]');
+  let unCheckAllInputs = document.querySelector('input[id="unCheckAll"]');
+  let allservices = document.querySelectorAll('input[name="service"]');
+  let allregions = document.querySelectorAll('input[name="region"]');
+  let allindustries = document.querySelectorAll('input[name="industry"]');
 
+  checkAllInputs.addEventListener('click', function(e) {
+    e.preventDefault;
+    console.log('working');
+    checkAll();
+  })
+  unCheckAllInputs.addEventListener('click', function(e) {
+    e.preventDefault;
+    unCheckAll();
+  })
+  function checkAll(){
+    for(let i=0; i<allservices.length; i++) {
+        allservices[i].checked = true;
+    }
+    for(let i=0; i<allregions.length; i++) {
+        allregions[i].checked = true;
+    }
+    for(let i=0; i<allindustries.length; i++) {
+        allindustries[i].checked = true;
+    }
+    unCheckAllInputs.checked = false;
+  }
+  function unCheckAll(){
+    for(let i=0; i<allservices.length; i++) {
+        allservices[i].checked = false;
+    }
+    for(let i=0; i<allregions.length; i++) {
+        allregions[i].checked = false;
+    }
+    for(let i=0; i<allindustries.length; i++) {
+        allindustries[i].checked = false;
+    }
+    checkAllInputs.checked = false;
+  }
+
+</script>
 
 {% endblock %}
