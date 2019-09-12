@@ -3,24 +3,29 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style media="screen">
+{% comment %} <style media="screen">
   @media screen and (max-width:600px){
     .container{
     min-width: 100vw;
     padding-left:0px;
     }
   }
-</style>
+</style> {% endcomment %}
 {% endblock %}
-{% block content %}
+
+{% block header %}
 <main>
 <div class="jumbotron jumbotron-fluid bg-gr-blue shadow p-3 mb-5 bg-white">
   <div class="container text-white">
-    <h1 class="display-3">{{ org.Name }}</h1>
+    <h1 class="display-4">{{ org.Name }}</h1>
     <h3 class="lead">{{ org.Region }}, {{ org.Address }}</h3>
   </div>
 </div>
 </main>
+{% endblock %}
+
+
+{% block content %}
 
 <article>
   <section class="shadow p-3 mb-5 bg-white rounded">

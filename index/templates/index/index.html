@@ -53,21 +53,38 @@
       </div>
     </div>
   </div>
-  <div class="custom-control custom-checkbox custom-control-inline">
+  <div class="form-group row text-center">
+    <div class="col">
+      <div class="custom-control custom-checkbox custom-control-inline ">
+        <input type="checkbox" class="custom-control-input" id="checkAll" name="checkAll" value="checkAll">
+        <label class="custom-control-label" for="checkAll">Select All</label>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} <div class="custom-control custom-checkbox custom-control-inline">
     <input type="radio" class="custom-control-input" id="checkAll" name="checkAll" value="checkAll">
     <label class="custom-control-label" for="checkAll"><h5>Check All</h5></label>
-  </div>
-  <div class="custom-control custom-checkbox custom-control-inline">
+  </div> {% endcomment %}
+  {% comment %} <div class="custom-control custom-checkbox custom-control-inline">
     <input type="radio" class="custom-control-input" id="unCheckAll" name="unCheckAll" value="unCheckAll">
     <label class="custom-control-label" for="unCheckAll"><h5>Uncheck All</h5></label>
-  </div>
+  </div> {% endcomment %}
+
   <!-- button  + Search all -->
   <div class="text-center mt-5">
     <input type="submit" name="" value="Search" class="mx-auto btn btn-lg btn-outline-primary">
   </div>
 
 </form>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $("#checkAll").change(function(){
+    $("input:checkbox").prop("checked", $(this).prop("checked"))
+  })
+</script>
 
+{% comment %} 
 <script>
   let checkAllInputs = document.querySelector('input[id="checkAll"]');
   let unCheckAllInputs = document.querySelector('input[id="unCheckAll"]');
@@ -109,6 +126,6 @@
     checkAllInputs.checked = false;
   }
 
-</script>
+</script> {% endcomment %}
 
 {% endblock %}
