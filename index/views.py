@@ -27,18 +27,8 @@ def getregion(query_result):
 def list (request):
     if request.method == 'POST':
         regions = request.POST.getlist('region')
-        print(regions)
         industries = request.POST.getlist('industry')
         services = request.POST.getlist('service')
-        searchAll = request.POST.get('searchAll')
-    # Send all if Search all is selected
-        if searchAll:
-            query_result =  OrgBaseInfo.objects.all().order_by('Region')
-            getregion(query_result)
-            context = {
-                'query_result': query_result
-            }
-            return render(request, 'index/list.html', context=context)
     # Send empty if nothing selected
         if len(regions)==0 and len(industries)==0 and len(services)==0:
             context = {
