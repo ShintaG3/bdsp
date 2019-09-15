@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 # Create your models here.
 
 # Regions tuple added here
@@ -44,6 +45,10 @@ class OrgBaseInfo(models.Model):
         blank=True,
         default='ada',
         help_text='Region of the company')
+
+    def get_absolute_url(self):
+        """Returns the url to access the Org instance """
+        return reverse('details', args=[str(self.id)])
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""

@@ -4,6 +4,7 @@ from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 def index (request):
     regiondata = Region_data
@@ -83,6 +84,7 @@ def details (request, id):
     }
     return render(request, 'index/details.html', context=context)
 
+@login_required
 def editPage(request, id):
     if request.method == 'POST':
         orgid = int(request.session.get('orgid'))
@@ -180,6 +182,7 @@ def search(request):
     getregion(orgs)
     return render(request,'index/list.html',context={'query_result':orgs})
 
+@login_required
 def editexperiences(request, id):
     org = get_object_or_404(OrgBaseInfo, pk=id)
     orgid = org.id
@@ -196,6 +199,7 @@ def editexperiences(request, id):
         }
     return render(request, 'index/edit_experiences.html', context=context)
 
+@login_required
 def editcases(request, id):
     #org = get_object_or_404(OrgBaseInfo, pk=id)
     case = get_object_or_404(Case, pk=id)
@@ -214,6 +218,7 @@ def editcases(request, id):
         }
     return render(request, 'index/edit_cases.html', context=context)
 
+@login_required
 def editservices(request, service_id):
     service = get_object_or_404(Service, pk=int(service_id))
     org = get_object_or_404(OrgBaseInfo, Name=service.OrgName)
@@ -234,6 +239,7 @@ def editservices(request, service_id):
         }
     return render(request, 'index/edit_services.html', context=context)
 
+@login_required
 def addservice (request, id):
     org = get_object_or_404(OrgBaseInfo, pk=id)
     if request.method == 'POST':
@@ -250,6 +256,7 @@ def addservice (request, id):
     }
     return render(request, 'index/new_service.html', context=context)
 
+@login_required
 def register (request):
     regiondata = Region_data
     regions = []
