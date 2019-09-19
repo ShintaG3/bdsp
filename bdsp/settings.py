@@ -107,6 +107,8 @@ USE_TZ = True
 from django.conf import settings
 from django.conf.urls.static import static
 
+LOGIN_REDIRECT_URL = '/'
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -116,7 +118,6 @@ STATICFILES_DIRS = [
     # '/var/www/static/',
 ]
 
-LOGIN_REDIRECT_URL = '/'
 
 urlpatterns = [
     # ... the rest of your URLconf goes here ...
