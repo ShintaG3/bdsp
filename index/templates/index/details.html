@@ -144,7 +144,7 @@
   <h2 class="display-5">Experience</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
-    {% if experience %}
+    {% if experiences %}
     {% for experience in experiences %}
       <div class="row">
         <a class="ml-auto mr-2" href="{% url 'experience_update' experience.id %}">
@@ -154,6 +154,14 @@
         </a>
       </div>
       {% endfor %}
+    {% else %}
+      <div class="row">
+        <a class="ml-auto mr-2" href="{% url 'experience_create' org.id %}">
+          <i class="material-icons">
+            add
+          </i>
+        </a>
+      </div>
     {% endif %}
     {% endif %}
 
@@ -167,10 +175,12 @@
           </tr>
         </thead>
         <tbody>
+          {% for experience in experiences %}
           <tr>
             <td>{{ experience.Large }}</td>
             <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

@@ -69,7 +69,7 @@ def details (request, id):
     'org': org,
     'services': services,
     'cases': cases,
-    'experience': experiences
+    'experiences': experiences
     }
     return render(request, 'index/details.html', context=context)
 

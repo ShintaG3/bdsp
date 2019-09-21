@@ -11,7 +11,7 @@ urlpatterns = [
 ]
 # Add URLConf to create, update, and delete experiences
 urlpatterns += [
-    #path('experience/create/', views.ExperienceCreate.as_view(), name='experience_create'),
+    path('experience/create/<int:pk>', views.ExperienceCreate.as_view(), name='experience_create'),
     path('experience/update/<int:pk>/', views.ExperienceUpdate.as_view(), name='experience_update'),
     path('experience/delete/<int:pk>/', views.ExperienceDelete.as_view(), name='experience_delete')
 ]
