@@ -90,7 +90,7 @@
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
       <div class="row">
-        <a class="ml-auto mr-2" href="{% url 'addservice' org.id %}">
+        <a class="ml-auto mr-2" href="{% url 'service_create' org.id %}">
           <i class="material-icons">
             add
           </i>
@@ -109,6 +109,7 @@
           </tr>
         </thead>
         <tbody>
+          {% if services %}
           {% for service in services %}
           <tr>
             <td>{{ service.ServiceCategory }}</td>
@@ -117,9 +118,16 @@
             <td>
               {% if user.is_authenticated %}
               <div class="row">
-                <a class="ml-auto mr-2" href="{% url 'editservices' service.id %}">
+                <a class="ml-auto mr-2" href="{% url 'service_update' service.id %}">
                   <i class="material-icons">
                     edit
+                  </i>
+                </a>
+              </div>
+              <div class="row">
+                <a class="ml-auto mr-2" href="{% url 'service_delete' service.id %}">
+                  <i class="material-icons">
+                    delete
                   </i>
                 </a>
               </div>
@@ -127,6 +135,7 @@
             </td>
           </tr>
           {% endfor %}
+          {% endif %}
         </tbody>
       </table>
     </div>
@@ -135,13 +144,17 @@
   <h2 class="display-5">Experience</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
     {% if user.is_authenticated %}
+    {% if experience %}
+    {% for experience in experiences %}
       <div class="row">
-        <a class="ml-auto mr-2" href="{% url 'editexperiences' org.id %}" >
+        <a class="ml-auto mr-2" href="{% url 'experience_update' experience.id %}">
           <i class="material-icons">
             edit
           </i>
         </a>
       </div>
+      {% endfor %}
+    {% endif %}
     {% endif %}
 
     <div class="table-responsive">
@@ -154,12 +167,10 @@
           </tr>
         </thead>
         <tbody>
-          {% for experience in experiences %}
           <tr>
             <td>{{ experience.Large }}</td>
             <td>{{ experience.Medium }}</td><td>{{ experience.SmallandMicro }}</td>
           </tr>
-          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -167,6 +178,15 @@
 
   <h2 class="display-5">Cases</h2>
   <section  class="shadow p-3 mb-5 bg-white rounded">
+    {% if user.is_authenticated %}
+      <div class="row">
+        <a class="ml-auto mr-2" href="{% url 'case_create' org.id %}">
+          <i class="material-icons">
+            add
+          </i>
+        </a>
+      </div>
+    {% endif %}
     <div class="table-responsive">
       <table class="table table-hover mt-5">
         <thead>
@@ -177,6 +197,7 @@
           </tr>
         </thead>
         <tbody>
+          {% if cases %}
           {% for case in cases %}
           <tr>
             <td>{{ case.ServiceCategory.Name }}</td>
@@ -184,10 +205,18 @@
             <td>{{ case.Result }}</td>
             {% if user.is_authenticated %}
             <td>
+
               <div class="row">
-                <a class="ml-auto mr-2" href="{% url 'editcases' case.id %}" >
+                <a class="ml-auto mr-2" href="{% url 'case_update' case.id %}" >
                   <i class="material-icons">
                     edit
+                  </i>
+                </a>
+              </div>
+              <div class="row">
+                <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
+                  <i class="material-icons">
+                    delete
                   </i>
                 </a>
               </div>
@@ -195,6 +224,7 @@
             {% endif %}
           </tr>
           {% endfor %}
+          {% endif %}
         </tbody>
       </table>
     </div>

@@ -14,8 +14,8 @@
       <div class="form-check">
         {% for region in regions %}
         <div class="custom-control custom-checkbox custom-control-inline" >
-            <input type="checkbox" class="custom-control-input" id="{{ region.name }}" name="region" value="{{ region.name }}">
-            <label class="custom-control-label" for="{{ region.name }}">{{ region.value }} &nbsp;</label>
+            <input type="checkbox" class="custom-control-input" id="{{ region }}" name="region" value="{{ region }}">
+            <label class="custom-control-label" for="{{ region }}">{{ region }} &nbsp;</label>
         </div>
         {% endfor %}
         </div>
@@ -84,7 +84,7 @@
   })
 </script>
 
-{% comment %} 
+{% comment %}
 <script>
   let checkAllInputs = document.querySelector('input[id="checkAll"]');
   let unCheckAllInputs = document.querySelector('input[id="unCheckAll"]');

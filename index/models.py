@@ -4,9 +4,9 @@ from django.urls import reverse
 
 # Regions tuple added here
 Region_data = (
-    ('ada', 'Addis Ababa'),
-    ('jhn', 'Johannesburg'),
-    ('smt', 'Something')
+    ('Addis Adabba', 'ada'),
+    ('Johannesburg', 'jhn'),
+    ('Something', 'smt')
 )
 
 class Industry(models.Model):
@@ -38,21 +38,19 @@ class OrgBaseInfo(models.Model):
     Email = models.EmailField()
     Telephone = models.CharField(max_length=12, help_text="Enter the telephone number for the organisation")
 
-
     Region = models.CharField(
-        max_length=3,
+        max_length=30,
         choices=Region_data,
         blank=True,
         default='ada',
         help_text='Region of the company')
 
-    def get_absolute_url(self):
-        """Returns the url to access the Org instance """
-        return reverse('details', args=[str(self.id)])
-
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.Name
+
+    def get_absolute_url(self):
+        return reverse('details', args=[self.id])
 
 class Service(models.Model):
     OrgName = models.ForeignKey('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
@@ -63,6 +61,10 @@ class Service(models.Model):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
 
+    def get_absolute_url(self):
+        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        return reverse('details', args=[str(Orgid)])
+
 class Experience(models.Model):
     OrgName = models.OneToOneField('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     Large = models.IntegerField()
@@ -72,6 +74,10 @@ class Experience(models.Model):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
 
+    def get_absolute_url(self):
+        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        return reverse('details', args=[str(Orgid)])
+
 class Case(models.Model):
     OrgName = models.ForeignKey('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     ServiceCategory = models.ForeignKey('ServiceCategory', on_delete=models.SET_NULL, null=True)
@@ -80,3 +86,7 @@ class Case(models.Model):
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
+
+    def get_absolute_url(self):
+        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        return reverse('details', args=[str(Orgid)])
