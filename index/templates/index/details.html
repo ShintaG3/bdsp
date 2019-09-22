@@ -76,9 +76,9 @@
           <tr>
             <th class="lead" scope="row">Contact</th>
             <td >
-              <span>{{ org.ContactPerson }}&nbsp;&nbsp;</span>
-              <span>Email:{{ org.Email }}&nbsp;&nbsp;</span>
-              <span>Tel:{{ org.Telephone }}</span>
+              <span>{{ org.ContactPerson }}</span>
+              <span>,&nbsp; Email:{{ org.Email }}</span>
+              <span>,&nbsp; Tel:{{ org.Telephone }}</span>
             </td>
           </tr>
         </tbody>
@@ -123,8 +123,6 @@
                     edit
                   </i>
                 </a>
-              </div>
-              <div class="row">
                 <a class="ml-auto mr-2" href="{% url 'service_delete' service.id %}">
                   <i class="material-icons">
                     delete
@@ -222,8 +220,6 @@
                     edit
                   </i>
                 </a>
-              </div>
-              <div class="row">
                 <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
                   <i class="material-icons">
                     delete

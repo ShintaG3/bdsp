@@ -4,9 +4,9 @@ from django.urls import reverse
 
 # Regions tuple added here
 Region_data = (
-    ('Addis Adabba', 'ada'),
-    ('Johannesburg', 'jhn'),
-    ('Something', 'smt')
+    ('Addis Ababba', 'Addis Ababba'),
+    ('Johannesburg', 'Johannesburg'),
+    ('Something', 'Something')
 )
 
 class Industry(models.Model):

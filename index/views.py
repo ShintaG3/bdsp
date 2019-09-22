@@ -90,9 +90,12 @@ class ServiceUpdate(LoginRequiredMixin, UpdateView):
     model = Service
     fields = ['ServiceCategory', 'Service', 'Contents']
 
-class ServiceDelete(LoginRequiredMixin, DeleteView):
-    model = Service
-    success_url = reverse_lazy('index')
+@login_required
+def ServiceDelete(request, pk):
+    service = Service.objects.get(id=pk)
+    org = OrgBaseInfo.objects.get(Name=service.OrgName)
+    service.delete()
+    return redirect('details', id=int(org.id))
 
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
@@ -102,19 +105,22 @@ class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     fields = ['ServiceCategory', 'Contents', 'Result']
 
-class CaseDelete(LoginRequiredMixin,DeleteView):
-    model = Case
-    success_url = reverse_lazy('index')
-
-class ExperienceCreate(LoginRequiredMixin,CreateView):
+@login_required
+def CaseDelete(request, pk):
+    case = Case.objects.get(id=pk)
+    org = OrgBaseInfo.objects.get(Name=case.OrgName)
+    case.delete()
+    return redirect('details', id=int(org.id))
+    
+class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     fields = '__all__'
 
-class ExperienceUpdate(UpdateView):
+class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
     fields = ['Large', 'Medium', 'SmallandMicro']
 
-class ExperienceDelete(DeleteView):
+class ExperienceDelete(LoginRequiredMixin, DeleteView):
     model = Experience
     success_url = reverse_lazy('index')
 
