@@ -10,8 +10,16 @@
     {{ form.as_table }}
     </table>
     <input type="submit" value="Submit" />
-
 </form>
-
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"
+></script>
+<script>
+  $("tr").addClass("form-group row");
+  $("label").addClass("col-sm-2 col-form-label");
+  $("input, select").addClass("form-control");
+</script>
 
 {% endblock %}

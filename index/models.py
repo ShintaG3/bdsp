@@ -12,7 +12,7 @@ Region_data = (
 class Industry(models.Model):
     Name = models.CharField(
         max_length=100,
-        help_text="Enter the type of industry(eg. textile, metal)"
+        #help_text="Enter the type of industry(eg. textile, metal)"
         )
     def __str__(self):
         return self.Name
@@ -20,14 +20,14 @@ class Industry(models.Model):
 class ServiceCategory(models.Model):
     Name = models.CharField(
         max_length=50,
-        help_text="Enter the Name of service(eg. marketing, finance)"
+        #help_text="Enter the Name of service(eg. marketing, finance)"
         )
     def __str__(self):
         return self.Name
 
 class OrgBaseInfo(models.Model):
-    Name = models.CharField(max_length=100, help_text="Enter the name of Organisation(eg. Metal Industries)")
-    Address = models.CharField(max_length=200, help_text="Enter the adress of the Organisation")
+    Name = models.CharField(max_length=100)
+    Address = models.CharField(max_length=200)
     RegistrationDate = models.DateField()
     Industry = models.ManyToManyField('Industry')
     ServiceCategory = models.ManyToManyField('ServiceCategory')
@@ -36,14 +36,13 @@ class OrgBaseInfo(models.Model):
     Affiliation = models.CharField(max_length=50)
     ContactPerson = models.CharField(max_length=50)
     Email = models.EmailField()
-    Telephone = models.CharField(max_length=12, help_text="Enter the telephone number for the organisation")
+    Telephone = models.CharField(max_length=12)
 
     Region = models.CharField(
         max_length=30,
         choices=Region_data,
-        blank=True,
-        default='ada',
-        help_text='Region of the company')
+        blank=True
+        )
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
