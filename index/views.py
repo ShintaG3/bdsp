@@ -145,8 +145,6 @@ class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
     form_class = OrgBaseInfoForm
     # success_url = reverse_lazy('index')
 
-    # fields = '__all__'
-
 
 class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     model = OrgBaseInfo
