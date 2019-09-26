@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -21,6 +20,8 @@
       href="https://fonts.googleapis.com/css?family=Lato:300&display=swap"
       rel="stylesheet"
     />
+    {% include 'base/css.html' %}
+
     {% block style %}{% endblock %}
     <title>BDSP|Network</title>
   </head>
@@ -47,5 +48,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    {% include 'base/js.html' %}
   </body>
 </html>
