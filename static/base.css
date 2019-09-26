@@ -45,7 +45,7 @@
 
 .egg-db {
   background-color: #0cbaba;
-  background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);   
+  background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 }
 
 .btn-outline-primary:hover {
@@ -70,4 +70,10 @@
   font-family: 'Lato', sans-serif;
   font-size: 10vw;
   }
+}
+
+.dontBeLikeButton{
+    border:0px;
+    color:#007bff;
+    background-color: #fff;
 }
