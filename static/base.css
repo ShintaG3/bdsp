@@ -48,11 +48,11 @@
   background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 }
 
-.btn-outline-primary:hover {
+/* .btn-outline-primary:hover {
   transition: 0.4s;
   background: rgb(28,167,236);
   background: linear-gradient(147deg, rgba(28,167,236,1) 0%, rgba(31,47,152,1) 100%);
-}
+} */
 
 
 
