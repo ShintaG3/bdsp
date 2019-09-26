@@ -3,129 +3,129 @@
 {% load static %}
 {% endblock %}
 
+{% block header %}
+<div class="page-header header-filter purple-filter" data-parallax="true" style="background-image: url('{% static 'img/bdsp.jpg' %}'); transform: translate3d(0px, 0px, 0px);"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="brand text-center">
+          <h1>BDSP Directory</h1>
+          <h3 class="title text-center">Find your supporter</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block content %}
-<form class="" action="{% url 'list' %}" method="post">{% csrf_token %}
+<div class="main main-raised">
+  <div class="section section-basic">
+    <div class="container">
 
-  <div class="form-group row mt-5">
-    <div class="col-sm-2">
-      <p class="h3">Region</p>
-    </div>
-    <div class="col-sm-10">
-      <div class="form-check">
-        {% for region in regions %}
-        <div class="custom-control custom-checkbox custom-control-inline" >
-            <input type="checkbox" class="custom-control-input" id="{{ region }}" name="region" value="{{ region }}">
-            <label class="custom-control-label" for="{{ region }}">{{ region }} &nbsp;</label>
+      <form class="" action="{% url 'list' %}" method="post">{% csrf_token %}
+        <div class="row">
+          <div class="col-sm-2 my-auto">
+            <h3 class="mt-0 mb-3">
+              <small>Region</small>
+            </h3>
+          </div>
+          <div class="col-sm-10 my-auto">
+            <div class="form-check">
+              {% for region in regions %}
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="{{ region }}" name="region" value="{{ region }}">
+                  {{ region }}
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-        {% endfor %}
+
+        <div class="row mt-5">
+          <div class="col-sm-2 my-auto">
+            <h3 class="mt-0 mb-3">
+              <small>Industry</small>
+            </h3>
+
+          </div>
+          <div class="col-sm-10 my-auto">
+            <div class="form-check">
+              {% for industry in industries %}
+              <div class="form-check  form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="{{ industry }}" name="industry"
+                    value="{{ industry }}">
+                  {{ industry }}
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-    </div>
-  </div>
 
-  <div class="form-group row mt-5">
-    <div class="col-sm-2">
-      <p class="h3">Industry</p>
-    </div>
-    <div class="col-sm-10">
-      <div class="form-check">
-        {% for industry in industries %}
-        <div class="custom-control custom-checkbox custom-control-inline" >
-            <input type="checkbox" class="custom-control-input" id="{{ industry }}" name="industry" value="{{ industry }}">
-            <label class="custom-control-label" for="{{ industry }}">{{ industry }} &nbsp;</label>
+        <div class="row mt-5">
+          <div class="col-sm-2 my-auto">
+            <h3 class="mt-0 mb-3">
+              <small>Service</small>
+            </h3>
+          </div>
+          <div class="col-sm-10 my-auto">
+            <div class="form-check">
+              {% for service in services %}
+              <div class="form-check  form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" id="{{ service }}" name="service"
+                    value="{{ service }}">
+                  {{ service }}
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group row mt-5">
-    <div class="col-sm-2">
-      <p class="h3">Service</p>
-    </div>
-    <div class="col-sm-10">
-      <div class="form-check">
-          {% for service in services %}
-        <div class="custom-control custom-checkbox custom-control-inline" >
-            <input type="checkbox" class="custom-control-input" id="{{ service }}" name="service" value="{{ service }}">
-            <label class="custom-control-label" for="{{ service }}">{{ service }} &nbsp;</label>
+        <div class="form-group row text-center">
+          <div class="col">
+            <div class="form-check  form-check-inline ">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="checkAll" name="checkAll" value="checkAll">
+                Select All
+                <span class="form-check-sign">
+                  <span class="check"></span>
+                </span>
+              </label>
+            </div>
+          </div>
         </div>
-        {% endfor %}
-      </div>
+
+        <!-- button  + Search all -->
+        <div class="text-center mt-5">
+          <input type="submit" name="" value="Search" class="mx-auto btn btn-primary btn-round">
+        </div>
+      </form>
     </div>
   </div>
-  <div class="form-group row text-center">
-    <div class="col">
-      <div class="custom-control custom-checkbox custom-control-inline ">
-        <input type="checkbox" class="custom-control-input" id="checkAll" name="checkAll" value="checkAll">
-        <label class="custom-control-label" for="checkAll">Select All</label>
-      </div>
-    </div>
-  </div>
+</div>
 
-  {% comment %} <div class="custom-control custom-checkbox custom-control-inline">
-    <input type="radio" class="custom-control-input" id="checkAll" name="checkAll" value="checkAll">
-    <label class="custom-control-label" for="checkAll"><h5>Check All</h5></label>
-  </div> {% endcomment %}
-  {% comment %} <div class="custom-control custom-checkbox custom-control-inline">
-    <input type="radio" class="custom-control-input" id="unCheckAll" name="unCheckAll" value="unCheckAll">
-    <label class="custom-control-label" for="unCheckAll"><h5>Uncheck All</h5></label>
-  </div> {% endcomment %}
-
-  <!-- button  + Search all -->
-  <div class="text-center mt-5">
-    <input type="submit" name="" value="Search" class="mx-auto btn btn-lg btn-outline-primary">
-  </div>
-
-</form>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>
-  $("#checkAll").change(function(){
+  $("#checkAll").change(function () {
     $("input:checkbox").prop("checked", $(this).prop("checked"))
   })
 </script>
-
-{% comment %}
-<script>
-  let checkAllInputs = document.querySelector('input[id="checkAll"]');
-  let unCheckAllInputs = document.querySelector('input[id="unCheckAll"]');
-  let allservices = document.querySelectorAll('input[name="service"]');
-  let allregions = document.querySelectorAll('input[name="region"]');
-  let allindustries = document.querySelectorAll('input[name="industry"]');
-
-  checkAllInputs.addEventListener('click', function(e) {
-    e.preventDefault;
-    console.log('working');
-    checkAll();
-  })
-  unCheckAllInputs.addEventListener('click', function(e) {
-    e.preventDefault;
-    unCheckAll();
-  })
-  function checkAll(){
-    for(let i=0; i<allservices.length; i++) {
-        allservices[i].checked = true;
-    }
-    for(let i=0; i<allregions.length; i++) {
-        allregions[i].checked = true;
-    }
-    for(let i=0; i<allindustries.length; i++) {
-        allindustries[i].checked = true;
-    }
-    unCheckAllInputs.checked = false;
-  }
-  function unCheckAll(){
-    for(let i=0; i<allservices.length; i++) {
-        allservices[i].checked = false;
-    }
-    for(let i=0; i<allregions.length; i++) {
-        allregions[i].checked = false;
-    }
-    for(let i=0; i<allindustries.length; i++) {
-        allindustries[i].checked = false;
-    }
-    checkAllInputs.checked = false;
-  }
-
-</script> {% endcomment %}
 
 {% endblock %}
