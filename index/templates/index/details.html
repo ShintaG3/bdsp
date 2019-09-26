@@ -2,6 +2,7 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'base.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {% endblock %}
@@ -16,7 +17,6 @@
 </div>
 </main>
 {% endblock %}
-
 
 {% block content %}
 
@@ -123,11 +123,39 @@
                     edit
                   </i>
                 </a>
-                <a class="ml-auto mr-2" href="{% url 'service_delete' service.id %}">
-                  <i class="material-icons">
-                    delete
-                  </i>
-                </a>
+
+    <!-- <button data-toggle="modal" data-target="#exampleModalCenter"> -->
+    <button class="dontBeLikeButton">
+      <i class="material-icons" data-toggle="modal" data-target="#exampleModalCenter">
+        delete
+      </i>
+    </button>
+    <!--</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a class="ml-auto mr-2" href="{% url 'service_delete' service.id %}">
+                <button type="button" class="btn btn-primary">
+                Delete
+                </button>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
               </div>
               {% endif %}
             </td>
@@ -220,11 +248,38 @@
                     edit
                   </i>
                 </a>
-                <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
-                  <i class="material-icons">
+                <!-- <button data-toggle="modal" data-target="#exampleModalCenter"> -->
+                <button class="dontBeLikeButton">
+                  <i class="material-icons" data-toggle="modal" data-target="#exampleModalCenter">
                     delete
                   </i>
-                </a>
+                </button>
+                <!--</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
+                        <button type="button" class="btn btn-primary">
+                        Delete
+                        </button>
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               </div>
               <td>
             {% endif %}
