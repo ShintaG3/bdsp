@@ -53,3 +53,21 @@
   background: rgb(28,167,236);
   background: linear-gradient(147deg, rgba(28,167,236,1) 0%, rgba(31,47,152,1) 100%);
 }
+
+
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 480px) {
+  .display-5 {
+  font-family: 'Lato', sans-serif;
+  font-size: 3rem;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 479px) {
+  .display-5 {
+  font-family: 'Lato', sans-serif;
+  font-size: 10vw;
+  }
+}
