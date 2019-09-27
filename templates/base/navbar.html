@@ -36,14 +36,14 @@
       </button>
     </form>
     {% if user.is_authenticated %}
-
+				
     <div>
-      <a class="nav-link ml-auto" href="{% url 'logout' %}">logout</a>
+      <a class="nav-link ml-auto" href="{% url 'logout'%}?next={{request.path}}">logout</a>
     </div>
     {% else %}
 
     <div>
-      <a class="nav-link ml-auto" href="{% url 'login' %}">login</a>
+      <a class="nav-link ml-auto" href="{% url 'login'%}?next={{request.path}}">login</a>
     </div>
     {% endif %}
   </div>
