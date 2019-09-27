@@ -82,3 +82,7 @@
     color:#007bff;
     background-color: #fff;
 }
+
+.modal-backdrop {
+  z-index: -1;
+}
