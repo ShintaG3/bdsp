@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block header %}
-<div class="page-header header-filter purple-filter" data-parallax="true" style="background-image: url('{% static 'img/bdsp.jpg' %}'); transform: translate3d(0px, 0px, 0px);"
->
+<div class="page-header header-filter purple-filter" data-parallax="true"
+  style="background-image: url('{% static 'img/bdsp.jpg' %}'); transform: translate3d(0px, 0px, 0px);">
   <div class="container">
     <div class="row">
       <div class="col-md-8 ml-auto mr-auto">
@@ -28,7 +28,7 @@
       <form class="" action="{% url 'list' %}" method="post">{% csrf_token %}
         <div class="row">
           <div class="col-sm-2 my-auto">
-            <h3 class="mt-0 mb-3">
+            <h3 class="mt-0 mb-3 text-center">
               <small>Region</small>
             </h3>
           </div>
@@ -51,10 +51,9 @@
 
         <div class="row mt-5">
           <div class="col-sm-2 my-auto">
-            <h3 class="mt-0 mb-3">
+            <h3 class="mt-0 mb-3 text-center">
               <small>Industry</small>
             </h3>
-
           </div>
           <div class="col-sm-10 my-auto">
             <div class="form-check">
@@ -76,7 +75,7 @@
 
         <div class="row mt-5">
           <div class="col-sm-2 my-auto">
-            <h3 class="mt-0 mb-3">
+            <h3 class="mt-0 mb-3 text-center">
               <small>Service</small>
             </h3>
           </div>
@@ -97,6 +96,7 @@
             </div>
           </div>
         </div>
+
         <div class="form-group row text-center">
           <div class="col">
             <div class="form-check  form-check-inline ">

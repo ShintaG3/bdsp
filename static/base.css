@@ -33,6 +33,11 @@
   background: linear-gradient(147deg, rgba(123,213,245,1) 0%, rgba(120,127,246,1) 100%);
 }
 
+.bg-gr-bp {
+  background: rgb(60,76,173);
+  background: linear-gradient(147deg, rgba(60,76,173,1) 0%, rgba(240,67,147,1) 100%);
+}
+
 .egg-b {
   background-color: #2a2a72;
   background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
