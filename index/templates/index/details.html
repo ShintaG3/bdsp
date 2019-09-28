@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+
 
 {% endblock %}
 
@@ -132,15 +132,15 @@
                       edit
                     </i>
                   </a>
+
                   <!-- Button trigger modal -->
-                  <button class="dontBeLikeButton">
-                    <i class="material-icons" data-toggle="modal" data-target= "#{{ service.id }}">
+                  <button class="btn btn-primary btn-just-icon btn-round mr-4">
+                    <i class="material-icons" data-toggle="modal" data-target="#{{ service.id }}">
                       delete
                     </i>
                   </button>
-                  <!--</button>
 
-        <!-- Modal -->
+                  <!-- Modal -->
                   <div class="modal fade" id="{{ service.id }}" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -269,25 +269,23 @@
                   </a>
 
                   <!-- Button trigger modal -->
-                  <!-- <button data-toggle="modal" data-target="#exampleModalCenter"> -->
-               <button class="dontBeLikeButton">
-                 <i class="material-icons" data-toggle="modal" data-target="#{{ case.id }}">
-                   delete
-                 </i>
-               </button>
-               <!--</button>
+                  <button class="btn btn-primary btn-just-icon btn-round mr-4">
+                    <i class="material-icons" data-toggle="modal" data-target="#{{ case.id }}">
+                      delete
+                    </i>
+                  </button>
 
-             <!-- Modal -->
-               <div class="modal fade" id="{{ case.id }}" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                 <div class="modal-dialog modal-dialog-centered" role="document">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="{{ case.id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -84,6 +84,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+django_venv
 
 .DS_Store
 # Spyder project settings
