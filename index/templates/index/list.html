@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
+<style media="screen">
+#list_main{
+  min-height:80vh;
+}
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="table-responsive mt-5">
+<div class="table-responsive mt-5" id="list_main">
 <table class="table table-hover mt-5">
   <thead>
     <tr>

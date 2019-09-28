@@ -1,12 +1,10 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from .models import Industry, ServiceCategory, Region_data, OrgBaseInfo, Service, Case, Experience
-from django.urls import reverse
+from django.http import HttpResponse
+from .models import *
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *

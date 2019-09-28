@@ -1,13 +1,24 @@
-
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
+<style media="screen">
+  #main_form{
+    position: relative;
+    top: 15vh;
+  }
+  footer{
+    position:absolute;
+    bottom: 0px;
+    width: 100vw;
+  }
+</style>
 {% endblock %}
+
 {% block content %}
-<form action="" method="post">
+<form action="" method="post" id="main_form">
     {% csrf_token %}
     <table>
-    {{ form.as_table }}
+    {{ form.as_p }}
     </table>
     <input type="submit" value="Submit" />
 </form>
