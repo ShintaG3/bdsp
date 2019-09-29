@@ -146,4 +146,5 @@ class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
 
 class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     model = OrgBaseInfo
-    fields = '__all__'
+    form_class = OrgBaseInfoForm
+    # fields = '__all__'

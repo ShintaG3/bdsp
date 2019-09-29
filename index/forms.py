@@ -35,22 +35,20 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
 
-    # models.CharField(
-    #     max_length=100, help_text="Enter the name of Organisation(eg. Metal Industries)")
-    # Address = models.CharField(
+    # Address = forms.CharField(
     #     max_length=200, help_text="Enter the adress of the Organisation")
-    # RegistrationDate = models.DateField()
-    # Industry = models.ManyToManyField('Industry')
-    # ServiceCategory = models.ManyToManyField('ServiceCategory')
-    # PR = models.CharField(max_length=300)
-    # Url = models.URLField(max_length=50)
-    # Affiliation = models.CharField(max_length=50)
-    # ContactPerson = models.CharField(max_length=50)
-    # Email = models.EmailField()
-    # Telephone = models.CharField(
+    # RegistrationDate = forms.DateField()
+    # Industry = forms.ManyToManyField('Industry')
+    # ServiceCategory = forms.ManyToManyField('ServiceCategory')
+    # PR = forms.CharField(max_length=300)
+    # Url = forms.URLField(max_length=50)
+    # Affiliation = forms.CharField(max_length=50)
+    # ContactPerson = forms.CharField(max_length=50)
+    # Email = forms.EmailField()
+    # Telephone = forms.CharField(
     #     max_length=12, help_text="Enter the telephone number for the organisation")
 
-    # Region = models.CharField(
+    # Region = forms.CharField(
     #     max_length=30,
     #     choices=Region_data,
     #     blank=True,
