@@ -37,7 +37,7 @@
         {% if user.is_authenticated %}
 
         <div class="nav-item">
-          <a href="{% url 'logout'%}?next={{request.path}}">Login</a>
+          <a href="{% url 'logout'%}?next={{request.path}}">Logout</a>
         </div>
         {% else %}
 

@@ -21,7 +21,7 @@ urlpatterns += [
     path('service/update/<int:pk>/', views.ServiceUpdate.as_view(), name='service_update'),
     path('service/delete/<int:pk>/', views.ServiceDelete, name='service_delete')
 ]
-# Add URLConf to create, update, and delete Services
+# Add URLConf to create, update, and delete Cases
 urlpatterns += [
     path('case/create/<int:pk>', views.CaseCreate.as_view(), name='case_create'),
     path('case/update/<int:pk>/', views.CaseUpdate.as_view(), name='case_update'),

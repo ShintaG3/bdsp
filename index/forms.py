@@ -5,7 +5,7 @@ from index.models import OrgBaseInfo, Service, Experience, Case, Industry, Regio
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
-        exclude = ['OrgName']
+        fields = '__all__'
     Large = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -37,18 +37,20 @@ class ServiceForm(ModelForm):
         model = Service
         fields = '__all__'
     Service = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Service Offered"
+                "placeholder": "Service Provides",
+                'rows': 3
             }
         )
     )
     Contents = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Feedback recieved"
+                "placeholder": "Summary for the Serice provides",
+                'rows': 3
             }
         )
     )
@@ -58,21 +60,24 @@ class CaseForm(ModelForm):
         model = Case
         fields = '__all__'
     Result = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Result summary for the service offered"
+                "placeholder": "Result",
+                'rows': 3
             }
         )
     )
     Contents = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Case information"
+                "placeholder": "Contents",
+                'rows': 3
             }
         )
     )
+
 def region_data():
     return Region_data
 
@@ -89,14 +94,15 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Address = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Address Of Organisation"
+                "placeholder": "Address of Organisation",
+                'rows': 3
             }
         )
     )
-    
+
     PR = forms.CharField(
         widget=forms.Textarea(
             attrs={
