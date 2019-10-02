@@ -66,10 +66,6 @@ class OrgBaseInfoModelTest(TestCase):
         org1 = OrgBaseInfo.objects.get(id=1)
         #This will also fail if the urlconf is not defined.
         self.assertEquals(org1.get_absolute_url(),'/details/1')
-# Not working
-    #def test_view_url_exists_desired_location(self):
-        #response = self.client.get('/list')
-        #self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('list'))
@@ -93,19 +89,18 @@ class CheckAuthenticationForEditTest(TestCase):
         self.assertRedirects(response, '/accounts/login/?next=/editPage/1')
 
     def test_edit_service_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/edit_services/1')
-        self.assertRedirects(response, '/accounts/login/?next=/edit_services/1')
+        response = self.client.get('/service/create/1')
+        self.assertRedirects(response, '/accounts/login/?next=/service/create/1')
 
     def test_edit_experience_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/edit_experiences/1')
-        self.assertRedirects(response, '/accounts/login/?next=/edit_experiences/1')
+        response = self.client.get('/experience/create/1')
+        self.assertRedirects(response, '/accounts/login/?next=/experience/create/1')
 
     def test_edit_case_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/edit_cases/1')
-        self.assertRedirects(response, '/accounts/login/?next=/edit_cases/1')
+        response = self.client.get('/case/create/1')
+        self.assertRedirects(response, '/accounts/login/?next=/case/create/1')
 
     def test_logged_in_uses_correct_template(self):
         c = Client()
         response = c.post('/login/', {'username': 'monusri', 'password': 'hellyeah@2019'})
         self.assertEqual(response.status_code, 200)
-        

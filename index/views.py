@@ -87,12 +87,13 @@ def search(request):
 
 class ServiceCreate(LoginRequiredMixin, CreateView):
     model = Service
-    fields = '__all__'
+    form_class = ServiceForm
 
 
 class ServiceUpdate(LoginRequiredMixin, UpdateView):
     model = Service
-    fields = ['ServiceCategory', 'Service', 'Contents']
+    #fields = ['ServiceCategory', 'Service', 'Contents']
+    form_class = ServiceForm
 
 
 @login_required
@@ -105,13 +106,13 @@ def ServiceDelete(request, pk):
 
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
-    fields = '__all__'
-
+    #fields = '__all__'
+    form_class = CaseForm
 
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
-    fields = ['ServiceCategory', 'Contents', 'Result']
-
+    #fields = ['ServiceCategory', 'Contents', 'Result']
+    form_class = CaseForm
 
 @login_required
 def CaseDelete(request, pk):
@@ -123,12 +124,14 @@ def CaseDelete(request, pk):
 
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
-    fields = '__all__'
+    form_class = ExperienceForm
+    #fields = '__all__'
 
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
-    fields = ['Large', 'Medium', 'SmallandMicro']
+    #fields = ['Large', 'Medium', 'SmallandMicro']
+    form_class = ExperienceForm
 
 
 class ExperienceDelete(LoginRequiredMixin, DeleteView):
