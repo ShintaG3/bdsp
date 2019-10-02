@@ -2,12 +2,13 @@
 {% block style %}
 {% load static %}
 <style media="screen">
-  #main_form, footer{
+  #main_form,
+  footer {
     position: relative;
     top: 15vh;
   }
 
-  ul{
+  ul {
     list-style-type: none;
     display: ruby-base-container;
   }
@@ -16,17 +17,46 @@
 
 {% block content %}
 <form action="" method="post" id="main_form">
-    {% csrf_token %}
-    <table class="form-group row">
-    {{ form.as_p }}
-    </table>
-    <input type="submit" value="Submit" />
+  {% csrf_token %}
+
+  <div class="form-group bmd-form-group">
+    <label class="bmd-label-floating">{{ form.Name.label_tag }}</label>
+    {{ form.Name }}
+  </div>
+  <div class="form-group bmd-form-group">
+    <label class="bmd-label-floating">{{ form.Address.label_tag }}</label>
+    {{ form.Address }}
+  </div>
+  <div class="form-group">
+    <label class="label-control">{{ form.RegistrationDate.label_tag }}</label>
+    {{ form.RegistrationDate }}
+  </div>
+
+  <input type="submit" value="Submit" />
 </form>
 
 {% endblock %}
 
 {% block script %}
 <script>
-  $('#id_RegistrationDate').attr("type", "date");
+  $('.datetimepicker').datetimepicker({
+    icons: {
+      time: "fa fa-clock-o",
+      date: "fa fa-calendar",
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down",
+      previous: 'fa fa-chevron-left',
+      next: 'fa fa-chevron-right',
+      today: 'fa fa-screenshot',
+      clear: 'fa fa-trash',
+      close: 'fa fa-remove'
+    },
+    format: 'L'
+
+  });
 </script>
+
+<!-- <script>
+  $('#id_RegistrationDate').attr("type", "date");
+</script> -->
 {% endblock %}
