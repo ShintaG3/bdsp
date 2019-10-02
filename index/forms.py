@@ -1,11 +1,12 @@
 from django.forms import ModelForm
 from django import forms
-from index.models import OrgBaseInfo, Service, Experience, Case, Industry, Region_data
+from index.models import *
 
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
         fields = '__all__'
+
     Large = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -81,6 +82,7 @@ class CaseForm(ModelForm):
 def region_data():
     return Region_data
 
+
 class OrgBaseInfoForm(ModelForm):
     class Meta:
         model = OrgBaseInfo
@@ -152,10 +154,37 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
-    Region = forms.ChoiceField(choices= region_data,
+    Region = forms.ChoiceField(
+        choices= region_data,
         widget=forms.RadioSelect(
             attrs={
 
             }
+        )
+    )
+    RegistrationDate = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "id": "datetimepicker",
+                "class": "form-control datetimepicker",
+
+            }
+        )
+    )
+    Industry = forms.ModelMultipleChoiceField(
+      queryset = Industry.objects.all(),
+      widget= forms.CheckboxSelectMultiple(
+      attrs={
+
+           }
+        )
+    )
+
+    ServiceCategory = forms.ModelMultipleChoiceField(
+      queryset = ServiceCategory.objects.all(),
+      widget= forms.CheckboxSelectMultiple(
+      attrs={
+        
+           }
         )
     )

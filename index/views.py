@@ -109,10 +109,12 @@ class CaseCreate(LoginRequiredMixin, CreateView):
     #fields = '__all__'
     form_class = CaseForm
 
+
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     #fields = ['ServiceCategory', 'Contents', 'Result']
     form_class = CaseForm
+
 
 @login_required
 def CaseDelete(request, pk):
@@ -140,14 +142,18 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
 
 # Registration of New Org:
 
-
 class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
     model = OrgBaseInfo
     form_class = OrgBaseInfoForm
-    # success_url = reverse_lazy('index')
 
 
 class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     model = OrgBaseInfo
     form_class = OrgBaseInfoForm
-    # fields = '__all__'
+    context_object_name = 'org'
+    template = 'orgbaseinfo_form.html'
+
+    def get_success_url(self):
+        id = self.kwargs['pk']
+        print(id)
+        return reverse_lazy('details', kwargs={'id': id})

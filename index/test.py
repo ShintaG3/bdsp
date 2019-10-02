@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.test import Client
 # Create your tests here.
-from index.models import OrgBaseInfo, ServiceCategory, Industry
+from index.models import OrgBaseInfo, ServiceCategory, Industry, Case, Experience, Service
 from django.contrib.auth.models import User
 
 class OrgBaseInfoModelTest(TestCase):
@@ -46,6 +46,14 @@ class OrgBaseInfoModelTest(TestCase):
         org.ServiceCategory.add(service2)
         org.Industry.add(industry1)
         org.Industry.add(industry2)
+
+        case1 = Case(
+        OrgName=org,
+        ServiceCategory=service1,
+        Contents='Nothing Much!',
+        Result='NC'
+        )
+        case1.save()
 
     def test_name_label(self):
         org1 = OrgBaseInfo.objects.get(id=1)
@@ -99,6 +107,18 @@ class CheckAuthenticationForEditTest(TestCase):
     def test_edit_case_page_redirect_if_not_logged_in(self):
         response = self.client.get('/case/create/1')
         self.assertRedirects(response, '/accounts/login/?next=/case/create/1')
+
+    def test_update_service_page_redirect_if_not_logged_in(self):
+        response = self.client.get('/service/update/1')
+        self.assertRedirects(response, '/accounts/login/?next=/service/update/1')
+
+    def test_update_experience_page_redirect_if_not_logged_in(self):
+        response = self.client.get('/experience/update/1')
+        self.assertRedirects(response, '/accounts/login/?next=/experience/update/1')
+
+    def test_update_case_page_redirect_if_not_logged_in(self):
+        response = self.client.get('/case/update/1')
+        self.assertRedirects(response, '/accounts/login/?next=/case/update/1')
 
     def test_logged_in_uses_correct_template(self):
         c = Client()

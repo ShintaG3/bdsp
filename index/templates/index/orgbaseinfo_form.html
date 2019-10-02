@@ -2,31 +2,113 @@
 {% block style %}
 {% load static %}
 <style media="screen">
-  #main_form, footer{
+  #main_form,
+  footer {
     position: relative;
     top: 15vh;
   }
-
-  ul{
+  ul {
     list-style-type: none;
-    display: ruby-base-container;
+    display: inline-flex;
   }
+  li{
+    padding:4px;
+  }
+  input[type='checkbox'] {
+    width:20px;
+    height:20px;
+    background-color:#fff;
+    border-radius:10px;
+    border: 2px solid;
+}
+
+
 </style>
 {% endblock %}
 
 {% block content %}
 <form action="" method="post" id="main_form">
-    {% csrf_token %}
-    <table class="form-group row">
-    {{ form.as_p }}
-    </table>
-    <input type="submit" value="Submit" />
+  {% csrf_token %}
+
+  <div class="form-group bmd-form-group">
+    <label class="bmd-label-floating">{{ form.Name.label_tag }}</label>
+    {{ form.Name }}
+  </div>
+  <div class="form-group bmd-form-group">
+    <label class="bmd-label-floating">{{ form.Address.label_tag }}</label>
+    {{ form.Address }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Industry.label_tag }}</label>
+    {{ form.Industry }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.ServiceCategory.label_tag }}</label>
+    {{ form.ServiceCategory }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.PR.label_tag }}</label>
+    {{ form.PR }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Url.label_tag }}</label>
+    {{ form.Url }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Affiliation.label_tag }}</label>
+    {{ form.Affiliation }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.ContactPerson.label_tag }}</label>
+    {{ form.ContactPerson }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Email.label_tag }}</label>
+    {{ form.Email }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Telephone.label_tag }}</label>
+    {{ form.Telephone }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.Region.label_tag }}</label>
+    {{ form.Region }}
+  </div>
+
+  <div class="form-group">
+    <label class="label-control">{{ form.RegistrationDate.label_tag }}</label>
+    {{ form.RegistrationDate }}
+  </div>
+
+  <input type="submit" value="Submit" class="form-control" />
 </form>
 
 {% endblock %}
 
 {% block script %}
 <script>
-  $('#id_RegistrationDate').attr("type", "date");
+  $('#datetimepicker').datetimepicker({
+    icons: {
+      time: "fa fa-clock-o",
+      date: "fa fa-calendar",
+      up: "fa fa-chevron-up",
+      down: "fa fa-chevron-down",
+      previous: 'fa fa-chevron-left',
+      next: 'fa fa-chevron-right',
+      today: 'fa fa-screenshot',
+      clear: 'fa fa-trash',
+      close: 'fa fa-remove'
+    },
+    format: 'YYYY-MM-DD'
+  });
 </script>
 {% endblock %}

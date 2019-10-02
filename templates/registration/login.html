@@ -2,6 +2,17 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'search.css' %}" type="text/css" />
+<style media="screen">
+  #main_form{
+    position: relative;
+    top: 15vh;
+  }
+  footer{
+    position:absolute;
+    bottom: 0px;
+    width: 100vw;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -18,7 +29,7 @@
   {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}" id="main_form">
 {% csrf_token %}
 
 <div>
