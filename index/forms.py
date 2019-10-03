@@ -184,7 +184,7 @@ class OrgBaseInfoForm(ModelForm):
       queryset = ServiceCategory.objects.all(),
       widget= forms.CheckboxSelectMultiple(
       attrs={
-        
+
            }
         )
     )

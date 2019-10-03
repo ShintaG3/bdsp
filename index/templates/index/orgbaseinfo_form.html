@@ -10,86 +10,146 @@
   ul {
     list-style-type: none;
     display: inline-flex;
+    padding-left: 0px;
+    margin-bottom: 0px;
   }
   li{
     padding:4px;
   }
-  input[type='checkbox'] {
-    width:20px;
-    height:20px;
-    background-color:#fff;
-    border-radius:10px;
-    border: 2px solid;
-}
+  #region_data{
+    padding-left: 0px;
+  }
 
 
 </style>
 {% endblock %}
 
 {% block content %}
+
 <form action="" method="post" id="main_form">
   {% csrf_token %}
+  {% if form.errors %}
+  <ul>
+    {% for error in form.errors %}
+    <li>Error in:{{ error }} </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
-  <div class="form-group bmd-form-group">
-    <label class="bmd-label-floating">{{ form.Name.label_tag }}</label>
+  <div class="table-responsive mt-5" id="list_main">
+  <table class="table table-hover mt-5">
+  <tr>
+  <th><label class="col-sm-2 col-form-label">{{ form.Name.label_tag }}</label></th>
+  <td>
+    <div class="col-sm-10">
     {{ form.Name }}
-  </div>
-  <div class="form-group bmd-form-group">
-    <label class="bmd-label-floating">{{ form.Address.label_tag }}</label>
+    </div>
+  </td>
+  </tr>
+
+  <tr>
+    <th><label class="col-sm-2 col-form-label">{{ form.Address.label_tag }}</label></th>
+    <td>
+      <div class="col-sm-10">
     {{ form.Address }}
-  </div>
+    </div>
+    </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Industry.label_tag }}</label>
-    {{ form.Industry }}
-  </div>
+  <tr>
+  <th><label class="col-sm-2 col-form-label">{{ form.Region.label_tag }}</label></th>
+  <td>
+    <div class="col-sm-10" id="region_data">
+      {{ form.Region }}
+    </div>
+  </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.ServiceCategory.label_tag }}</label>
-    {{ form.ServiceCategory }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.Industry.label_tag }}</label></th>
+      <td>
+      <div class="form-check">
+        {{ form.Industry }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.PR.label_tag }}</label>
-    {{ form.PR }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.ServiceCategory.label_tag }}</label></th>
+      <td>
+      <div class="form-check">
+        {{ form.ServiceCategory }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Url.label_tag }}</label>
-    {{ form.Url }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.PR.label_tag }}</label></th>
+      <td>
+      <div class="col-sm-10">
+        {{ form.PR }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Affiliation.label_tag }}</label>
-    {{ form.Affiliation }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.Url.label_tag }}</label></th>
+      <td>
+      <div class="col-sm-10">
+        {{ form.Url }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.ContactPerson.label_tag }}</label>
-    {{ form.ContactPerson }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.Affiliation.label_tag }}</label></th>
+      <td>
+      <div class="col-sm-10">
+        {{ form.Affiliation }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Email.label_tag }}</label>
-    {{ form.Email }}
-  </div>
+  <tr>
+    <th><label class="col-sm-2 col-form-label">{{ form.ContactPerson.label_tag }}</label></th>
+    <td>
+      <div class="col-sm-10">
+        {{ form.ContactPerson }}
+      </div>
+    </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Telephone.label_tag }}</label>
-    {{ form.Telephone }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.Email.label_tag }}</label></th>
+      <td>
+      <div class="col-sm-10">
+        {{ form.Email }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.Region.label_tag }}</label>
-    {{ form.Region }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.Telephone.label_tag }}</label></th>
+      <td>
+      <div class="col-sm-10">
+        {{ form.Telephone }}
+      </div>
+      </td>
+  </tr>
 
-  <div class="form-group">
-    <label class="label-control">{{ form.RegistrationDate.label_tag }}</label>
-    {{ form.RegistrationDate }}
-  </div>
+  <tr>
+      <th><label class="col-sm-2 col-form-label">{{ form.RegistrationDate.label_tag }}</label></th>
+      <td>
+        {{ form.RegistrationDate }}
+      </td>
+  </tr>
 
-  <input type="submit" value="Submit" class="form-control" />
+  </table>
+  </div>
+  <!-- button -->
+  <div class="text-center mt-5">
+      <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-lg btn-outline-primary">
+  </div>
 </form>
 
 {% endblock %}
@@ -110,5 +170,8 @@
     },
     format: 'YYYY-MM-DD'
   });
+// Needs to improve more for bigger checkboxes
+//  $( "input:checkbox" ).after("<span class='form-check-sign'><span class='check'></span></span>");
+
 </script>
 {% endblock %}

@@ -92,47 +92,43 @@ class ServiceCreate(LoginRequiredMixin, CreateView):
 
 class ServiceUpdate(LoginRequiredMixin, UpdateView):
     model = Service
-    #fields = ['ServiceCategory', 'Service', 'Contents']
     form_class = ServiceForm
 
 
 @login_required
 def ServiceDelete(request, pk):
     service = Service.objects.get(id=pk)
-    org = OrgBaseInfo.objects.get(Name=service.OrgName)
+    orgid = service.OrgName.id
     service.delete()
-    return redirect('details', id=int(org.id))
+    return redirect('details', id=int(orgid))
 
 
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
-    #fields = '__all__'
     form_class = CaseForm
 
 
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
-    #fields = ['ServiceCategory', 'Contents', 'Result']
     form_class = CaseForm
 
 
 @login_required
 def CaseDelete(request, pk):
     case = Case.objects.get(id=pk)
-    org = OrgBaseInfo.objects.get(Name=case.OrgName)
+    orgid = case.OrgName.id
     case.delete()
-    return redirect('details', id=int(org.id))
+    return redirect('details', id=int(orgid))
 
 
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     form_class = ExperienceForm
-    #fields = '__all__'
+
 
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
-    #fields = ['Large', 'Medium', 'SmallandMicro']
     form_class = ExperienceForm
 
 

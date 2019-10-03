@@ -61,7 +61,7 @@ class Service(models.Model):
         return str(self.OrgName)
 
     def get_absolute_url(self):
-        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        Orgid = self.OrgName.id
         return reverse('details', args=[str(Orgid)])
 
 class Experience(models.Model):
@@ -74,7 +74,7 @@ class Experience(models.Model):
         return str(self.OrgName)
 
     def get_absolute_url(self):
-        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        Orgid = self.OrgName.id
         return reverse('details', args=[str(Orgid)])
 
 class Case(models.Model):
@@ -87,5 +87,5 @@ class Case(models.Model):
         return str(self.OrgName)
 
     def get_absolute_url(self):
-        Orgid = OrgBaseInfo.objects.get(Name=self.OrgName).id
+        Orgid = self.OrgName.id
         return reverse('details', args=[str(Orgid)])
