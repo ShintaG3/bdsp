@@ -36,115 +36,86 @@
   </ul>
   {% endif %}
 
-  <div class="table-responsive mt-5" id="list_main">
-  <table class="table table-hover mt-5">
-  <tr>
-  <th><label class="col-sm-2 col-form-label">{{ form.Name.label_tag }}</label></th>
-  <td>
+
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label">{{ form.Name.label_tag }}</label>
     <div class="col-sm-10">
     {{ form.Name }}
     </div>
-  </td>
-  </tr>
-
-  <tr>
-    <th><label class="col-sm-2 col-form-label">{{ form.Address.label_tag }}</label></th>
-    <td>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Address.label_tag }}</label>
       <div class="col-sm-10">
-    {{ form.Address }}
-    </div>
-    </td>
-  </tr>
-
-  <tr>
-  <th><label class="col-sm-2 col-form-label">{{ form.Region.label_tag }}</label></th>
-  <td>
-    <div class="col-sm-10" id="region_data">
-      {{ form.Region }}
-    </div>
-  </td>
-  </tr>
-
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.Industry.label_tag }}</label></th>
-      <td>
-      <div class="form-check">
-        {{ form.Industry }}
+      {{ form.Address }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.ServiceCategory.label_tag }}</label></th>
-      <td>
-      <div class="form-check">
-        {{ form.ServiceCategory }}
-      </div>
-      </td>
-  </tr>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Region.label_tag }}</label>
+        <div class="col-sm-10" id="region_data">
+          {{ form.Region }}
+        </div>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.PR.label_tag }}</label></th>
-      <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Industry.label_tag }}</label>
+    <div class="form-check">
+      {{ form.Industry }}
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.ServiceCategory.label_tag }}</label>
+        <div class="form-check">
+          {{ form.ServiceCategory }}
+        </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.PR.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.PR }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.Url.label_tag }}</label></th>
-      <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Url.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.Url }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.Affiliation.label_tag }}</label></th>
-      <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Affiliation.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.Affiliation }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-    <th><label class="col-sm-2 col-form-label">{{ form.ContactPerson.label_tag }}</label></th>
-    <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.ContactPerson.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.ContactPerson }}
       </div>
-    </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.Email.label_tag }}</label></th>
-      <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Email.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.Email }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.Telephone.label_tag }}</label></th>
-      <td>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.Telephone.label_tag }}</label>
       <div class="col-sm-10">
         {{ form.Telephone }}
       </div>
-      </td>
-  </tr>
+  </div>
 
-  <tr>
-      <th><label class="col-sm-2 col-form-label">{{ form.RegistrationDate.label_tag }}</label></th>
-      <td>
-        {{ form.RegistrationDate }}
-      </td>
-  </tr>
-
-  </table>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">{{ form.RegistrationDate.label_tag }}</label>
+      {{ form.RegistrationDate }}
   </div>
   <!-- button -->
   <div class="text-center mt-5">
