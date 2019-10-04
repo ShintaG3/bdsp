@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from index.models import *
 
+
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
@@ -56,6 +57,7 @@ class ServiceForm(ModelForm):
         )
     )
 
+
 class CaseForm(ModelForm):
     class Meta:
         model = Case
@@ -79,6 +81,7 @@ class CaseForm(ModelForm):
         )
     )
 
+
 def region_data():
     return Region_data
 
@@ -87,19 +90,23 @@ class OrgBaseInfoForm(ModelForm):
     class Meta:
         model = OrgBaseInfo
         fields = '__all__'
+
     Name = forms.CharField(
+        label='Organization name',
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Name of Organisation"
+                # "placeholder": "Name of Organisation"
+
             }
         )
     )
     Address = forms.CharField(
+        label='Address',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Address of Organisation",
+                # "placeholder": "Address of Organisation",
                 'rows': 3
             }
         )
@@ -154,11 +161,18 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Region = forms.ChoiceField(
         choices= region_data,
         widget=forms.RadioSelect(
             attrs={
 
+
+    RegistrationDate = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control datetimepicker",
+                "type": "text",
             }
         )
     )

@@ -149,6 +149,7 @@ class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     context_object_name = 'org'
     template = 'orgbaseinfo_form.html'
 
+
     def get_success_url(self):
         id = self.kwargs['pk']
         print(id)

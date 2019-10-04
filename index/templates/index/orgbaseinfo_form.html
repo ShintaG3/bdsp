@@ -7,6 +7,7 @@
     position: relative;
     top: 15vh;
   }
+
   ul {
     list-style-type: none;
     display: inline-flex;
@@ -28,6 +29,7 @@
 
 <form action="" method="post" id="main_form">
   {% csrf_token %}
+
   {% if form.errors %}
   <ul>
     {% for error in form.errors %}
@@ -150,6 +152,7 @@
   <div class="text-center mt-5">
       <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-lg btn-outline-primary">
   </div>
+
 </form>
 
 {% endblock %}
@@ -157,6 +160,7 @@
 {% block script %}
 <script>
   $('#datetimepicker').datetimepicker({
+
     icons: {
       time: "fa fa-clock-o",
       date: "fa fa-calendar",
@@ -168,10 +172,16 @@
       clear: 'fa fa-trash',
       close: 'fa fa-remove'
     },
+
     format: 'YYYY-MM-DD'
   });
 // Needs to improve more for bigger checkboxes
 //  $( "input:checkbox" ).after("<span class='form-check-sign'><span class='check'></span></span>");
 
+
 </script>
+
+<!-- <script>
+  $('#id_RegistrationDate').attr("type", "date");
+</script> -->
 {% endblock %}
