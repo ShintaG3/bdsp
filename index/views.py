@@ -126,7 +126,6 @@ class ExperienceCreate(LoginRequiredMixin, CreateView):
     form_class = ExperienceForm
 
 
-
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):
     model = Experience
     form_class = ExperienceForm
@@ -138,6 +137,7 @@ class ExperienceDelete(LoginRequiredMixin, DeleteView):
 
 # Registration of New Org:
 
+
 class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
     model = OrgBaseInfo
     form_class = OrgBaseInfoForm
@@ -148,7 +148,6 @@ class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     form_class = OrgBaseInfoForm
     context_object_name = 'org'
     template = 'orgbaseinfo_form.html'
-
 
     def get_success_url(self):
         id = self.kwargs['pk']

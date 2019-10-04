@@ -96,7 +96,6 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                # "placeholder": "Name of Organisation"
 
             }
         )
@@ -106,26 +105,25 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                # "placeholder": "Address of Organisation",
                 'rows': 3
             }
         )
     )
 
     PR = forms.CharField(
+        label='PR',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "PR of Organisation",
                 'rows': 3
             }
         )
     )
     Url = forms.CharField(
+        label='URL',
         widget=forms.URLInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "URL of Organisation"
             }
         )
     )
@@ -138,10 +136,11 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     ContactPerson = forms.CharField(
+        label='Contact Person',
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Contact Person for the Organisation"
+
             }
         )
     )
@@ -163,42 +162,37 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     Region = forms.ChoiceField(
-        choices= region_data,
+        choices=region_data,
         widget=forms.RadioSelect(
             attrs={
-
-
-    RegistrationDate = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control datetimepicker",
-                "type": "text",
             }
         )
     )
+
     RegistrationDate = forms.DateField(
+        label='Registration Date',
         widget=forms.DateInput(
             attrs={
-                "id": "datetimepicker",
+
                 "class": "form-control datetimepicker",
 
             }
         )
     )
     Industry = forms.ModelMultipleChoiceField(
-      queryset = Industry.objects.all(),
-      widget= forms.CheckboxSelectMultiple(
-      attrs={
+        queryset=Industry.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
 
-           }
+            }
         )
     )
 
     ServiceCategory = forms.ModelMultipleChoiceField(
-      queryset = ServiceCategory.objects.all(),
-      widget= forms.CheckboxSelectMultiple(
-      attrs={
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
 
-           }
+            }
         )
     )
