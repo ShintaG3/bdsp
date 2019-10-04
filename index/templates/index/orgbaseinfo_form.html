@@ -1,133 +1,172 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<style media="screen">
-  #main_form,
-  footer {
-    position: relative;
-    top: 15vh;
-  }
-  ul {
-    list-style-type: none;
-    display: inline-flex;
-    padding-left: 0px;
-    margin-bottom: 0px;
-  }
-  li{
-    padding:4px;
-  }
-  #region_data{
-    padding-left: 0px;
-  }
+{% endblock %}
 
+{% block header %}
+<div class="page-header blue-filter " data-parallax="true"
+  style="background-image: url('{% static 'img/trianglify.png' %}'); transform:translate3d(0px, 0px, 0px); height:60vh;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="brand text-center">
+          <h1>{{ org.Name }}</h1>
+          <h3 class="lead">{{ org.Region }}, {{ org.Address }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-</style>
 {% endblock %}
 
 {% block content %}
 
-<form action="" method="post" id="main_form">
-  {% csrf_token %}
-  {% if form.errors %}
-  <ul>
-    {% for error in form.errors %}
-    <li>Error in:{{ error }} </li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+<div class="main main-raised">
+  <div class="section">
+    <div class="container">
+
+      <form action="" method="post" id="main_form">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <ul>
+          {% for error in form.errors %}
+          <li>Error in:{{ error }} </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <!-- Registration Date -->
+        <div class="form-group">
+          <label class="label-control">{{form.RegistrationDate.label}}</label>
+          {{ form.RegistrationDate }}
+          <!-- <input type="text" class="form-control datetimepicker" value="10/05/2016" /> -->
+        </div>
+
+        <!-- Name -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Name.label }}</label>
+          {{ form.Name }}
+        </div>
+
+        <!-- Address -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Address.label }}</label>
+          {{ form.Address }}
+        </div>
+
+        <!-- Region -->
+        <fieldset class="form-group">
+          <legend class="col-form-label">
+            Region
+          </legend>
+          {% for choice in form.Region.field.choices %}
+          <div class="form-check form-check-radio form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="Region" id="id_Region" value="{{choice.0}}"
+                {% if choice.0 in org.Region %} checked="checked" {% endif %}>
+              {{choice.0}}
+              <span class="circle">
+                <span class="check"></span>
+              </span>
+            </label>
+          </div>
+          {% endfor %}
+        </fieldset>
+
+        <!-- Industry -->
+        <div class="form-group">
+          <legend class="col-form-label">
+            Industry
+          </legend>
+          {% for choice in form.Industry.field.queryset %}
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="Industry" value="{{forloop.counter}}"
+                {% if choice in org.Industry.all %} checked="checked" {% endif %}>
+              {{choice}}
+              <span class="form-check-sign">
+                <span class="check"></span>
+              </span>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- ServiceCategory -->
+        <div class="form-group">
+          <legend class="col-form-label">
+            Service
+          </legend>
+          {% for choice in form.ServiceCategory.field.queryset %}
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="ServiceCategory" value="{{forloop.counter}}"
+                {% if choice in org.ServiceCategory.all %} checked="checked" {% endif %}>
+              {{choice}}
+              <span class="form-check-sign">
+                <span class="check"></span>
+              </span>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- {{form.ServiceCategory}} -->
+
+        <!-- PR -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.PR.label }}</label>
+          {{ form.PR }}
+        </div>
+
+        <!-- URL -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Url.label }}</label>
+          {{ form.Url }}
+        </div>
+
+        <!-- Affiliation -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Affiliation.label }}</label>
+          {{ form.Affiliation }}
+        </div>
+
+        <!-- Contact Person -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.ContactPerson.label }}</label>
+          {{ form.ContactPerson }}
+        </div>
+
+        <!-- Email -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Email.label }}</label>
+          {{ form.Email }}
+        </div>
+
+        <!-- Telephone -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Telephone.label }}</label>
+          {{ form.Telephone }}
+        </div>
 
 
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label">{{ form.Name.label_tag }}</label>
-    <div class="col-sm-10">
-    {{ form.Name }}
+        <!-- button -->
+        <div class="text-center mt-5">
+          <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
+        </div>
+
+      </form>
+
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Address.label_tag }}</label>
-      <div class="col-sm-10">
-      {{ form.Address }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Region.label_tag }}</label>
-        <div class="col-sm-10" id="region_data">
-          {{ form.Region }}
-        </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Industry.label_tag }}</label>
-    <div class="form-check">
-      {{ form.Industry }}
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.ServiceCategory.label_tag }}</label>
-        <div class="form-check">
-          {{ form.ServiceCategory }}
-        </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.PR.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.PR }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Url.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.Url }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Affiliation.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.Affiliation }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.ContactPerson.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.ContactPerson }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Email.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.Email }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.Telephone.label_tag }}</label>
-      <div class="col-sm-10">
-        {{ form.Telephone }}
-      </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ form.RegistrationDate.label_tag }}</label>
-      {{ form.RegistrationDate }}
-  </div>
-  <!-- button -->
-  <div class="text-center mt-5">
-      <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-lg btn-outline-primary">
-  </div>
-</form>
+</div>
 
 {% endblock %}
 
 {% block script %}
 <script>
-  $('#datetimepicker').datetimepicker({
+  $('.datetimepicker').datetimepicker({
     icons: {
       time: "fa fa-clock-o",
       date: "fa fa-calendar",
@@ -139,10 +178,9 @@
       clear: 'fa fa-trash',
       close: 'fa fa-remove'
     },
-    format: 'YYYY-MM-DD'
-  });
-// Needs to improve more for bigger checkboxes
-//  $( "input:checkbox" ).after("<span class='form-check-sign'><span class='check'></span></span>");
 
+    format: 'YYYY-MM-DD',
+  });
 </script>
+
 {% endblock %}

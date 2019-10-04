@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from index.models import *
 
+
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
@@ -56,6 +57,7 @@ class ServiceForm(ModelForm):
         )
     )
 
+
 class CaseForm(ModelForm):
     class Meta:
         model = Case
@@ -79,6 +81,7 @@ class CaseForm(ModelForm):
         )
     )
 
+
 def region_data():
     return Region_data
 
@@ -87,38 +90,40 @@ class OrgBaseInfoForm(ModelForm):
     class Meta:
         model = OrgBaseInfo
         fields = '__all__'
+
     Name = forms.CharField(
+        label='Organization name',
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Name of Organisation"
+
             }
         )
     )
     Address = forms.CharField(
+        label='Address',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Address of Organisation",
                 'rows': 3
             }
         )
     )
 
     PR = forms.CharField(
+        label='PR',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "PR of Organisation",
                 'rows': 3
             }
         )
     )
     Url = forms.CharField(
+        label='URL',
         widget=forms.URLInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "URL of Organisation"
             }
         )
     )
@@ -131,10 +136,11 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     ContactPerson = forms.CharField(
+        label='Contact Person',
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Contact Person for the Organisation"
+
             }
         )
     )
@@ -154,37 +160,39 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Region = forms.ChoiceField(
-        choices= region_data,
+        choices=region_data,
         widget=forms.RadioSelect(
             attrs={
-
             }
         )
     )
+
     RegistrationDate = forms.DateField(
+        label='Registration Date',
         widget=forms.DateInput(
             attrs={
-                "id": "datetimepicker",
+
                 "class": "form-control datetimepicker",
 
             }
         )
     )
     Industry = forms.ModelMultipleChoiceField(
-      queryset = Industry.objects.all(),
-      widget= forms.CheckboxSelectMultiple(
-      attrs={
+        queryset=Industry.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
 
-           }
+            }
         )
     )
 
     ServiceCategory = forms.ModelMultipleChoiceField(
-      queryset = ServiceCategory.objects.all(),
-      widget= forms.CheckboxSelectMultiple(
-      attrs={
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
 
-           }
+            }
         )
     )
