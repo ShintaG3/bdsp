@@ -34,10 +34,12 @@ class ExperienceForm(ModelForm):
     )
 
 
+
 class ServiceForm(ModelForm):
     class Meta:
         model = Service
         fields = '__all__'
+    
     Service = forms.CharField(
         widget=forms.Textarea(
             attrs={
