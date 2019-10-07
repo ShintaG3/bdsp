@@ -1,10 +1,11 @@
 from django.test import TestCase
 import datetime
 from django.utils import timezone
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.test import Client
+from .views import *
 # Create your tests here.
-from index.models import OrgBaseInfo, ServiceCategory, Industry, Case, Experience, Service
+from index.models import *
 from django.contrib.auth.models import User
 
 class OrgBaseInfoModelTest(TestCase):
@@ -55,6 +56,7 @@ class OrgBaseInfoModelTest(TestCase):
         )
         case1.save()
 
+
     def test_name_label(self):
         org1 = OrgBaseInfo.objects.get(id=1)
         field_label = org1._meta.get_field('Name').verbose_name
@@ -83,6 +85,39 @@ class OrgBaseInfoModelTest(TestCase):
         response = self.client.get(reverse('list'))
         self.assertTemplateUsed(response, 'index/list.html')
 
+    def test_details_view_status_code(self):
+        url = reverse('details', kwargs={'id':1})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_details_view_status_not_found_code(self):
+        url = reverse('details', kwargs={'id':100})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 404)
+
+    def test_details_url_resolves_home_view(self):
+        view = resolve('/details/1')
+        self.assertEquals(view.func, details)
+
+class HomeTests(TestCase):
+    def test_home_view_status_code(self):
+        url = reverse('index')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_home_url_resolves_home_view(self):
+        view = resolve('/')
+        self.assertEquals(view.func, index)
+
+    def test_list_view_status_code(self):
+        url = reverse('list')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_home_url_resolves_home_view(self):
+        view = resolve('/list')
+        self.assertEquals(view.func, list)
+
 class CheckAuthenticationForEditTest(TestCase):
     @classmethod
     def setup(self):
@@ -108,17 +143,6 @@ class CheckAuthenticationForEditTest(TestCase):
         response = self.client.get('/case/create/1')
         self.assertRedirects(response, '/accounts/login/?next=/case/create/1')
 
-    def test_update_service_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/service/update/1')
-        self.assertRedirects(response, '/accounts/login/?next=/service/update/1')
-
-    def test_update_experience_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/experience/update/1')
-        self.assertRedirects(response, '/accounts/login/?next=/experience/update/1')
-
-    def test_update_case_page_redirect_if_not_logged_in(self):
-        response = self.client.get('/case/update/1')
-        self.assertRedirects(response, '/accounts/login/?next=/case/update/1')
 
     def test_logged_in_uses_correct_template(self):
         c = Client()
