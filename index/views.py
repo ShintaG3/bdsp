@@ -117,10 +117,18 @@ class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
     form_class = CaseForm
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.OrgName = OrgBaseInfo.objects.get(id=self.kwargs["pk"])
+        instance.save()
+        form.save_m2m()
+        return redirect('details', id=self.kwargs["pk"])
+
 
 class CaseUpdate(LoginRequiredMixin, UpdateView):
     model = Case
     form_class = CaseForm
+    context_object_name = 'case'
 
 
 @login_required
@@ -134,6 +142,12 @@ def CaseDelete(request, pk):
 class ExperienceCreate(LoginRequiredMixin, CreateView):
     model = Experience
     form_class = ExperienceForm
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.OrgName = OrgBaseInfo.objects.get(id=self.kwargs["pk"])
+        instance.save()
+        return redirect('details', id=self.kwargs["pk"])
 
 
 class ExperienceUpdate(LoginRequiredMixin, UpdateView):

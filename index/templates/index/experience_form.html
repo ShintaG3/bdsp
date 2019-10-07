@@ -2,7 +2,8 @@
 {% block style %}
 {% load static %}
 <style media="screen">
-  .main-raised, footer{
+  .main-raised,
+  footer {
     position: relative;
     top: 25vh;
   }
@@ -15,7 +16,7 @@
   <div class="section">
     <div class="container">
 
-      <form action="" method="post" id="main_form">
+      <form method="post" id="main_form">
         {% csrf_token %}
 
         {% if form.errors %}
@@ -26,42 +27,30 @@
         </ul>
         {% endif %}
 
-	<!-- Name -->
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">{{ form.OrgName.label_tag }}</label>
-  	      <div class="col-sm-10">
-  	      {{ form.OrgName }}
-        	</div>
-  	  </div>
-
-	<!-- Experience Large -->
-      <div class="form-group row">
-       <label class="col-sm-2 col-form-label">{{ form.Large.label_tag }}</label>
-          <div class="col-sm-10">
-          {{ form.Large }}
+        <div class="form-row">
+          <!-- Experience Large -->
+          <div class="form-group bmd-form-group col">
+            <label class="bmd-label-floating">{{ form.Large.label }}</label>
+            {{ form.Large }}
           </div>
-	     </div>
 
-	<!-- Experience Medium -->
-	     <div class="form-group row">
-	        <label class="col-sm-2 col-form-label">{{ form.Medium.label_tag }}</label>
-            <div class="col-sm-10">
+          <!-- Experience Medium -->
+          <div class="form-group bmd-form-group col">
+            <label class="bmd-label-floating">{{ form.Medium.label }}</label>
             {{ form.Medium }}
-            </div>
-	     </div>
+          </div>
 
-	<!-- Experience small and micro -->
-       <div class="form-group row">
-         <label class="col-sm-2 col-form-label">{{ form.SmallandMicro.label_tag }}</label>
-      	  <div class="col-sm-10">
-      	  {{ form.SmallandMicro }}
-      	  </div>
-      	</div>
+          <!-- Experience small and micro -->
+          <div class="form-group bmd-form-group col">
+            <label class="bmd-label-floating">{{ form.SmallandMicro.label }}</label>
+            {{ form.SmallandMicro }}
+          </div>
+        </div>
 
-  	<!-- button -->
-      <div class="text-center mt-5">
-        <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
-      </div>
+        <!-- button -->
+        <div class="text-center mt-5">
+          <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
+        </div>
 
       </form>
 
@@ -72,6 +61,6 @@
 {% endblock %}
 {% block script %}
 <script>
-$('select').addClass("form-control");
+  $('select').addClass("form-control");
 </script>
 {% endblock %}

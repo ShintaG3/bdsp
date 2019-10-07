@@ -6,13 +6,12 @@ from index.models import *
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
-        fields = '__all__'
+        fields = ['Large', 'Medium', 'SmallandMicro']
 
     Large = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Experience with Large Organisations"
             }
         )
     )
@@ -20,7 +19,6 @@ class ExperienceForm(ModelForm):
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Experience with Medium Organisations"
             }
         )
     )
@@ -28,7 +26,6 @@ class ExperienceForm(ModelForm):
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Experience with Small and Micro Organisations"
             }
         )
     )
@@ -68,21 +65,27 @@ class ServiceForm(ModelForm):
 class CaseForm(ModelForm):
     class Meta:
         model = Case
-        fields = '__all__'
-    Result = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Result",
-                'rows': 3
-            }
+        fields = ['ServiceCategory', 'Result', 'Contents']
+
+    ServiceCategory = forms.ModelMultipleChoiceField(
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
         )
     )
+
     Contents = forms.CharField(
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Contents",
+                'rows': 3
+            }
+        )
+    )
+
+    Result = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
                 'rows': 3
             }
         )

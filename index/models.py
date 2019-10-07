@@ -60,7 +60,6 @@ class OrgBaseInfo(models.Model):
 class Service(models.Model):
     OrgName = models.ForeignKey(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    # ServiceCategory = models.ForeignKey('ServiceCategory', on_delete=models.SET_NULL, null=True)
     ServiceCategory = models.ManyToManyField('ServiceCategory')
     Service = models.CharField(max_length=200)
     Contents = models.CharField(max_length=300)
@@ -93,8 +92,9 @@ class Experience(models.Model):
 class Case(models.Model):
     OrgName = models.ForeignKey(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    ServiceCategory = models.ForeignKey(
-        'ServiceCategory', on_delete=models.SET_NULL, null=True)
+    # ServiceCategory = models.ForeignKey(
+    #     'ServiceCategory', on_delete=models.SET_NULL, null=True)
+    ServiceCategory = models.ManyToManyField('ServiceCategory')
     Contents = models.CharField(max_length=300)
     Result = models.CharField(max_length=300)
 

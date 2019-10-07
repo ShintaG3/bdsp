@@ -2,74 +2,78 @@
 {% block style %}
 {% load static %}
 <style media="screen">
-  .main-raised, footer{
-    position: relative;
-    top: 25vh;
-  }
-
+	.main-raised,
+	footer {
+		position: relative;
+		top: 25vh;
+	}
 </style>
 {% endblock %}
 
 {% block content %}
 
 <div class="main main-raised">
-  <div class="section">
-    <div class="container">
+	<div class="section">
+		<div class="container">
 
-      <form action="" method="post" id="main_form">
-        {% csrf_token %}
+			<form action="" method="post" id="main_form">
+				{% csrf_token %}
 
-        {% if form.errors %}
-        <ul>
-          {% for error in form.errors %}
-          <li>Error in:{{ error }} </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-	<!-- Name -->
-        <div class="form-group row">
-	        <label class="col-sm-2 col-form-label">{{ form.OrgName.label_tag }}</label>
-    	      <div class="col-sm-10">
-    	      {{ form.OrgName }}
-          	</div>
-    	</div>
-	<!-- Service Category -->
-       <div class="form-group row">
-      	<label class="col-sm-2 col-form-label">{{ form.ServiceCategory.label_tag }}</label>
-  	      <div class="col-sm-10">
-  	      {{ form.ServiceCategory }}
-  	      </div>
-    	  </div>
-	<!-- Contents -->
-	   <div class="form-group row">
-      	<label class="col-sm-2 col-form-label">{{ form.Contents.label_tag }}</label>
-  	      <div class="col-sm-10">
-  	      {{ form.Contents }}
-  	      </div>
-    	</div>
+				{% if form.errors %}
+				<ul>
+					{% for error in form.errors %}
+					<li>Error in:{{ error }} </li>
+					{% endfor %}
+				</ul>
+				{% endif %}
 
-	<!-- Result -->
-	   <div class="form-group row">
-      	<label class="col-sm-2 col-form-label">{{ form.Result.label_tag }}</label>
-	      <div class="col-sm-10">
-	      {{ form.Result }}
-	      </div>
-    	</div>
 
-  <!-- button -->
-      <div class="text-center mt-5">
-        <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
-      </div>
+				<!-- ServiceCategory -->
+				<div class="form-group">
+					<legend class="col-form-label">
+						Service Category
+					</legend>
+					{% for choice in form.ServiceCategory.field.queryset %}
+					<div class="form-check form-check-inline">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="ServiceCategory"
+								value="{{forloop.counter}}" {% if choice in case.ServiceCategory.all %}
+								checked="checked" {% endif %}>
+							{{choice}}
+							<span class="form-check-sign">
+								<span class="check"></span>
+							</span>
+						</label>
+					</div>
+					{% endfor %}
+				</div>
 
-      </form>
+				<!-- Contents -->
+				<div class="form-group bmd-form-group">
+					<label class="bmd-label-floating">{{ form.Contents.label }}</label>
+					{{ form.Contents }}
+				</div>
 
-    </div>
-  </div>
+				<!-- Result -->
+				<div class="form-group bmd-form-group">
+					<label class="bmd-label-floating">{{ form.Result.label }}</label>
+					{{ form.Result }}
+				</div>
+
+				<!-- button -->
+				<div class="text-center mt-5">
+					<input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
+				</div>
+
+			</form>
+
+		</div>
+	</div>
 </div>
 
 {% endblock %}
 {% block script %}
 <script>
-$('select').addClass("form-control");
+	$('select').addClass("form-control");
 </script>
 {% endblock %}

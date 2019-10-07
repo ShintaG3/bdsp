@@ -198,11 +198,12 @@
             edit
           </i>
         </a>
+
       </div>
       {% endfor %}
       {% else %}
       <div class="row">
-        <a class="ml-auto mr-2" href="{% url 'experience_create' org.id %}">
+        <a class="btn btn-primary btn-just-icon btn-round ml-auto mr-4" href="{% url 'experience_create' org.id %}">
           <i class="material-icons">
             add
           </i>
@@ -264,7 +265,9 @@
             {% if cases %}
             {% for case in cases %}
             <tr>
-              <td>{{ case.ServiceCategory.Name }}</td>
+              <td>{% for eachcase in case.ServiceCategory.all %}
+                {{ eachcase.Name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}</td>
               <td>{{ case.Contents }}</td>
               <td>{{ case.Result }}</td>
               {% if user.is_authenticated %}
