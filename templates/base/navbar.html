@@ -17,7 +17,9 @@
       <div class="navbar-nav">
         {% if user.is_authenticated %}
         <div class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">Register</a>
+          <a class="btn btn-white btn-just-icon btn-round" href="{% url 'register' %}">
+            <i class="material-icons">add</i>
+          </a>
         </div>
         {% endif %}
       </div>
@@ -27,7 +29,7 @@
           {% csrf_token %}
           <div class="form-group no-border">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="orgInfo"
-              required maxlength="10" />
+              required maxlength="20" />
             <button class="btn btn-white btn-just-icon btn-round" type="submit">
               <i class="material-icons">search</i>
             </button>

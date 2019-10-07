@@ -141,7 +141,6 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Affiliation of Organisation"
             }
         )
     )
@@ -158,7 +157,6 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.EmailInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Email for the Organisation"
             }
         )
     )
@@ -166,7 +164,6 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Telephone Number"
             }
         )
     )
@@ -183,26 +180,19 @@ class OrgBaseInfoForm(ModelForm):
         label='Registration Date',
         widget=forms.DateInput(
             attrs={
-
                 "class": "form-control datetimepicker",
-
             }
         )
     )
+
     Industry = forms.ModelMultipleChoiceField(
         queryset=Industry.objects.all(),
         widget=forms.CheckboxSelectMultiple(
-            attrs={
-
-            }
         )
     )
 
     ServiceCategory = forms.ModelMultipleChoiceField(
         queryset=ServiceCategory.objects.all(),
         widget=forms.CheckboxSelectMultiple(
-            attrs={
-
-            }
         )
     )
