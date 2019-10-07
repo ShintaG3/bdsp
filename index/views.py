@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 from .forms import *
 
 
@@ -85,14 +86,23 @@ def search(request):
     return render(request, 'index/list.html', context={'query_result': orgs})
 
 
-class ServiceCreate(LoginRequiredMixin, CreateView):
+@method_decorator(login_required, name='dispatch')
+class ServiceCreate(CreateView):
     model = Service
     form_class = ServiceForm
+
+    def form_valid(self, form):
+        service = form.save(commit=False)
+        service.OrgName = OrgBaseInfo.objects.get(id=self.kwargs["pk"])
+        service.save()
+        form.save_m2m()
+        return redirect('details', id=self.kwargs["pk"])
 
 
 class ServiceUpdate(LoginRequiredMixin, UpdateView):
     model = Service
     form_class = ServiceForm
+    context_object_name = 'service'
 
 
 @login_required
@@ -151,5 +161,4 @@ class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         id = self.kwargs['pk']
-        print(id)
         return reverse_lazy('details', kwargs={'id': id})

@@ -34,26 +34,31 @@ class ExperienceForm(ModelForm):
     )
 
 
-
 class ServiceForm(ModelForm):
     class Meta:
         model = Service
-        fields = '__all__'
-    
+        fields = ['ServiceCategory', 'Service', 'Contents']
+
+    ServiceCategory = forms.ModelMultipleChoiceField(
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+        )
+    )
+
     Service = forms.CharField(
+        label='Service',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Service Provides",
                 'rows': 3
             }
         )
     )
     Contents = forms.CharField(
+        label='Contents',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                "placeholder": "Summary for the Serice provides",
                 'rows': 3
             }
         )

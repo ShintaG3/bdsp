@@ -2,8 +2,8 @@
 {% block style %}
 {% load static %}
 <style>
-  @media screen and (max-width:800px){
-    .container{
+  @media screen and (max-width:800px) {
+    .container {
       padding-right: 0px;
       padding-left: 0px;
     }
@@ -128,7 +128,9 @@
             {% if services %}
             {% for service in services %}
             <tr>
-              <td>{{ service.ServiceCategory }}</td>
+              <td>{% for eachservice in service.ServiceCategory.all %}
+                {{ eachservice.Name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}</td>
               <td>{{ service.Service }}</td>
               <td>{{ service.Contents }}</td>
               <td>

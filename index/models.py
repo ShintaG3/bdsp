@@ -9,21 +9,26 @@ Region_data = (
     ('Something', 'Something')
 )
 
+
 class Industry(models.Model):
     Name = models.CharField(
         max_length=100,
         #help_text="Enter the type of industry(eg. textile, metal)"
-        )
+    )
+
     def __str__(self):
         return self.Name
+
 
 class ServiceCategory(models.Model):
     Name = models.CharField(
         max_length=50,
         #help_text="Enter the Name of service(eg. marketing, finance)"
-        )
+    )
+
     def __str__(self):
         return self.Name
+
 
 class OrgBaseInfo(models.Model):
     Name = models.CharField(max_length=100)
@@ -42,7 +47,7 @@ class OrgBaseInfo(models.Model):
         max_length=30,
         choices=Region_data,
         blank=True
-        )
+    )
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -51,11 +56,15 @@ class OrgBaseInfo(models.Model):
     def get_absolute_url(self):
         return reverse('details', args=[self.id])
 
+
 class Service(models.Model):
-    OrgName = models.ForeignKey('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    ServiceCategory = models.ForeignKey('ServiceCategory', on_delete=models.SET_NULL, null=True)
+    OrgName = models.ForeignKey(
+        'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    # ServiceCategory = models.ForeignKey('ServiceCategory', on_delete=models.SET_NULL, null=True)
+    ServiceCategory = models.ManyToManyField('ServiceCategory')
     Service = models.CharField(max_length=200)
     Contents = models.CharField(max_length=300)
+
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
@@ -64,11 +73,14 @@ class Service(models.Model):
         Orgid = self.OrgName.id
         return reverse('details', args=[str(Orgid)])
 
+
 class Experience(models.Model):
-    OrgName = models.OneToOneField('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    OrgName = models.OneToOneField(
+        'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     Large = models.IntegerField()
     Medium = models.IntegerField()
     SmallandMicro = models.IntegerField()
+
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
@@ -77,11 +89,15 @@ class Experience(models.Model):
         Orgid = self.OrgName.id
         return reverse('details', args=[str(Orgid)])
 
+
 class Case(models.Model):
-    OrgName = models.ForeignKey('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    ServiceCategory = models.ForeignKey('ServiceCategory', on_delete=models.SET_NULL, null=True)
+    OrgName = models.ForeignKey(
+        'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    ServiceCategory = models.ForeignKey(
+        'ServiceCategory', on_delete=models.SET_NULL, null=True)
     Contents = models.CharField(max_length=300)
     Result = models.CharField(max_length=300)
+
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return str(self.OrgName)
