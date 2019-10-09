@@ -1,19 +1,6 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<!-- <link rel="stylesheet" href="{% static 'search.css' %}" type="text/css" /> -->
-<style media="screen">
-  #main_form {
-    position: relative;
-    top: 15vh;
-  }
-
-  footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100vw;
-  }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -30,11 +17,11 @@
 {% endif %}
 
 <div class="container">
-  <div class="row mt-5">
+  <div class="row" style="margin-top:18vh;">
     <div class="col-lg-4 col-md-6 mx-auto">
       <div class="card card-login">
 
-        <form class="form" method="post" action="{% url 'login' %}" id="main_form">
+        <form class="form" method="post" action="{% url 'login' %}">
           <div class="card-header card-header-primary text-center">
             <h4 class="card-title">Login</h4>
           </div>
@@ -60,10 +47,10 @@
                 {{ form.password }}
               </div>
             </span>
-            <div class="text-center mt-3">
-              <input class="btn btn-outline-primary" type="submit" value="login" />
-              <input type="hidden" name="next" value="{{ next }}" />
-            </div>
+          </div>
+          <div class="text-center mt-3">
+            <input class="btn btn-outline-primary" type="submit" value="login" />
+            <input type="hidden" name="next" value="{{ next }}" />
           </div>
         </form>
       </div>
