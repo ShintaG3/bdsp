@@ -8,9 +8,16 @@ urlpatterns = [
     path('list', views.list, name="list"),
     path('details/<int:id>', views.details, name="details"),
     path('search', views.search, name="search"),
-    path('register', views.OrgbaseInfoCreate.as_view(), name="register"),
-    path('editPage/<int:pk>', views.OrgBaseInfoUpdate.as_view(), name="editPage")
+
 ]
+
+# Add URLConf to create, update, and delete orgs
+urlpatterns += [
+    path('register', views.OrgbaseInfoCreate.as_view(), name="register"),
+    path('editPage/<int:pk>', views.OrgBaseInfoUpdate.as_view(), name="editPage"),
+    path('delete/<int:pk>', views.OrgDelete, name="org_delete"),
+]
+
 # Add URLConf to create, update, and delete experiences
 urlpatterns += [
     path('experience/create/<int:pk>',

@@ -85,6 +85,38 @@ def search(request):
         Name__icontains=orgInfo).order_by('Region')
     return render(request, 'index/list.html', context={'query_result': orgs})
 
+# Org_Base_Info
+
+
+class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
+    model = OrgBaseInfo
+    form_class = OrgBaseInfoForm
+
+
+class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
+    model = OrgBaseInfo
+    form_class = OrgBaseInfoForm
+    context_object_name = 'org'
+    template = 'orgbaseinfo_form.html'
+
+    def get_success_url(self):
+        id = self.kwargs['pk']
+        return reverse_lazy('details', kwargs={'id': id})
+
+
+class OrgDelete(LoginRequiredMixin, DeleteView):
+    model = OrgBaseInfo
+    success_url = reverse_lazy('index')
+
+
+@login_required
+def OrgDelete(request, pk):
+    org = OrgBaseInfo.objects.get(id=pk)
+    org.delete()
+    return redirect('index')
+
+
+# Service
 
 @method_decorator(login_required, name='dispatch')
 class ServiceCreate(CreateView):
@@ -113,6 +145,29 @@ def ServiceDelete(request, pk):
     return redirect('details', id=int(orgid))
 
 
+# Experience
+class ExperienceCreate(LoginRequiredMixin, CreateView):
+    model = Experience
+    form_class = ExperienceForm
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.OrgName = OrgBaseInfo.objects.get(id=self.kwargs["pk"])
+        instance.save()
+        return redirect('details', id=self.kwargs["pk"])
+
+
+class ExperienceUpdate(LoginRequiredMixin, UpdateView):
+    model = Experience
+    form_class = ExperienceForm
+
+
+class ExperienceDelete(LoginRequiredMixin, DeleteView):
+    model = Experience
+    success_url = reverse_lazy('index')
+
+
+# Case
 class CaseCreate(LoginRequiredMixin, CreateView):
     model = Case
     form_class = CaseForm
@@ -137,42 +192,3 @@ def CaseDelete(request, pk):
     orgid = case.OrgName.id
     case.delete()
     return redirect('details', id=int(orgid))
-
-
-class ExperienceCreate(LoginRequiredMixin, CreateView):
-    model = Experience
-    form_class = ExperienceForm
-
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.OrgName = OrgBaseInfo.objects.get(id=self.kwargs["pk"])
-        instance.save()
-        return redirect('details', id=self.kwargs["pk"])
-
-
-class ExperienceUpdate(LoginRequiredMixin, UpdateView):
-    model = Experience
-    form_class = ExperienceForm
-
-
-class ExperienceDelete(LoginRequiredMixin, DeleteView):
-    model = Experience
-    success_url = reverse_lazy('index')
-
-# Registration of New Org:
-
-
-class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
-    model = OrgBaseInfo
-    form_class = OrgBaseInfoForm
-
-
-class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
-    model = OrgBaseInfo
-    form_class = OrgBaseInfoForm
-    context_object_name = 'org'
-    template = 'orgbaseinfo_form.html'
-
-    def get_success_url(self):
-        id = self.kwargs['pk']
-        return reverse_lazy('details', kwargs={'id': id})
