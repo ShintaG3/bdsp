@@ -1,5 +1,7 @@
+from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from . import views
+from .forms import UserLoginForm
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -31,4 +33,10 @@ urlpatterns += [
     path('case/create/<int:pk>', views.CaseCreate.as_view(), name='case_create'),
     path('case/update/<int:pk>/', views.CaseUpdate.as_view(), name='case_update'),
     path('case/delete/<int:pk>/', views.CaseDelete, name='case_delete')
+]
+
+# amend AuthenticationForm
+urlpatterns += [
+    path('login/', LoginView.as_view(template_name="registration/login.html",
+                                     authentication_form=UserLoginForm), name='login'),
 ]
