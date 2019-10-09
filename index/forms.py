@@ -196,3 +196,5 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.CheckboxSelectMultiple(
         )
     )
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=15, min_length=5)

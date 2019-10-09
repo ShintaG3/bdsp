@@ -80,11 +80,15 @@ def details(request, id):
 
 
 def search(request):
+    #blacklist = ["delete()", ";", "update", "DELETE()"]
     orgInfo = request.POST["orgInfo"]
-    orgs = OrgBaseInfo.objects.filter(
-        Name__icontains=orgInfo).order_by('Region')
-    return render(request, 'index/list.html', context={'query_result': orgs})
-
+    form = SearchForm({'search': orgInfo})
+    if form.is_valid():
+        orgs = OrgBaseInfo.objects.filter(
+            Name__icontains=orgInfo).order_by('Region')
+        return render(request, 'index/list.html', context={'query_result': orgs})
+    else:
+        return redirect('index')
 
 @method_decorator(login_required, name='dispatch')
 class ServiceCreate(CreateView):
