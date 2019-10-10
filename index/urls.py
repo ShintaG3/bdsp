@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from . import views
 from .forms import UserLoginForm
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -47,3 +50,7 @@ urlpatterns += [
     path('login/', LoginView.as_view(template_name="registration/login.html",
                                      authentication_form=UserLoginForm), name='login'),
 ]
+
+# Serving Staticfile during development
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
