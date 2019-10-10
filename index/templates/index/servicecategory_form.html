@@ -2,10 +2,14 @@
 {% block style %}
 {% load static %}
 <style media="screen">
-  .main-raised,
-  footer {
+  .main-raised{
     position: relative;
     top: 25vh;
+  }
+  footer{
+    position:absolute;
+    bottom: 0px;
+    width: 100vw;
   }
 </style>
 {% endblock %}
@@ -27,7 +31,7 @@
         </ul>
         {% endif %}
 
-        <div class="form-row">
+        <div class="form-group">
           <label class="bmd-label-floating">{{ form.Name.label }}</label>
             <div class="form-group bmd-form-group col">
               {{ form.Name }}

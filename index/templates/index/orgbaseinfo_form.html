@@ -58,6 +58,9 @@
         </fieldset>
 
         <!-- Industry -->
+        {% for error in form.Industry.error %}
+        {{ error }}
+        {% endfor %}
         <div class="form-group">
           <legend class="col-form-label">
             Industry
