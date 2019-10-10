@@ -1,12 +1,18 @@
 from django.db import models
 from django.urls import reverse
-# Create your models here.
 
 # Regions tuple added here
 Region_data = (
     ('Addis Ababba', 'Addis Ababba'),
-    ('Johannesburg', 'Johannesburg'),
-    ('Something', 'Something')
+    ('Afar', 'Afar'),
+    ('Amhara', 'Amhara'),
+    ('Benishangul-Gumuz', 'Benishangul-Gumuz'),
+    ('Dire Dawa', 'Dire Dawa'),
+    ('Gambela', 'Gambela'),
+    ('Harari', 'Harari'),
+    ('Oromia', 'Oromia'),
+    ('Somali', 'Somali'),
+    ('Tigray', 'Tigray'),
 )
 
 
@@ -92,8 +98,6 @@ class Experience(models.Model):
 class Case(models.Model):
     OrgName = models.ForeignKey(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    # ServiceCategory = models.ForeignKey(
-    #     'ServiceCategory', on_delete=models.SET_NULL, null=True)
     ServiceCategory = models.ManyToManyField('ServiceCategory')
     Contents = models.CharField(max_length=300)
     Result = models.CharField(max_length=300)

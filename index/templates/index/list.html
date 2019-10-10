@@ -31,7 +31,7 @@
         <td>
           {% for service in query.ServiceCategory.all %}
             <span class="text-muted">{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
-            <!-- <p class="text-muted"></p> -->
+
           {% endfor %}
         </td>
         <td>
