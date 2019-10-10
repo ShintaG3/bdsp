@@ -203,7 +203,6 @@ class ExperienceForm(ModelForm):
 
 
 
-
 class CaseForm(ModelForm):
     class Meta:
         model = Case
@@ -229,6 +228,29 @@ class CaseForm(ModelForm):
             attrs={
                 "class": "form-control",
                 'rows': 3
+            }
+        )
+    )
+
+class addIndustryForm(ModelForm):
+    class Meta:
+        model = Industry
+        fields = '__all__'
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+class addServiceCategoryForm(ModelForm):
+    class Meta:
+        model = Service
+        fields = '__all__'
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
             }
         )
     )

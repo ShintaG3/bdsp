@@ -148,3 +148,4 @@ class CheckAuthenticationForEditTest(TestCase):
         c = Client()
         response = c.post('/login/', {'username': 'monusri', 'password': 'hellyeah@2019'})
         self.assertEqual(response.status_code, 200)
+        

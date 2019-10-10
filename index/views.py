@@ -94,25 +94,73 @@ def search(request):
     else:
         return redirect('index')
 
-# Industry Options
 
+# Industry Options ------------>
+@login_required
 def EditIndustryOptions(request):
     industries = Industry.objects.all()
     context = {
         "objects":industries,
         "title": "Industry"
     }
-    return render(request, 'index/options.html', context=context)
+    return render(request, 'index/industry_options.html', context=context)
+
+class AddIndustry(LoginRequiredMixin, CreateView):
+    model = Industry
+    form = addIndustryForm
+    fields = '__all__'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_industry')
+
+class UpdateIndustry(LoginRequiredMixin, UpdateView):
+    model = Industry
+    form = addIndustryForm
+    fields = '__all__'
+    context_object_name = 'industry'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_industry')
+
+@login_required
+def DeleteIndustry(request, pk):
+    industry = Industry.objects.get(id=pk)
+    industry.delete()
+    return redirect('options_industry')
 
 # Service Options
-
-def EditServiceOptions(request):
+@login_required
+def EditServiceCategoryOptions(request):
     services = ServiceCategory.objects.all()
     context = {
         "objects":services,
         "title": "Service"
     }
-    return render(request, 'index/options.html', context=context)
+    return render(request, 'index/serviceCategory_options.html', context=context)
+
+class AddServiceCategory(LoginRequiredMixin, CreateView):
+    model = ServiceCategory
+    form = addServiceCategoryForm
+    fields = '__all__'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_serviceCategory')
+
+class UpdateServiceCategory(LoginRequiredMixin, UpdateView):
+    model = ServiceCategory
+    form = addServiceCategoryForm
+    fields = '__all__'
+    context_object_name = 'serviceCategory'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_serviceCategory')
+
+@login_required
+def DeleteServiceCategory(request, pk):
+    service = ServiceCategory.objects.get(id=pk)
+    service.delete()
+    return redirect('options_serviceCategory')
+
 
 
 # Org_Base_Info
