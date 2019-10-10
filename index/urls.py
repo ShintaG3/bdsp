@@ -37,6 +37,8 @@ urlpatterns += [
 ]
 # Add URLConf to create, update, and delete Services
 urlpatterns += [
+    path('editService',
+         views.EditServiceOptions, name='options_service'),
     path('service/create/<int:pk>',
          views.ServiceCreate.as_view(), name='service_create'),
     path('service/update/<int:pk>/',

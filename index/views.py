@@ -90,7 +90,18 @@ def search(request):
 def EditIndustryOptions(request):
     industries = Industry.objects.all()
     context = {
-        "objects":industries
+        "objects":industries,
+        "title": "Industry"
+    }
+    return render(request, 'index/options.html', context=context)
+
+# Service Options
+
+def EditServiceOptions(request):
+    services = ServiceCategory.objects.all()
+    context = {
+        "objects":services,
+        "title": "Service"
     }
     return render(request, 'index/options.html', context=context)
 
