@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.urls import path, include
 from . import views
 from .forms import UserLoginForm
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -18,6 +21,11 @@ urlpatterns += [
     path('delete/<int:pk>', views.OrgDelete, name="org_delete"),
 ]
 
+# Add URLConf to create, update, and delete Industry
+urlpatterns += [
+    path('editIndustry', views.EditIndustryOptions, name="options_industry"),
+]
+
 # Add URLConf to create, update, and delete experiences
 urlpatterns += [
     path('experience/create/<int:pk>',
@@ -29,6 +37,8 @@ urlpatterns += [
 ]
 # Add URLConf to create, update, and delete Services
 urlpatterns += [
+    path('editService',
+         views.EditServiceOptions, name='options_service'),
     path('service/create/<int:pk>',
          views.ServiceCreate.as_view(), name='service_create'),
     path('service/update/<int:pk>/',
@@ -47,3 +57,7 @@ urlpatterns += [
     path('login/', LoginView.as_view(template_name="registration/login.html",
                                      authentication_form=UserLoginForm), name='login'),
 ]
+
+# Serving Staticfile during development
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

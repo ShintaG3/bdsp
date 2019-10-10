@@ -25,6 +25,7 @@
   <div class="section section-basic">
     <div class="container">
 
+      <!-- Region -->
       <form class="" action="{% url 'list' %}" method="post">{% csrf_token %}
         <div class="row">
           <div class="col-sm-2 my-auto">
@@ -49,7 +50,19 @@
           </div>
         </div>
 
+        <!-- Industry -->
+        {% if user.is_authenticated %}
         <div class="row mt-5">
+          <a class="mr-2 ml-auto btn btn-primary btn-just-icon btn-round" href="{% url 'options_industry' %}">
+            <i class="material-icons">edit</i>
+          </a>
+        </div>
+        <div class="row">
+
+        {% else %}
+        <div class="row mt-5">
+
+        {% endif %}
           <div class="col-sm-2 my-auto">
             <h3 class="mt-0 mb-3 text-center">
               <small>Industry</small>
@@ -73,7 +86,19 @@
           </div>
         </div>
 
+        <!-- Service -->
+        {% if user.is_authenticated %}
         <div class="row mt-5">
+          <a class="mr-2 ml-auto btn btn-primary btn-just-icon btn-round" href="{% url 'options_service' %}">
+            <i class="material-icons">edit</i>
+          </a>
+        </div>
+        <div class="row">
+
+        {% else %}
+        <div class="row mt-5">
+
+        {% endif %}
           <div class="col-sm-2 my-auto">
             <h3 class="mt-0 mb-3 text-center">
               <small>Service</small>
@@ -97,6 +122,7 @@
           </div>
         </div>
 
+        <!-- All -->
         <div class="form-group row text-center">
           <div class="col">
             <div class="form-check  form-check-inline ">
@@ -111,7 +137,7 @@
           </div>
         </div>
 
-        <!-- button  + Search all -->
+        <!-- button -->
         <div class="text-center mt-5">
           <input type="submit" name="" value="Search" class="mx-auto btn btn-primary btn-round">
         </div>

@@ -3,6 +3,10 @@ from django import forms
 from index.models import *
 from django.contrib.auth.forms import AuthenticationForm
 
+def region_data():
+    return Region_data
+
+
 
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
@@ -21,99 +25,19 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
 
-
-class ExperienceForm(ModelForm):
+class IndustryForm(ModelForm):
     class Meta:
-        model = Experience
-        fields = ['Large', 'Medium', 'SmallandMicro']
+        model = Industry
+        fields = '__all__'
 
-    Large = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
+    Name = forms.CharField(
+        label = 'Industry',
+        widget = forms.TextInput(
+            attrs = {
+                "class": "form-control"
             }
         )
     )
-    Medium = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
-            }
-        )
-    )
-    SmallandMicro = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "class": "form-control",
-            }
-        )
-    )
-
-
-class ServiceForm(ModelForm):
-    class Meta:
-        model = Service
-        fields = ['ServiceCategory', 'Service', 'Contents']
-
-    ServiceCategory = forms.ModelMultipleChoiceField(
-        queryset=ServiceCategory.objects.all(),
-        widget=forms.CheckboxSelectMultiple(
-        )
-    )
-
-    Service = forms.CharField(
-        label='Service',
-        widget=forms.Textarea(
-            attrs={
-                "class": "form-control",
-                'rows': 3
-            }
-        )
-    )
-    Contents = forms.CharField(
-        label='Contents',
-        widget=forms.Textarea(
-            attrs={
-                "class": "form-control",
-                'rows': 3
-            }
-        )
-    )
-
-
-class CaseForm(ModelForm):
-    class Meta:
-        model = Case
-        fields = ['ServiceCategory', 'Result', 'Contents']
-
-    ServiceCategory = forms.ModelMultipleChoiceField(
-        queryset=ServiceCategory.objects.all(),
-        widget=forms.CheckboxSelectMultiple(
-        )
-    )
-
-    Contents = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "class": "form-control",
-                'rows': 3
-            }
-        )
-    )
-
-    Result = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "class": "form-control",
-                'rows': 3
-            }
-        )
-    )
-
-
-def region_data():
-    return Region_data
-
 
 class OrgBaseInfoForm(ModelForm):
     class Meta:
@@ -219,3 +143,92 @@ class OrgBaseInfoForm(ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=15, min_length=1)
+
+class ServiceForm(ModelForm):
+    class Meta:
+        model = Service
+        fields = ['ServiceCategory', 'Service', 'Contents']
+
+    ServiceCategory = forms.ModelMultipleChoiceField(
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+        )
+    )
+
+    Service = forms.CharField(
+        label='Service',
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                'rows': 3
+            }
+        )
+    )
+    Contents = forms.CharField(
+        label='Contents',
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                'rows': 3
+            }
+        )
+    )
+
+class ExperienceForm(ModelForm):
+    class Meta:
+        model = Experience
+        fields = ['Large', 'Medium', 'SmallandMicro']
+
+    Large = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
+    Medium = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
+    SmallandMicro = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
+
+
+
+
+class CaseForm(ModelForm):
+    class Meta:
+        model = Case
+        fields = ['ServiceCategory', 'Result', 'Contents']
+
+    ServiceCategory = forms.ModelMultipleChoiceField(
+        queryset=ServiceCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple(
+        )
+    )
+
+    Contents = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                'rows': 3
+            }
+        )
+    )
+
+    Result = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                'rows': 3
+            }
+        )
+    )

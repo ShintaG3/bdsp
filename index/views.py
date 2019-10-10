@@ -94,6 +94,27 @@ def search(request):
     else:
         return redirect('index')
 
+# Industry Options
+
+def EditIndustryOptions(request):
+    industries = Industry.objects.all()
+    context = {
+        "objects":industries,
+        "title": "Industry"
+    }
+    return render(request, 'index/options.html', context=context)
+
+# Service Options
+
+def EditServiceOptions(request):
+    services = ServiceCategory.objects.all()
+    context = {
+        "objects":services,
+        "title": "Service"
+    }
+    return render(request, 'index/options.html', context=context)
+
+
 # Org_Base_Info
 
 class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
