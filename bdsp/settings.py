@@ -116,6 +116,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+DEBUG = False
 
 try:
     from .local_settings import *
