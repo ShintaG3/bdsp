@@ -126,3 +126,20 @@ except ImportError:
 if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
+
+# Heroku logging code to trace error while deployment
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
+        },
+    },
+}
