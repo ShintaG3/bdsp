@@ -21,6 +21,11 @@ urlpatterns += [
     path('delete/<int:pk>', views.OrgDelete, name="org_delete"),
 ]
 
+# Add URLConf to create, update, and delete Industry
+urlpatterns += [
+    path('editIndustry', views.EditIndustryOptions, name="options_industry"),
+]
+
 # Add URLConf to create, update, and delete experiences
 urlpatterns += [
     path('experience/create/<int:pk>',

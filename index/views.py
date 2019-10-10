@@ -85,6 +85,16 @@ def search(request):
         Name__icontains=orgInfo).order_by('Region')
     return render(request, 'index/list.html', context={'query_result': orgs})
 
+# Industry Options
+
+def EditIndustryOptions(request):
+    industries = Industry.objects.all()
+    context = {
+        "objects":industries
+    }
+    return render(request, 'index/options.html', context=context)
+
+
 # Org_Base_Info
 
 
