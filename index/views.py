@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from .forms import *
-
+import re
 
 def index(request):
     regiondata = []
@@ -80,8 +80,12 @@ def details(request, id):
 
 
 def search(request):
-    #blacklist = ["delete()", ";", "update", "DELETE()"]
     orgInfo = request.POST["orgInfo"]
+    p = re.compile('\W')   # Check if the input has any non alphanumeric charaters
+    specialChars = p.findall(orgInfo)
+    for chars in specialChars:
+        if chars != ' ':
+            return redirect('index') # Redirect to index if undesirable input
     form = SearchForm({'search': orgInfo})
     if form.is_valid():
         orgs = OrgBaseInfo.objects.filter(
@@ -121,7 +125,6 @@ def OrgDelete(request, pk):
 
 
 # Service
-
 @method_decorator(login_required, name='dispatch')
 class ServiceCreate(CreateView):
     model = Service

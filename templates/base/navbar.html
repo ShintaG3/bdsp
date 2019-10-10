@@ -42,7 +42,7 @@
         {% csrf_token %}
         <div class="form-group no-border">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="orgInfo" required
-            maxlength="10" />
+            maxlength="15" />
         </div>
         <button class="btn btn-white btn-just-icon btn-round" type="submit">
           <i class="material-icons">search</i>
@@ -65,7 +65,7 @@
           </div>
           {% endif %}
         </div>
-  
+
         <div class="navbar-nav ml-auto">
           <form class="form-inline ml-auto" method="post" action="/search">
             {% csrf_token %}
@@ -75,23 +75,23 @@
               <button class="btn btn-white btn-just-icon btn-round" type="submit">
                 <i class="material-icons">search</i>
               </button>
-  
+
             </div>
           </form>
           {% if user.is_authenticated %}
-  
+
           <div class="nav-item">
             <a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">logout</a>
           </div>
           {% else %}
-  
+
           <div class="nav-item">
             <a class="nav-link" href="{% url 'login'%}?next={{request.path}}">login</a>
           </div>
           {% endif %}
-  
+
         </div>
-  
+
       </div> -->
 
 
