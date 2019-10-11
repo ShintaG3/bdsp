@@ -107,16 +107,15 @@ def EditIndustryOptions(request):
 
 class AddIndustry(LoginRequiredMixin, CreateView):
     model = Industry
-    form = addIndustryForm
-    fields = '__all__'
+    form_class = IndustryForm
+    template = "index/industry_form.html"
     def form_valid(self, form):
         form.save()
         return redirect('options_industry')
 
 class UpdateIndustry(LoginRequiredMixin, UpdateView):
     model = Industry
-    form = addIndustryForm
-    fields = '__all__'
+    form_class = IndustryForm
     context_object_name = 'industry'
     def form_valid(self, form):
         form.save()
@@ -140,16 +139,16 @@ def EditServiceCategoryOptions(request):
 
 class AddServiceCategory(LoginRequiredMixin, CreateView):
     model = ServiceCategory
-    form = addServiceCategoryForm
-    fields = '__all__'
+    form_class = addServiceCategoryForm
+    template = "index/servicecategory_form"
     def form_valid(self, form):
         form.save()
         return redirect('options_serviceCategory')
 
 class UpdateServiceCategory(LoginRequiredMixin, UpdateView):
     model = ServiceCategory
-    form = addServiceCategoryForm
-    fields = '__all__'
+    form_class = addServiceCategoryForm
+    # fields = '__all__'
     context_object_name = 'serviceCategory'
     def form_valid(self, form):
         form.save()

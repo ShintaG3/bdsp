@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<style>
+<!-- <style>
   @media screen and (max-width:800px) {
     .container {
       padding-right: 0px;
       padding-left: 0px;
     }
   }
-</style>
+</style> -->
 {% endblock %}
 
 {% block header %}
@@ -210,7 +210,7 @@
 </div>
 
 <!-- Experience -->
-<div class="main main-raised mt-5" style="z-index:-1;">
+<div class="main main-raised mt-5" style="z-index:0;">
   <div class="section pt-4">
     <div class="container">
       <h2 class="title text-center">Experience</h2>
@@ -219,8 +219,7 @@
       {% if experiences %}
       {% for experience in experiences %}
       <div class="row">
-        <a class="btn btn-primary btn-just-icon btn-round ml-auto mr-4"
-          href="{% url 'experience_update' experience.id %}">
+        <a class="btn btn-primary btn-just-icon btn-round ml-auto mr-4" href="{% url 'experience_update' experience.id %}">
           <i class="material-icons">
             edit
           </i>

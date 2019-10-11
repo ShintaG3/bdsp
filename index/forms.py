@@ -7,7 +7,7 @@ def region_data():
     return Region_data
 
 
-
+#---Login---
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -25,20 +25,27 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
 
+#---Search---
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=15, min_length=1)
+
+
+# ---Industry---
 class IndustryForm(ModelForm):
     class Meta:
         model = Industry
-        fields = '__all__'
+        fields = ['Name']
 
     Name = forms.CharField(
-        label = 'Industry',
-        widget = forms.TextInput(
-            attrs = {
-                "class": "form-control"
+        label='Industry',
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
             }
         )
     )
 
+# ---Organization---
 class OrgBaseInfoForm(ModelForm):
     class Meta:
         model = OrgBaseInfo
@@ -140,10 +147,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
 
-
-class SearchForm(forms.Form):
-    search = forms.CharField(max_length=15, min_length=1)
-
+#---Service---
 class ServiceForm(ModelForm):
     class Meta:
         model = Service
@@ -174,6 +178,21 @@ class ServiceForm(ModelForm):
         )
     )
 
+
+class addServiceCategoryForm(ModelForm):
+    class Meta:
+        model = Service
+        fields = ['Name']
+    Name = forms.CharField(
+        label="Service Category",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+
+#---Experience---
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
@@ -202,7 +221,7 @@ class ExperienceForm(ModelForm):
     )
 
 
-
+#---Case---
 class CaseForm(ModelForm):
     class Meta:
         model = Case
@@ -232,25 +251,4 @@ class CaseForm(ModelForm):
         )
     )
 
-class addIndustryForm(ModelForm):
-    class Meta:
-        model = Industry
-        fields = '__all__'
-    Name = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control"
-            }
-        )
-    )
-class addServiceCategoryForm(ModelForm):
-    class Meta:
-        model = Service
-        fields = '__all__'
-    Name = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control"
-            }
-        )
-    )
+

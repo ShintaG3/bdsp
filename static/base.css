@@ -53,12 +53,6 @@
   background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
 }
 
-/* .btn-outline-primary:hover {
-  transition: 0.4s;
-  background: rgb(28,167,236);
-  background: linear-gradient(147deg, rgba(28,167,236,1) 0%, rgba(31,47,152,1) 100%);
-} */
-
 
 
 /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
@@ -77,11 +71,6 @@
   }
 }
 
-.dontBeLikeButton{
-    border:0px;
-    color:#007bff;
-    background-color: #fff;
-}
 
 .modal-backdrop {
   z-index: -1;
