@@ -5,7 +5,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from .forms import *
@@ -140,7 +140,9 @@ def EditServiceCategoryOptions(request):
 class AddServiceCategory(LoginRequiredMixin, CreateView):
     model = ServiceCategory
     form_class = addServiceCategoryForm
-    template = "index/servicecategory_form"
+    template_name = "index/servicecategory_form.html"
+    success_url = reverse_lazy('options_serviceCategory')
+   
     def form_valid(self, form):
         form.save()
         return redirect('options_serviceCategory')
@@ -148,7 +150,6 @@ class AddServiceCategory(LoginRequiredMixin, CreateView):
 class UpdateServiceCategory(LoginRequiredMixin, UpdateView):
     model = ServiceCategory
     form_class = addServiceCategoryForm
-    # fields = '__all__'
     context_object_name = 'serviceCategory'
     def form_valid(self, form):
         form.save()

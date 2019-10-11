@@ -20,7 +20,7 @@
   <div class="section">
     <div class="container">
 
-      <form method="post" id="main_form">
+      <form method="post" id="main_form" novalidate enctype='multipart/form-data'>
         {% csrf_token %}
 
         {% if form.errors %}
