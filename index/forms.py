@@ -29,7 +29,7 @@ class IndustryForm(ModelForm):
     class Meta:
         model = Industry
         fields = '__all__'
-    
+
     Name = forms.CharField(
         label = 'Industry',
         widget = forms.TextInput(
@@ -140,6 +140,10 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
 
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=15, min_length=1)
+
 class ServiceForm(ModelForm):
     class Meta:
         model = Service
@@ -199,7 +203,6 @@ class ExperienceForm(ModelForm):
 
 
 
-
 class CaseForm(ModelForm):
     class Meta:
         model = Case
@@ -229,5 +232,25 @@ class CaseForm(ModelForm):
         )
     )
 
-
-
+class addIndustryForm(ModelForm):
+    class Meta:
+        model = Industry
+        fields = '__all__'
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+class addServiceCategoryForm(ModelForm):
+    class Meta:
+        model = Service
+        fields = '__all__'
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )

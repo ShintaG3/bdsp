@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+<style>
+    .main-raised{
+      position: relative;
+      top: 25vh;
+    }
+    footer{
+      position:absolute;
+      bottom: 0px;
+      width: 100vw;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="main main-raised">
+  <div class="section">
+    <div class="container">
+
+      <form method="post" id="main_form">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <ul>
+          {% for error in form.errors %}
+          <li>Error in:{{ error }} </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="form-group">
+          <label class="bmd-label-floating">{{ form.Name.label }}</label>
+            <div class="form-group bmd-form-group col">
+              {{ form.Name }}
+            </div>
+        </div>
+
+        <!-- button -->
+        <div class="text-center mt-5">
+          <input type="submit" name="" value="Submit" class="mb-5 mx-auto btn btn-outline-primary">
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

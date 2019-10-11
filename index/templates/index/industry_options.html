@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block style %}
+{% load static %}
+{% endblock %}
+
+{% block content %}
+<div class="main main-raised col-lg-7 col-md-8 mx-auto" style="margin-top:18vh;">
+  <div class="section">
+    <div class="container">
+
+          <h2 class="title text-center">{{ title }}</h2>
+          <div class="row">
+            <a href="{% url 'add_industry' %}" class="ml-auto mr-2 btn btn-primary btn-just-icon btn-round">
+              <i class="material-icons">add</i>
+            </a>
+          </div>
+          <ul class="list-group list-group-flush">
+            {% for object in objects %}
+            <li class="list-group-item">
+              {{object}}
+              <span class="ml-auto text-right">
+                <a href="{% url 'update_industry' object.id %}" class="mr-2 btn btn-primary btn-just-icon btn-round">
+                    <i class="material-icons">edit</i>
+                </a>
+
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary btn-just-icon btn-round mr-4">
+                  <i class="material-icons" data-toggle="modal" data-target="#{{ object.id }}">
+                    delete
+                  </i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="{{ object.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" href="{% url 'delete_industry' object.id %}">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </li>
+            {% endfor %}
+          </ul>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -11,7 +11,6 @@ urlpatterns = [
     path('list', views.list, name="list"),
     path('details/<int:id>', views.details, name="details"),
     path('search', views.search, name="search"),
-
 ]
 
 # Add URLConf to create, update, and delete orgs
@@ -23,9 +22,27 @@ urlpatterns += [
 
 # Add URLConf to create, update, and delete Industry
 urlpatterns += [
-    path('editIndustry', views.EditIndustryOptions, name="options_industry"),
+    path('editIndustry',
+         views.EditIndustryOptions, name='options_industry'),
+    path('addIndustry',
+         views.AddIndustry.as_view(), name="add_industry"),
+    path('updateIndustry/<int:pk>',
+        views.UpdateIndustry.as_view(), name="update_industry"),
+    path('deleteIndustry/<int:pk>',
+        views.DeleteIndustry, name="delete_industry")
 ]
 
+# Add URLConf to create, update, and delete Service
+urlpatterns += [
+    path('editServiceCategory',
+         views.EditServiceCategoryOptions, name='options_serviceCategory'),
+    path('addServiceCategory',
+         views.AddServiceCategory.as_view(), name="add_serviceCategory"),
+    path('UpdateServiceCategory/<int:pk>',
+        views.UpdateServiceCategory.as_view(), name="update_serviceCategory"),
+    path('deleteServicecategory/<int:pk>',
+        views.DeleteServiceCategory, name="delete_serviceCategory")
+]
 # Add URLConf to create, update, and delete experiences
 urlpatterns += [
     path('experience/create/<int:pk>',
@@ -37,13 +54,13 @@ urlpatterns += [
 ]
 # Add URLConf to create, update, and delete Services
 urlpatterns += [
-    path('editService',
-         views.EditServiceOptions, name='options_service'),
+
     path('service/create/<int:pk>',
          views.ServiceCreate.as_view(), name='service_create'),
     path('service/update/<int:pk>/',
          views.ServiceUpdate.as_view(), name='service_update'),
-    path('service/delete/<int:pk>/', views.ServiceDelete, name='service_delete')
+    path('service/delete/<int:pk>/',
+        views.ServiceDelete, name='service_delete')
 ]
 # Add URLConf to create, update, and delete Cases
 urlpatterns += [

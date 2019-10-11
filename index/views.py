@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from .forms import *
-
+import re
 
 def index(request):
     regiondata = []
@@ -81,33 +81,89 @@ def details(request, id):
 
 def search(request):
     orgInfo = request.POST["orgInfo"]
-    orgs = OrgBaseInfo.objects.filter(
-        Name__icontains=orgInfo).order_by('Region')
-    return render(request, 'index/list.html', context={'query_result': orgs})
+    p = re.compile('\W')   # Check if the input has any non alphanumeric charaters
+    specialChars = p.findall(orgInfo)
+    for chars in specialChars:
+        if chars != ' ':
+            return redirect('index') # Redirect to index if undesirable input
+    form = SearchForm({'search': orgInfo})
+    if form.is_valid():
+        orgs = OrgBaseInfo.objects.filter(
+            Name__icontains=orgInfo).order_by('Region')
+        return render(request, 'index/list.html', context={'query_result': orgs})
+    else:
+        return redirect('index')
 
-# Industry Options
 
+# Industry Options ------------>
+@login_required
 def EditIndustryOptions(request):
     industries = Industry.objects.all()
     context = {
         "objects":industries,
         "title": "Industry"
     }
-    return render(request, 'index/options.html', context=context)
+    return render(request, 'index/industry_options.html', context=context)
+
+class AddIndustry(LoginRequiredMixin, CreateView):
+    model = Industry
+    form = addIndustryForm
+    fields = '__all__'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_industry')
+
+class UpdateIndustry(LoginRequiredMixin, UpdateView):
+    model = Industry
+    form = addIndustryForm
+    fields = '__all__'
+    context_object_name = 'industry'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_industry')
+
+@login_required
+def DeleteIndustry(request, pk):
+    industry = Industry.objects.get(id=pk)
+    industry.delete()
+    return redirect('options_industry')
 
 # Service Options
-
-def EditServiceOptions(request):
+@login_required
+def EditServiceCategoryOptions(request):
     services = ServiceCategory.objects.all()
     context = {
         "objects":services,
         "title": "Service"
     }
-    return render(request, 'index/options.html', context=context)
+    return render(request, 'index/serviceCategory_options.html', context=context)
+
+class AddServiceCategory(LoginRequiredMixin, CreateView):
+    model = ServiceCategory
+    form = addServiceCategoryForm
+    fields = '__all__'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_serviceCategory')
+
+class UpdateServiceCategory(LoginRequiredMixin, UpdateView):
+    model = ServiceCategory
+    form = addServiceCategoryForm
+    fields = '__all__'
+    context_object_name = 'serviceCategory'
+    def form_valid(self, form):
+        form.save()
+        return redirect('options_serviceCategory')
+
+@login_required
+def DeleteServiceCategory(request, pk):
+    service = ServiceCategory.objects.get(id=pk)
+    service.delete()
+    return redirect('options_serviceCategory')
+
 
 
 # Org_Base_Info
-
 
 class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
     model = OrgBaseInfo
@@ -138,7 +194,6 @@ def OrgDelete(request, pk):
 
 
 # Service
-
 @method_decorator(login_required, name='dispatch')
 class ServiceCreate(CreateView):
     model = Service
