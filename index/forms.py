@@ -181,7 +181,7 @@ class ServiceForm(ModelForm):
 
 class addServiceCategoryForm(ModelForm):
     class Meta:
-        model = Service
+        model = ServiceCategory
         fields = ['Name']
     Name = forms.CharField(
         label="Service Category",
