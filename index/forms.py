@@ -61,6 +61,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Address = forms.CharField(
+        required=False,
         label='Address',
         widget=forms.Textarea(
             attrs={
@@ -71,6 +72,7 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     PR = forms.CharField(
+        required=False,
         label='PR',
         widget=forms.Textarea(
             attrs={
@@ -80,6 +82,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Url = forms.CharField(
+        required=False,
         label='URL',
         widget=forms.URLInput(
             attrs={
@@ -88,6 +91,16 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Affiliation = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
+    OfficeHour = forms.CharField(
+        required=False,
+        label="Business Hour",
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
@@ -95,6 +108,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     ContactPerson = forms.CharField(
+        required=False,
         label='Contact Person',
         widget=forms.TextInput(
             attrs={
@@ -104,6 +118,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Email = forms.EmailField(
+        required=False,
         widget=forms.EmailInput(
             attrs={
                 "class": "form-control",
@@ -111,6 +126,7 @@ class OrgBaseInfoForm(ModelForm):
         )
     )
     Telephone = forms.CharField(
+        required=False,
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
@@ -119,6 +135,7 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     Region = forms.ChoiceField(
+        required=False,
         choices=region_data,
         widget=forms.RadioSelect(
             attrs={
@@ -127,6 +144,7 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     RegistrationDate = forms.DateField(
+        required=False,
         label='Registration Date',
         widget=forms.DateInput(
             attrs={
@@ -199,6 +217,7 @@ class ExperienceForm(ModelForm):
         fields = ['Large', 'Medium', 'SmallandMicro']
 
     Large = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
@@ -206,6 +225,7 @@ class ExperienceForm(ModelForm):
         )
     )
     Medium = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
@@ -213,6 +233,7 @@ class ExperienceForm(ModelForm):
         )
     )
     SmallandMicro = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "class": "form-control",
@@ -234,6 +255,7 @@ class CaseForm(ModelForm):
     )
 
     Contents = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
@@ -243,6 +265,7 @@ class CaseForm(ModelForm):
     )
 
     Result = forms.CharField(
+        required=False,
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",

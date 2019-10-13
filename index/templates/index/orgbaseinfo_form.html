@@ -32,12 +32,6 @@
           {{ form.Name }}
         </div>
 
-        <!-- Address -->
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">{{ form.Address.label }}</label>
-          {{ form.Address }}
-        </div>
-
         <!-- Region -->
         <fieldset class="form-group">
           <legend class="col-form-label">
@@ -56,6 +50,13 @@
           </div>
           {% endfor %}
         </fieldset>
+
+        <!-- Address -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Address.label }}</label>
+          {{ form.Address }}
+        </div>
+
 
         <!-- Industry -->
         {% for error in form.Industry.error %}
@@ -104,17 +105,24 @@
           {{ form.PR }}
         </div>
 
+        <!-- Affiliation -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.Affiliation.label }}</label>
+          {{ form.Affiliation }}
+        </div>
+
+        <!-- Office Hour -->
+        <div class="form-group bmd-form-group">
+          <label class="bmd-label-floating">{{ form.OfficeHour.label }}</label>
+          {{ form.OfficeHour }}
+        </div>
+
         <!-- URL -->
         <div class="form-group bmd-form-group">
           <label class="bmd-label-floating">{{ form.Url.label }}</label>
           {{ form.Url }}
         </div>
 
-        <!-- Affiliation -->
-        <div class="form-group bmd-form-group">
-          <label class="bmd-label-floating">{{ form.Affiliation.label }}</label>
-          {{ form.Affiliation }}
-        </div>
 
         <!-- Contact Person -->
         <div class="form-group bmd-form-group">

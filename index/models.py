@@ -38,22 +38,18 @@ class ServiceCategory(models.Model):
 
 class OrgBaseInfo(models.Model):
     Name = models.CharField(max_length=100)
-    Address = models.CharField(max_length=200)
-    RegistrationDate = models.DateField()
+    Address = models.CharField(max_length=200, null=True, blank=True)
+    RegistrationDate = models.DateField(null=True, blank=True)
     Industry = models.ManyToManyField('Industry')
     ServiceCategory = models.ManyToManyField('ServiceCategory')
-    PR = models.CharField(max_length=300)
-    Url = models.URLField(max_length=50)
-    Affiliation = models.CharField(max_length=50)
-    ContactPerson = models.CharField(max_length=50)
-    Email = models.EmailField()
-    Telephone = models.CharField(max_length=12)
-
-    Region = models.CharField(
-        max_length=30,
-        choices=Region_data,
-        blank=True
-    )
+    PR = models.CharField(max_length=300, null=True, blank=True)
+    Url = models.URLField(max_length=50, null=True, blank=True)
+    Affiliation = models.CharField(max_length=50, null=True, blank=True)
+    ContactPerson = models.CharField(max_length=50, null=True, blank=True)
+    Email = models.EmailField(null=True, blank=True)
+    Telephone = models.CharField(max_length=12, null=True, blank=True)
+    OfficeHour = models.CharField(max_length=20, null=True, blank=True)
+    Region = models.CharField(max_length=30, choices=Region_data, null=True, blank=True)
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -67,8 +63,8 @@ class Service(models.Model):
     OrgName = models.ForeignKey(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     ServiceCategory = models.ManyToManyField('ServiceCategory')
-    Service = models.CharField(max_length=200)
-    Contents = models.CharField(max_length=300)
+    Service = models.CharField(max_length=200, null=True, blank=True)
+    Contents = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -82,9 +78,9 @@ class Service(models.Model):
 class Experience(models.Model):
     OrgName = models.OneToOneField(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
-    Large = models.IntegerField()
-    Medium = models.IntegerField()
-    SmallandMicro = models.IntegerField()
+    Large = models.IntegerField(null=True, blank=True)
+    Medium = models.IntegerField(null=True, blank=True)
+    SmallandMicro = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -99,8 +95,8 @@ class Case(models.Model):
     OrgName = models.ForeignKey(
         'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
     ServiceCategory = models.ManyToManyField('ServiceCategory')
-    Contents = models.CharField(max_length=300)
-    Result = models.CharField(max_length=300)
+    Contents = models.CharField(max_length=300, null=True, blank=True)
+    Result = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""

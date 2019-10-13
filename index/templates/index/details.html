@@ -71,20 +71,24 @@
 
       </div>
       {% endif %}
-
+      
       <div class="table-responsive">
         <table class="table table-borderless">
           <tbody>
             <tr>
+              <tr>
+                <th class="lead" scope="row">Registration Date</th>
+                <td>{{ org.RegistrationDate|date:"Y-m-d" }}</td>
+              </tr>
               <th class="lead" scope="row">Industory</th>
-
+              
               <td>{% for industry in org.Industry.all %}
                 {{ industry.Name }}{% if not forloop.last %}, {% endif %}
                 {% endfor %}</td>
-
-            </tr>
-            <tr>
-              <th class="lead" scope="row">Service</th>
+                
+              </tr>
+              <tr>
+                <th class="lead" scope="row">Service</th>
               <td>
                 {% for service in org.ServiceCategory.all %}
 
@@ -98,12 +102,12 @@
               <td>{{ org.PR }}</td>
             </tr>
             <tr>
-              <th class="lead" scope="row">Registration Date</th>
-              <td>{{ org.RegistrationDate|date:"Y-m-d" }}</td>
-            </tr>
-            <tr>
               <th class="lead" scope="row">Affiliation</th>
               <td>{{ org.Affiliation }}</td>
+            </tr>
+            <tr>
+              <th class="lead" scope="row">Business Hour</th>
+              <td>{{ org.OfficeHour }}</td>
             </tr>
             <tr>
               <th class="lead" scope="row">URL</th>

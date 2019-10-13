@@ -95,6 +95,36 @@ def search(request):
         return redirect('index')
 
 
+# Org_Base_Info
+
+class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
+    model = OrgBaseInfo
+    form_class = OrgBaseInfoForm
+
+
+class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
+    model = OrgBaseInfo
+    form_class = OrgBaseInfoForm
+    context_object_name = 'org'
+    template = 'orgbaseinfo_form.html'
+
+    def get_success_url(self):
+        id = self.kwargs['pk']
+        return reverse_lazy('details', kwargs={'id': id})
+
+
+class OrgDelete(LoginRequiredMixin, DeleteView):
+    model = OrgBaseInfo
+    success_url = reverse_lazy('index')
+
+
+@login_required
+def OrgDelete(request, pk):
+    org = OrgBaseInfo.objects.get(id=pk)
+    org.delete()
+    return redirect('index')
+
+
 # Industry Options ------------>
 @login_required
 def EditIndustryOptions(request):
@@ -117,6 +147,7 @@ class UpdateIndustry(LoginRequiredMixin, UpdateView):
     model = Industry
     form_class = IndustryForm
     context_object_name = 'industry'
+    
     def form_valid(self, form):
         form.save()
         return redirect('options_industry')
@@ -160,37 +191,6 @@ def DeleteServiceCategory(request, pk):
     service = ServiceCategory.objects.get(id=pk)
     service.delete()
     return redirect('options_serviceCategory')
-
-
-
-# Org_Base_Info
-
-class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
-    model = OrgBaseInfo
-    form_class = OrgBaseInfoForm
-
-
-class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
-    model = OrgBaseInfo
-    form_class = OrgBaseInfoForm
-    context_object_name = 'org'
-    template = 'orgbaseinfo_form.html'
-
-    def get_success_url(self):
-        id = self.kwargs['pk']
-        return reverse_lazy('details', kwargs={'id': id})
-
-
-class OrgDelete(LoginRequiredMixin, DeleteView):
-    model = OrgBaseInfo
-    success_url = reverse_lazy('index')
-
-
-@login_required
-def OrgDelete(request, pk):
-    org = OrgBaseInfo.objects.get(id=pk)
-    org.delete()
-    return redirect('index')
 
 
 # Service
