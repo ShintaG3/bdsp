@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
-<!-- <style>
-  @media screen and (max-width:800px) {
-    .container {
-      padding-right: 0px;
-      padding-left: 0px;
-    }
-  }
-</style> -->
 {% endblock %}
 
 {% block header %}
@@ -148,7 +140,7 @@
       <div class="table-responsive">
         <table class="table table-hover mt-5">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th class="lead" scope="col">Service Category</th>
               <th class="lead" scope="col">Service</th>
               <th class="lead" scope="col">Contents</th>
@@ -166,8 +158,8 @@
               <td>{{ service.Contents }}</td>
               <td>
                 {% if user.is_authenticated %}
-                <div class="row">
-                  <a class="btn btn-primary btn-just-icon btn-round ml-auto mr-2"
+                <div class="text-right">
+                  <a class="btn btn-primary btn-just-icon btn-round"
                     href="{% url 'service_update' service.id %}">
                     <i class="material-icons">
                       edit
@@ -175,12 +167,12 @@
                   </a>
 
                   <!-- Button trigger modal -->
-                  <button class="btn btn-primary btn-just-icon btn-round mr-4">
+                  <button class="btn btn-primary btn-just-icon btn-round">
                     <i class="material-icons" data-toggle="modal" data-target="#{{ service.id }}">
                       delete
                     </i>
                   </button>
-
+                </div>
                   <!-- Modal -->
                   <div class="modal fade" id="{{ service.id }}" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -200,7 +192,7 @@
                     </div>
                   </div>
 
-                </div>
+                
                 {% endif %}
               </td>
             </tr>
@@ -303,8 +295,8 @@
               {% if user.is_authenticated %}
               <td>
 
-                <div class="row">
-                  <a class="btn btn-primary btn-just-icon btn-round ml-auto mr-2"
+                <div class="text-right">
+                  <a class="btn btn-primary btn-just-icon btn-round"
                     href="{% url 'case_update' case.id %}">
                     <i class="material-icons">
                       edit
@@ -312,37 +304,38 @@
                   </a>
 
                   <!-- Button trigger modal -->
-                  <button class="btn btn-primary btn-just-icon btn-round mr-4">
+                  <button class="btn btn-primary btn-just-icon btn-round">
                     <i class="material-icons" data-toggle="modal" data-target="#{{ case.id }}">
                       delete
                     </i>
                   </button>
+                </div>
 
-                  <!-- Modal -->
-                  <div class="modal fade" id="{{ case.id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                <!-- Modal -->
+                <div class="modal fade" id="{{ case.id }}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
+                          <button type="button" class="btn btn-primary">
+                            Delete
                           </button>
-                        </div>
+                        </a>
 
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <a class="ml-auto mr-2" href="{% url 'case_delete' case.id %}">
-                            <button type="button" class="btn btn-primary">
-                              Delete
-                            </button>
-                          </a>
-
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+ 
               <td>
                 {% endif %}
             </tr>
@@ -350,7 +343,7 @@
             {% endif %}
           </tbody>
         </table>
-      </div>
+      </!-->
     </div>
   </div>
 </div>
