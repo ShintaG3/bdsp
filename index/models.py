@@ -3,7 +3,7 @@ from django.urls import reverse
 
 # Regions tuple added here
 Region_data = (
-    ('Addis Ababba', 'Addis Ababba'),
+    ('Addis Ababa', 'Addis Ababa'),
     ('Afar', 'Afar'),
     ('Amhara', 'Amhara'),
     ('Benishangul-Gumuz', 'Benishangul-Gumuz'),
