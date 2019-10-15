@@ -25,12 +25,12 @@
         <td>{{ query.Region }}</td>
         <td>
           {% for industry in query.Industry.all %}
-          {{ industry.Name }}{% if not forloop.last %}, {% endif %}
+          <span class="badge badge-pill badge-danger">{{ industry.Name }}</span>
           {% endfor %}
         </td>
         <td>
           {% for service in query.ServiceCategory.all %}
-            <span class="text-muted">{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
+            <span class="badge badge-pill badge-primary">{{ service.Name }}</span>
 
           {% endfor %}
         </td>

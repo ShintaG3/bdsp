@@ -74,9 +74,11 @@
               </tr>
               <th class="lead" scope="row">Industory</th>
               
-              <td>{% for industry in org.Industry.all %}
-                {{ industry.Name }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}</td>
+              <td>
+                {% for industry in org.Industry.all %}
+                <span class="badge badge-pill badge-danger">{{ industry.Name }}</span>
+                {% endfor %}
+              </td>
                 
               </tr>
               <tr>
@@ -84,7 +86,8 @@
               <td>
                 {% for service in org.ServiceCategory.all %}
 
-                <span>{{ service.Name }}{% if not forloop.last %}, {% endif %} </span>
+                <span class="badge badge-pill badge-primary">{{ service.Name }} </span>
+                <!-- <span>{{ service.Name }}{% if not forloop.last %}, {% endif %} </span> -->
 
                 {% endfor %}
               </td>
@@ -151,8 +154,9 @@
             {% if services %}
             {% for service in services %}
             <tr>
-              <td>{% for eachservice in service.ServiceCategory.all %}
-                {{ eachservice.Name }}{% if not forloop.last %}, {% endif %}
+              <td>
+                {% for eachservice in service.ServiceCategory.all %}
+                <span class="badge badge-pill badge-primary">{{ eachservice.Name }}</span>
                 {% endfor %}</td>
               <td>{{ service.Service }}</td>
               <td>{{ service.Contents }}</td>
@@ -237,13 +241,13 @@
       <div class="table-responsive">
         <table class="table table-hover mt-5">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th class="lead" scope="col">Large</th>
               <th class="lead" scope="col">Medium</th>
               <th class="lead" scope="col">SmallandMicro</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             {% for experience in experiences %}
             <tr>
               <td>{{ experience.Large }}</td>
@@ -277,7 +281,7 @@
       <div class="table-responsive">
         <table class="table table-hover mt-5">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th class="lead" scope="col">ServiceCategory</th>
               <th class="lead" scope="col">Contents</th>
               <th class="lead" scope="col">Result</th>
@@ -288,8 +292,9 @@
             {% for case in cases %}
             <tr>
               <td>{% for eachcase in case.ServiceCategory.all %}
-                {{ eachcase.Name }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}</td>
+                <span class="badge badge-primary badge-pill">{{ eachcase.Name }}</span>
+                {% endfor %}
+              </td>
               <td>{{ case.Contents }}</td>
               <td>{{ case.Result }}</td>
               {% if user.is_authenticated %}
