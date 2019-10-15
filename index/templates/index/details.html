@@ -63,24 +63,23 @@
 
       </div>
       {% endif %}
-      
+
       <div class="table-responsive">
         <table class="table table-borderless">
           <tbody>
-            <tr>
               <tr>
-                <th class="lead" scope="row">Registration Date</th>
-                <td>{{ org.RegistrationDate|date:"Y-m-d" }}</td>
+                  <th class="lead" scope="row">Registration Date</th>
+                  <td>{{ org.RegistrationDate|date:"Y-m-d" }}</td>
               </tr>
-              <th class="lead" scope="row">Industory</th>
-              
-              <td>
-                {% for industry in org.Industry.all %}
-                <span class="badge badge-pill badge-danger">{{ industry.Name }}</span>
-                {% endfor %}
-              </td>
-                
+              <tr>
+                  <th class="lead" scope="row">Industory</th>
+                  <td>
+                    {% for industry in org.Industry.all %}
+                    <span class="badge badge-pill badge-danger">{{ industry.Name }}</span>
+                    {% endfor %}
+                  </td>
               </tr>
+
               <tr>
                 <th class="lead" scope="row">Service</th>
               <td>
@@ -92,6 +91,16 @@
                 {% endfor %}
               </td>
             </tr>
+
+            <tr>
+              <th class="lead" scope="row">Target Company</th>
+            <td>
+              {% for size in org.TargetCompanySize.all %}
+              <span class="badge badge-pill badge-primary">{{ size.Size }} </span>
+              {% endfor %}
+            </td>
+          </tr>
+
             <tr>
               <th class="lead" scope="row">PR</th>
               <td>{{ org.PR }}</td>
@@ -196,7 +205,7 @@
                     </div>
                   </div>
 
-                
+
                 {% endif %}
               </td>
             </tr>
@@ -340,7 +349,7 @@
                     </div>
                   </div>
                 </div>
- 
+
               <td>
                 {% endif %}
             </tr>

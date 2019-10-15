@@ -7,7 +7,7 @@ def region_data():
     return Region_data
 
 
-#---Login---
+#---Login---#
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -25,12 +25,12 @@ class UserLoginForm(AuthenticationForm):
         }
     ))
 
-#---Search---
+#---Search---#
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=15, min_length=1)
 
 
-# ---Industry---
+# ---Industry---#
 class IndustryForm(ModelForm):
     class Meta:
         model = Industry
@@ -45,7 +45,7 @@ class IndustryForm(ModelForm):
         )
     )
 
-# ---Organization---
+# ---Organization---#
 class OrgBaseInfoForm(ModelForm):
     class Meta:
         model = OrgBaseInfo
@@ -60,6 +60,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Address = forms.CharField(
         required=False,
         label='Address',
@@ -81,6 +82,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Url = forms.CharField(
         required=False,
         label='URL',
@@ -90,6 +92,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Affiliation = forms.CharField(
         required=False,
         widget=forms.TextInput(
@@ -98,6 +101,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     OfficeHour = forms.CharField(
         required=False,
         label="Business Hour",
@@ -107,6 +111,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     ContactPerson = forms.CharField(
         required=False,
         label='Contact Person',
@@ -117,6 +122,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Email = forms.EmailField(
         required=False,
         widget=forms.EmailInput(
@@ -125,6 +131,7 @@ class OrgBaseInfoForm(ModelForm):
             }
         )
     )
+
     Telephone = forms.CharField(
         required=False,
         widget=forms.TextInput(
@@ -162,6 +169,13 @@ class OrgBaseInfoForm(ModelForm):
     ServiceCategory = forms.ModelMultipleChoiceField(
         queryset=ServiceCategory.objects.all(),
         widget=forms.CheckboxSelectMultiple(
+        )
+    )
+
+    TargetCompanySize = forms.ModelMultipleChoiceField(
+        queryset = TargetCompanySize.objects.all(),
+        widget = forms.CheckboxSelectMultiple(
+
         )
     )
 
@@ -273,5 +287,3 @@ class CaseForm(ModelForm):
             }
         )
     )
-
-

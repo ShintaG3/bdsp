@@ -15,6 +15,13 @@ Region_data = (
     ('Tigray', 'Tigray'),
 )
 
+class TargetCompanySize(models.Model):
+    Size = models.CharField(
+        max_length=20
+    )
+
+    def __str__(self):
+        return self.Size
 
 class Industry(models.Model):
     Name = models.CharField(
@@ -42,6 +49,7 @@ class OrgBaseInfo(models.Model):
     RegistrationDate = models.DateField(null=True, blank=True)
     Industry = models.ManyToManyField('Industry')
     ServiceCategory = models.ManyToManyField('ServiceCategory')
+    TargetCompanySize = models.ManyToManyField('TargetCompanySize')
     PR = models.CharField(max_length=2000, null=True, blank=True)
     Url = models.URLField(max_length=256, null=True, blank=True)
     Affiliation = models.CharField(max_length=50, null=True, blank=True)
