@@ -3,11 +3,12 @@
 {% load static %}
 <style>
   #details-header{
-    background-image: url('{% static 'img/trianglify.png' %}');
+    background-image: url('{% static "img/trianglify-lowres.png" %}');
     background-position: center center;
     background-size: cover;
     transform:translate3d(0px, 0px, 0px);
     min-height:50vh;
+    padding: 20vh 0vh;
   }
 </style>
 {% endblock %}
@@ -17,7 +18,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 ml-auto mr-auto">
-        <div class="brand text-center" style="margin-top:80px;">
+        <div class="brand text-center">
           <h1>{{ org.Name }}</h1>
           <h3 class="lead">{{ org.Region }}, {{ org.Address }}</h3>
         </div>
