@@ -1,0 +1,80 @@
+.navbar-gr {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.bg-gr-blue {
+  background: rgb(98,133,255);
+  background: linear-gradient(180deg, rgba(98,133,255,1) 0%, rgba(12,123,255,1) 100%);
+}
+
+.bg-gr-b-5 {
+  background: rgb(31,47,152);
+  background: linear-gradient(147deg, rgba(31,47,152,1) 0%, rgba(123,213,245,1) 100%);
+}
+
+.bg-gr-b-4 {
+  background: rgb(28,167,236);
+  background: linear-gradient(147deg, rgba(28,167,236,1) 0%, rgba(31,47,152,1) 100%);
+}
+
+.bg-gr-b-3 {
+  background: rgb(74,222,222);
+  background: linear-gradient(147deg, rgba(74,222,222,1) 0%, rgba(28,167,236,1) 100%);
+}
+
+.bg-gr-b-2 {
+  background: rgb(120,127,246);
+  background: linear-gradient(147deg, rgba(120,127,246,1) 0%, rgba(74,222,222,1) 100%);
+}
+
+.bg-gr-b-1 {
+  background: rgb(123,213,245);
+  background: linear-gradient(147deg, rgba(123,213,245,1) 0%, rgba(120,127,246,1) 100%);
+}
+
+.bg-gr-bp {
+  background: rgb(60,76,173);
+  background: linear-gradient(147deg, rgba(60,76,173,1) 0%, rgba(240,67,147,1) 100%);
+}
+
+.egg-b {
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+
+.egg-g {
+  background-color #20bf55;
+  background-image linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+}
+
+.egg-db {
+  background-color: #0cbaba;
+  background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+}
+
+
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 480px) {
+  .display-5 {
+  font-family: 'Lato', sans-serif;
+  font-size: 3rem;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 479px) {
+  .display-5 {
+  font-family: 'Lato', sans-serif;
+  font-size: 10vw;
+  }
+  footer{
+    font-size: x-small;
+  }
+}
+
+
+.modal-backdrop {
+  z-index: -1;
+}
