@@ -99,6 +99,28 @@
           {% endfor %}
         </div>
 
+        <!-- TargetCompanySize -->
+        {% for error in form.TargetCompanySize.error %}
+          {{ error }}
+        {% endfor %}
+        <div class="form-group">
+          <legend class="col-form-label">
+            Target Company Size
+          </legend>
+          {% for choice in form.TargetCompanySize.field.queryset %}
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="TargetCompanySize" value="{{forloop.counter}}"
+                {% if choice in org.TargetCompanySize.all %} checked="checked" {% endif %}>
+              {{choice}}
+              <span class="form-check-sign">
+                <span class="check"></span>
+              </span>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
         <!-- PR -->
         <div class="form-group bmd-form-group">
           <label class="bmd-label-floating">{{ form.PR.label }}</label>
