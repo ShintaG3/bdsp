@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block style %}
 {% load static %}
+<style>
+  #details-header{
+    background-image: url('{% static 'img/trianglify.png' %}');
+    background-position: center center;
+    background-size: cover;
+    transform:translate3d(0px, 0px, 0px);
+    min-height:50vh;
+  }
+</style>
 {% endblock %}
 
 {% block header %}
-<div class="page-header blue-filter " data-parallax="true"
-  style="background-image: url('{% static 'img/trianglify.png' %}'); transform:translate3d(0px, 0px, 0px); height:60vh;">
+<div class="blue-filter" data-parallax="true" id="details-header">
   <div class="container">
     <div class="row">
       <div class="col-md-8 ml-auto mr-auto">
-        <div class="brand text-center">
+        <div class="brand text-center" style="margin-top:80px;">
           <h1>{{ org.Name }}</h1>
           <h3 class="lead">{{ org.Region }}, {{ org.Address }}</h3>
         </div>
@@ -159,7 +167,7 @@
               <th class="lead" scope="col"></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             {% if services %}
             {% for service in services %}
             <tr>
@@ -296,7 +304,7 @@
               <th class="lead" scope="col">Result</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             {% if cases %}
             {% for case in cases %}
             <tr>

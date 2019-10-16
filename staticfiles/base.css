@@ -69,6 +69,9 @@
   font-family: 'Lato', sans-serif;
   font-size: 10vw;
   }
+  footer {
+    font-size: smaller;
+  }
 }
 
 
