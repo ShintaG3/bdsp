@@ -117,7 +117,7 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEBUG = True
+DEBUG = False
 
 try:
     from .local_settings import *
