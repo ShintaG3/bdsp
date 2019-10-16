@@ -80,7 +80,7 @@
                   <td>{{ org.RegistrationDate|date:"Y-m-d" }}</td>
               </tr>
               <tr>
-                  <th class="lead" scope="row">Industory</th>
+                  <th class="lead" scope="row">Industry</th>
                   <td>
                     {% for industry in org.Industry.all %}
                     <span class="badge badge-pill badge-danger">{{ industry.Name }}</span>
@@ -261,7 +261,7 @@
             <tr class="text-center">
               <th class="lead" scope="col">Large</th>
               <th class="lead" scope="col">Medium</th>
-              <th class="lead" scope="col">SmallandMicro</th>
+              <th class="lead" scope="col">Small & Micro</th>
             </tr>
           </thead>
           <tbody class="text-center">
