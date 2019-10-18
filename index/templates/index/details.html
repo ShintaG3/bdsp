@@ -233,7 +233,7 @@
 <div class="main main-raised mt-5">
   <div class="section pt-4">
     <div class="container">
-      <h2 class="title text-center">Experience</h2>
+      <h2 class="title text-center">Support Experience </h2>
 
       {% if user.is_authenticated %}
       {% if experiences %}
@@ -262,6 +262,7 @@
         <table class="table table-hover mt-5">
           <thead>
             <tr class="text-center">
+              <th class="lead" scope="col">Year</th>
               <th class="lead" scope="col">Large</th>
               <th class="lead" scope="col">Medium</th>
               <th class="lead" scope="col">Small & Micro</th>
@@ -270,6 +271,7 @@
           <tbody class="text-center">
             {% for experience in experiences %}
             <tr>
+              <td>{{ experience.Year }}</td>
               <td>{{ experience.Large }}</td>
               <td>{{ experience.Medium }}</td>
               <td>{{ experience.SmallandMicro }}</td>
@@ -286,7 +288,7 @@
 <div class="main main-raised mt-5">
   <div class="section pt-4">
     <div class="container">
-      <h2 class="title text-center">Case</h2>
+      <h2 class="title text-center">Main Achievement</h2>
 
       {% if user.is_authenticated %}
       <div class="row">
@@ -303,8 +305,8 @@
           <thead>
             <tr class="text-center">
               <th class="lead" scope="col">Service Category</th>
-              <th class="lead" scope="col">Contents</th>
-              <th class="lead" scope="col">Result</th>
+              <th class="lead" scope="col">Service</th>
+              <th class="lead" scope="col">Achievement</th>
             </tr>
           </thead>
           <tbody>

@@ -229,7 +229,16 @@ class addServiceCategoryForm(ModelForm):
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
-        fields = ['Large', 'Medium', 'SmallandMicro']
+        fields = ['Year', 'Large', 'Medium', 'SmallandMicro']
+
+    Year = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
 
     Large = forms.IntegerField(
         required=False,
@@ -248,6 +257,7 @@ class ExperienceForm(ModelForm):
         )
     )
     SmallandMicro = forms.IntegerField(
+        label='Small & Micro',
         required=False,
         widget=forms.NumberInput(
             attrs={

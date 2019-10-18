@@ -84,8 +84,8 @@ class Service(models.Model):
 
 
 class Experience(models.Model):
-    OrgName = models.OneToOneField(
-        'OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    OrgName = models.OneToOneField('OrgBaseInfo', on_delete=models.SET_NULL, null=True)
+    Year = models.IntegerField(null=True, blank=True)
     Large = models.IntegerField(null=True, blank=True)
     Medium = models.IntegerField(null=True, blank=True)
     SmallandMicro = models.IntegerField(null=True, blank=True)
