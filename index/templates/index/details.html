@@ -9,6 +9,8 @@
     transform:translate3d(0px, 0px, 0px);
     min-height:50vh;
     padding: 20vh 0vh;
+    z-index: 2;
+    
   }
 </style>
 {% endblock %}
@@ -371,7 +373,21 @@
   </div>
 </div>
 
+{% endblock %}
 
-
+{% block script %}
+<script>
+  $(document).ready(function() {
+    BrowserDetect.init();
+    if (window_width >= 768) {
+      big_image = $('#details-header[data-parallax="true"]');
+      if (big_image.length != 0) {
+        $(window).on('scroll', materialKit.checkScrollForParallax);
+      }
+  
+    }
+  
+  });
+</script>
 
 {% endblock %}
