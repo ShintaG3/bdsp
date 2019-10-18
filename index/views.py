@@ -198,6 +198,7 @@ def DeleteServiceCategory(request, pk):
 class ServiceCreate(CreateView):
     model = Service
     form_class = ServiceForm
+    context_object_name = 'org'
 
     def form_valid(self, form):
         service = form.save(commit=False)

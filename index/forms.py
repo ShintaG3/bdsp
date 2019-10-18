@@ -186,13 +186,14 @@ class ServiceForm(ModelForm):
         fields = ['ServiceCategory', 'Service', 'Contents']
 
     ServiceCategory = forms.ModelMultipleChoiceField(
+        label='Service Category',
         queryset=ServiceCategory.objects.all(),
         widget=forms.CheckboxSelectMultiple(
         )
     )
 
     Service = forms.CharField(
-        label='Service',
+        label='Title',
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
