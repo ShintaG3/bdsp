@@ -24,11 +24,22 @@
         {% csrf_token %}
 
         {% if form.errors %}
-        <ul>
           {% for error in form.errors %}
-          <li>Error in:{{ error }} </li>
+            <div class="alert alert-danger">
+              <div class="container">
+                <div class="alert-icon">
+                  <i class="material-icons">error_outline</i>
+                </div>
+                <button type="button" data-dismiss="alert" aria-label="Close" class="close">
+                  <span aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                  </span>
+                </button>
+                <b>Error Alert:</b>
+                {{ error }} 
+              </div>
+            </div>
           {% endfor %}
-        </ul>
         {% endif %}
 
         <div class="form-group bmd-form-group">

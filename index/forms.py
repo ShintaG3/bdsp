@@ -193,6 +193,7 @@ class ServiceForm(ModelForm):
     )
 
     Service = forms.CharField(
+        required=False,
         label='Title',
         widget=forms.Textarea(
             attrs={
@@ -202,6 +203,7 @@ class ServiceForm(ModelForm):
         )
     )
     Contents = forms.CharField(
+        required=False,
         label='Contents',
         widget=forms.Textarea(
             attrs={
