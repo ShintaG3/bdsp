@@ -123,7 +123,7 @@
           {% for choice in form.TargetCompanySize.field.queryset %}
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="TargetCompanySize" value="{{ choice }}"
+              <input class="form-check-input" type="checkbox" name="TargetCompanySize" value="{{ choice.id }}"
                 {% if choice in org.TargetCompanySize.all %} checked="checked" {% endif %}>
               {{choice}}
               <span class="form-check-sign">
