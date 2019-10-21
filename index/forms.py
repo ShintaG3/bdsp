@@ -67,7 +67,7 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                'rows': 3
+                'rows': 1
             }
         )
     )
@@ -78,7 +78,7 @@ class OrgBaseInfoForm(ModelForm):
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
-                'rows': 3
+                'rows': 8
             }
         )
     )
