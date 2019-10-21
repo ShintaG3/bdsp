@@ -36,7 +36,7 @@
           {% for choice in form.ServiceCategory.field.queryset %}
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="ServiceCategory" value="{{forloop.counter}}"
+              <input class="form-check-input" type="checkbox" name="ServiceCategory" value="{{ choice.id }}"
                 {% if choice in service.ServiceCategory.all %} checked="checked" {% endif %}>
               {{choice}}
               <span class="form-check-sign">

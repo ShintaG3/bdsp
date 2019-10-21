@@ -13,11 +13,28 @@
         {% csrf_token %}
 
         {% if form.errors %}
-        <ul>
+        {% for error in form.errors %}
+        <div class="alert alert-danger">
+          <div class="container">
+            <div class="alert-icon">
+              <i class="material-icons">error_outline</i>
+            </div>
+            <button type="button" data-dismiss="alert" aria-label="Close" class="close">
+              <span aria-hidden="true">
+                <i class="material-icons">clear</i>
+              </span>
+            </button>
+            <b>Error Alert:</b>
+            {{ error }} 
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- <ul>
           {% for error in form.errors %}
           <li>Error in:{{ error }} </li>
           {% endfor %}
-        </ul>
+        </ul> -->
         {% endif %}
         <!-- Registration Date -->
         <div class="form-group">
@@ -69,7 +86,7 @@
           {% for choice in form.Industry.field.queryset %}
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="Industry" value="{{forloop.counter}}"
+              <input class="form-check-input" type="checkbox" name="Industry" value="{{choice.id }}"
                 {% if choice in org.Industry.all %} checked="checked" {% endif %}>
               {{choice}}
               <span class="form-check-sign">
@@ -88,7 +105,7 @@
           {% for choice in form.ServiceCategory.field.queryset %}
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="ServiceCategory" value="{{forloop.counter}}"
+              <input class="form-check-input" type="checkbox" name="ServiceCategory" value="{{ choice.id }}"
                 {% if choice in org.ServiceCategory.all %} checked="checked" {% endif %}>
               {{choice}}
               <span class="form-check-sign">
@@ -110,7 +127,7 @@
           {% for choice in form.TargetCompanySize.field.queryset %}
           <div class="form-check form-check-inline">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="TargetCompanySize" value="{{forloop.counter}}"
+              <input class="form-check-input" type="checkbox" name="TargetCompanySize" value="{{ choice }}"
                 {% if choice in org.TargetCompanySize.all %} checked="checked" {% endif %}>
               {{choice}}
               <span class="form-check-sign">

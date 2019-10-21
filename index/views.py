@@ -100,13 +100,19 @@ def search(request):
 class OrgbaseInfoCreate(LoginRequiredMixin, CreateView):
     model = OrgBaseInfo
     form_class = OrgBaseInfoForm
+    # context_object_name = 'org'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sc'] = ServiceCategory.objects.all
+        return context        
+      
 
 
 class OrgBaseInfoUpdate(LoginRequiredMixin, UpdateView):
     model = OrgBaseInfo
     form_class = OrgBaseInfoForm
     context_object_name = 'org'
-    template = 'orgbaseinfo_form.html'
+    template_name = 'index/orgbaseinfo_form.html'
 
     def get_success_url(self):
         id = self.kwargs['pk']

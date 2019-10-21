@@ -142,7 +142,6 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     Region = forms.ChoiceField(
-        required=False,
         choices=region_data,
         widget=forms.RadioSelect(
             attrs={
@@ -161,14 +160,12 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     Industry = forms.ModelMultipleChoiceField(
-        required=False,
-        queryset=Industry.objects.all(),
+         queryset=Industry.objects.all(),
         widget=forms.CheckboxSelectMultiple(
         )
     )
 
     ServiceCategory = forms.ModelMultipleChoiceField(
-        required=False,
         queryset=ServiceCategory.objects.all(),
         widget=forms.CheckboxSelectMultiple(
         )
