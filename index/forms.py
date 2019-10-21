@@ -161,18 +161,21 @@ class OrgBaseInfoForm(ModelForm):
     )
 
     Industry = forms.ModelMultipleChoiceField(
+        required=False,
         queryset=Industry.objects.all(),
         widget=forms.CheckboxSelectMultiple(
         )
     )
 
     ServiceCategory = forms.ModelMultipleChoiceField(
+        required=False,
         queryset=ServiceCategory.objects.all(),
         widget=forms.CheckboxSelectMultiple(
         )
     )
 
     TargetCompanySize = forms.ModelMultipleChoiceField(
+        required=False,
         queryset = TargetCompanySize.objects.all(),
         widget = forms.CheckboxSelectMultiple(
 
